@@ -36,12 +36,13 @@ defmodule PolymorphicProductions.MixProject do
       {:phoenix, github: "phoenixframework/phoenix", override: true},
       {:phoenix_pubsub, "~> 1.0"},
       {:phoenix_ecto, ">= 3.2.0 and < 3.5.0"},
+      {:plug_cowboy, "~> 2.0"},
       {:postgrex, ">= 0.0.0"},
       {:phoenix_html, "~> 2.11"},
       {:phoenix_live_reload, "~> 1.0", only: :dev},
       {:gettext, "~> 0.11"},
       {:jason, "~> 1.0"},
-      {:cowboy, "~> 1.0"},
+      {:cowboy, "~> 2.5"},
       {:edeliver, ">= 1.6.0"},
       {:distillery, "~> 2.0", warn_missing: false}
     ]
