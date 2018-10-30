@@ -1,0 +1,43 @@
+APP="polymorphic_productions"
+
+BUILD_HOST="polymorphic.productions"
+BUILD_USER="deploy"
+BUILD_AT="/tmp/edeliver/polymorphic_productions/builds"
+
+PRODUCTION_HOSTS="polymorphic.productions"
+PRODUCTION_USER="deploy"
+DELIVER_TO="/home/deploy/app/"
+
+# For *Phoenix* projects, symlink prod.secret.exs to our tmp source
+pre_erlang_get_and_update_deps() {
+  local _prod_secret_path="/home/deploy/prod.secret.exs"
+  if [ "$TARGET_MIX_ENV" = "prod" ]; then
+    __sync_remote "
+      ln -sfn '$_prod_secret_path' '$BUILD_AT/config/prod.secret.exs'
+    "
+  fi
+}
+
+pre_erlang_clean_compile() {
+  status "Preparing assets with: Webpack build and phoenix.digest"
+  __sync_remote "
+    set -e
+    # runs the commands on the build host
+    [ -f ~/.profile ] && source ~/.profile # load profile (optional)
+
+    # enter the build directory on the build host (required)
+    cd '$BUILD_AT/assets'
+
+    # installing npm dependencies
+    npm install $SILENCE || error "npm"
+
+    npm run deploy $SILENCE || error "npm"
+
+    # building webpack
+    # node_modules/webpack/bin/webpack.js -p $SILENCE || error "webpack"
+
+    cd '$BUILD_AT'
+    # run your custom task
+    APP='$APP' MIX_ENV='$TARGET_MIX_ENV' $MIX_CMD phx.digest $SILENCE || error "digest"
+  "
+}
