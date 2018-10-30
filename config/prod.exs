@@ -10,9 +10,18 @@ use Mix.Config
 # which you should run after static files are built and
 # before starting your production server.
 config :polymorphic_productions, PolymorphicProductionsWeb.Endpoint,
-  http: [port: 4000],
-  url: [host: "polymorphic.productionsjj"],
-  cache_static_manifest: "priv/static/cache_manifest.json"
+  https: [
+    :inet6,
+    otp_app: :isafe,
+    port: 443,
+    cipher_suite: :strong,
+    keyfile: "/etc/letsencrypt/live/polymorphic.productions/privkey.pem",
+    certfile: "/etc/letsencrypt/live/polymorphic.productions/cert.pem",
+    cacertfile: "/etc/letsencrypt/live/polymorphic.productions/chain.pem"
+  ],
+  url: [host: "polymorphic.productions", port: 443],
+  cache_static_manifest: "priv/static/cache_manifest.json",
+  server: true
 
 # Do not print debug messages in production
 config :logger, level: :info
