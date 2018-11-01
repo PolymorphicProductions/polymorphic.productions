@@ -1,19 +1,24 @@
 defmodule PolymorphicProductionsWeb.ConfirmController do
   use PolymorphicProductionsWeb, :controller
 
-  import PolymorphicProductionsWeb.Authorize
+  alias Phauxth.Confirm
   alias PolymorphicProductions.Accounts
+  alias PolymorphicProductionsWeb.Email
 
   def index(conn, params) do
-    case Phauxth.Confirm.verify(params, Accounts) do
+    case Confirm.verify(params) do
       {:ok, user} ->
         Accounts.confirm_user(user)
-        message = "Your account has been confirmed"
-        Accounts.Message.confirm_success(user.email)
-        success(conn, message, Routes.session_path(conn, :new))
+        Email.confirm_success(user.email)
+
+        conn
+        |> put_flash(:info, "Your account has been confirmed")
+        |> redirect(to: Routes.session_path(conn, :new))
 
       {:error, message} ->
-        error(conn, message, Routes.session_path(conn, :new))
+        conn
+        |> put_flash(:error, message)
+        |> redirect(to: Routes.page_path(conn, :index))
     end
   end
 end

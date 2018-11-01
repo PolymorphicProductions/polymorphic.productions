@@ -44,10 +44,11 @@ defmodule PolymorphicProductions.MixProject do
       {:jason, "~> 1.0"},
       {:phauxth, github: "riverrun/phauxth", override: true},
       {:bcrypt_elixir, "~> 1.0"},
-      {:bamboo, "~> 0.8"},
+      {:bamboo, "~> 1.1"},
       {:cowboy, "~> 2.5"},
       {:edeliver, ">= 1.6.0"},
-      {:distillery, "~> 2.0", warn_missing: false}
+      {:distillery, "~> 2.0", warn_missing: false},
+      {:argon2_elixir, "~> 1.3"}
     ]
   end
 

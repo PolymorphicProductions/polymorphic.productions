@@ -14,17 +14,19 @@ config :polymorphic_productions, PolymorphicProductionsWeb.Endpoint,
   url: [host: "localhost"],
   secret_key_base: "3PiqBs6QqAwrSbvLmywSxI1uriZoqgZ46yi6EMpxmmS1KG1xYC2NTB1HsjDnSawp",
   render_errors: [view: PolymorphicProductionsWeb.ErrorView, accepts: ~w(html json)],
-  pubsub: [name: PolymorphicProductions.PubSub,
-           adapter: Phoenix.PubSub.PG2]
+  pubsub: [name: PolymorphicProductions.PubSub, adapter: Phoenix.PubSub.PG2]
 
 # Phauxth authentication configuration
+# config :phauxth,
+#   token_salt: "5W3bQee3",
+#   endpoint: PolymorphicProductionsWeb.Endpoint
+
 config :phauxth,
-  token_salt: "5W3bQee3",
-  endpoint: PolymorphicProductionsWeb.Endpoint
+  user_context: PolymorphicProductions.Accounts,
+  token_module: PolymorphicProductionsWeb.Auth.Token
 
 # Mailer configuration
-config :polymorphic_productions, PolymorphicProductions.Mailer,
-  adapter: Bamboo.LocalAdapter
+config :polymorphic_productions, PolymorphicProductionsWeb.Mailer, adapter: Bamboo.LocalAdapter
 
 # Configures Elixir's Logger
 config :logger, :console,
@@ -35,7 +37,6 @@ config :logger, :console,
 config :phoenix, :json_library, Jason
 config :ecto, :json_library, Jason
 
-
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
-import_config "#{Mix.env}.exs"
+import_config "#{Mix.env()}.exs"
