@@ -42,6 +42,9 @@ defmodule PolymorphicProductions.MixProject do
       {:phoenix_live_reload, "~> 1.0", only: :dev},
       {:gettext, "~> 0.11"},
       {:jason, "~> 1.0"},
+      {:phauxth, github: "riverrun/phauxth", override: true},
+      {:bcrypt_elixir, "~> 1.0"},
+      {:bamboo, "~> 0.8"},
       {:cowboy, "~> 2.5"},
       {:edeliver, ">= 1.6.0"},
       {:distillery, "~> 2.0", warn_missing: false}
