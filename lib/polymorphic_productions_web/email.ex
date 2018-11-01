@@ -48,12 +48,13 @@ defmodule PolymorphicProductionsWeb.Email do
   An email with a link to reset the password.
   """
   def reset_request(conn, address, nil) do
-    prep_mail(address)
-    |> subject("Reset your password")
-    |> text_body(
-      "You requested a password reset, but no user is associated with the email you provided."
-    )
-    |> Mailer.deliver_now()
+    # DO we cant to nofitfy there was no user found?
+    # prep_mail(address)
+    # |> subject("Reset your password")
+    # |> text_body(
+    #   "You requested a password reset, but no user is associated with the email you provided."
+    # )
+    # |> Mailer.deliver_now()
   end
 
   def reset_request(conn, address, key) do
@@ -69,19 +70,6 @@ defmodule PolymorphicProductionsWeb.Email do
     |> render("pass_reset.html")
     |> Mailer.deliver_later()
   end
-
-  # def reset_request(%User{} = user) do
-  #   new_email()
-  #   |> to(user.email)
-  #   |> from("noreply@impactnw.org")
-  #   |> subject("BEffect | New User Invitation")
-  #   |> put_html_layout({Beffect.Mailer.LayoutView, "email.html"})
-  #   |> put_header("reply-to", "noreply@impactnw.org")
-  #   |> put_header("X-Invite", user.invite_token_raw)
-  #   |> put_private(:mailgun_custom_vars, %{invite_token: user.invite_token_raw})
-  #   |> assign(:user, user)
-  #   |> render("invite.html")
-  # end
 
   @doc """
   An email acknowledging that the account has been successfully confirmed.

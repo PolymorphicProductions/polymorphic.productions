@@ -78,8 +78,14 @@ defmodule PolymorphicProductions.Accounts do
   Makes a password reset request.
   """
   def create_password_reset(attrs) do
-    with %User{} = user <- get_by(attrs) do
-      user |> User.password_reset_changeset(DateTime.utc_now()) |> Repo.update()
+    case get_by(attrs) |> IO.inspect() do
+      %PolymorphicProductions.Accounts.User{} = user ->
+        user
+        |> User.password_reset_changeset(DateTime.utc_now())
+        |> Repo.update()
+
+      _ ->
+        {:error, "no user found"}
     end
   end
 
