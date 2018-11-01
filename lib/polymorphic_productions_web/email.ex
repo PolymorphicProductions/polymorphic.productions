@@ -47,7 +47,7 @@ defmodule PolymorphicProductionsWeb.Email do
   @doc """
   An email with a link to reset the password.
   """
-  def reset_request(address, nil) do
+  def reset_request(conn, address, nil) do
     prep_mail(address)
     |> subject("Reset your password")
     |> text_body(
@@ -56,12 +56,17 @@ defmodule PolymorphicProductionsWeb.Email do
     |> Mailer.deliver_now()
   end
 
-  def reset_request(address, key) do
+  def reset_request(conn, address, key) do
     prep_mail(address)
     |> subject("Reset your password")
     |> put_html_layout({PolymorphicProductionsWeb.Mailer.LayoutView, "email.html"})
-    |> text_body("Reset your password at http://www.example.com/password_resets/edit?key=#{key}")
-    |> render("invite.html")
+    |> text_body(
+      "Reset your password at https://polymorphic.productions/password_resets/edit?key=#{key}"
+    )
+    |> assign(:address, address)
+    |> assign(:key, key)
+    |> assign(:conn, conn)
+    |> render("pass_reset.html")
     |> Mailer.deliver_later()
   end
 
@@ -101,6 +106,7 @@ defmodule PolymorphicProductionsWeb.Email do
   defp prep_mail(address) do
     new_email()
     |> to(address)
-    |> from("admin@example.com")
+    |> from("noreply@polymorphic.productions")
+    |> put_header("reply-to", "noreply@impactnw.org")
   end
 end
