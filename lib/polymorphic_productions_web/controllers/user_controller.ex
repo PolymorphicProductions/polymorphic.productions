@@ -8,7 +8,7 @@ defmodule PolymorphicProductionsWeb.UserController do
   alias PolymorphicProductionsWeb.{Auth.Token, Email}
 
   # the following plugs are defined in the controllers/authorize.ex file
-  plug(:user_check when action in [:index, :show])
+  plug(:admin_check when action in [:index])
   plug(:id_check when action in [:edit, :update, :delete, :show])
 
   def index(conn, _params) do

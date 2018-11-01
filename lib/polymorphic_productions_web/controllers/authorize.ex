@@ -10,6 +10,7 @@ defmodule PolymorphicProductionsWeb.Authorize do
   import Phoenix.Controller
 
   alias PolymorphicProductionsWeb.Router.Helpers, as: Routes
+  alias PolymorphicProductions.Accounts.User
 
   @doc """
   Plug to only allow authenticated users to access the resource.
@@ -64,17 +65,20 @@ defmodule PolymorphicProductionsWeb.Authorize do
   end
 
   def admin_check(
-        %Plug.Conn{params: %{"id" => id}, assigns: %{current_user: current_user}} = conn,
+        %Plug.Conn{
+          params: %{"id" => id},
+          assigns: %{current_user: %User{admin: true} = current_user}
+        } = conn,
         _opts
       ) do
-    if id == to_string(current_user.id) do
-      conn
-    else
-      conn
-      |> put_flash(:error, "You are not authorized to view this page")
-      |> redirect(to: Routes.user_path(conn, :show, current_user))
-      |> halt()
-    end
+    conn
+  end
+
+  def admin_check(conn, _) do
+    conn
+    |> put_flash(:error, "You are not authorized to view this page")
+    |> redirect(to: Routes.page_path(conn, :index))
+    |> halt()
   end
 
   defp need_login(conn) do
