@@ -9,7 +9,7 @@ defmodule PolymorphicProductionsWeb.UserController do
 
   # the following plugs are defined in the controllers/authorize.ex file
   plug(:user_check when action in [:index, :show])
-  plug(:id_check when action in [:edit, :update, :delete])
+  plug(:id_check when action in [:edit, :update, :delete, :show])
 
   def index(conn, _params) do
     users = Accounts.list_users()

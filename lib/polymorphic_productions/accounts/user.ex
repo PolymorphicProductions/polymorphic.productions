@@ -9,7 +9,7 @@ defmodule PolymorphicProductions.Accounts.User do
     field(:password_hash, :string)
     field(:confirmed_at, :utc_datetime)
     field(:reset_sent_at, :utc_datetime)
-
+    field(:admin, :boolean)
     timestamps()
   end
 
@@ -35,6 +35,10 @@ defmodule PolymorphicProductions.Accounts.User do
 
   def password_reset_changeset(user, reset_sent_at) do
     change(user, %{reset_sent_at: reset_sent_at})
+  end
+
+  def admin_changeset(user, admin) do
+    change(user, %{admin: admin})
   end
 
   defp unique_email(changeset) do

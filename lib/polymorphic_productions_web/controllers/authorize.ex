@@ -59,6 +59,24 @@ defmodule PolymorphicProductionsWeb.Authorize do
     end
   end
 
+  def admin_check(%Plug.Conn{assigns: %{current_user: nil}} = conn, _opts) do
+    need_login(conn)
+  end
+
+  def admin_check(
+        %Plug.Conn{params: %{"id" => id}, assigns: %{current_user: current_user}} = conn,
+        _opts
+      ) do
+    if id == to_string(current_user.id) do
+      conn
+    else
+      conn
+      |> put_flash(:error, "You are not authorized to view this page")
+      |> redirect(to: Routes.user_path(conn, :show, current_user))
+      |> halt()
+    end
+  end
+
   defp need_login(conn) do
     conn
     |> put_session(:request_path, current_path(conn))
