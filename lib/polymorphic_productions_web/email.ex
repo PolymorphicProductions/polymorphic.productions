@@ -29,9 +29,9 @@ defmodule PolymorphicProductionsWeb.Email do
   4. Remove bamboo from the deps section in the mix.exs file
 
   """
+  use Bamboo.Phoenix, view: PolymorphicProductionsWeb.Mailer.EmailView
 
   import Bamboo.Email
-
   alias PolymorphicProductionsWeb.Mailer
 
   @doc """
@@ -59,9 +59,24 @@ defmodule PolymorphicProductionsWeb.Email do
   def reset_request(address, key) do
     prep_mail(address)
     |> subject("Reset your password")
+    |> put_html_layout({PolymorphicProductionsWeb.Mailer.LayoutView, "email.html"})
     |> text_body("Reset your password at http://www.example.com/password_resets/edit?key=#{key}")
-    |> Mailer.deliver_now()
+    |> render("invite.html")
+    |> Mailer.deliver_later()
   end
+
+  # def reset_request(%User{} = user) do
+  #   new_email()
+  #   |> to(user.email)
+  #   |> from("noreply@impactnw.org")
+  #   |> subject("BEffect | New User Invitation")
+  #   |> put_html_layout({Beffect.Mailer.LayoutView, "email.html"})
+  #   |> put_header("reply-to", "noreply@impactnw.org")
+  #   |> put_header("X-Invite", user.invite_token_raw)
+  #   |> put_private(:mailgun_custom_vars, %{invite_token: user.invite_token_raw})
+  #   |> assign(:user, user)
+  #   |> render("invite.html")
+  # end
 
   @doc """
   An email acknowledging that the account has been successfully confirmed.
