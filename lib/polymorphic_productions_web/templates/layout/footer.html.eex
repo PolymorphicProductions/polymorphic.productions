@@ -1,0 +1,27 @@
+<footer>
+  <div class="footer bg-dark-lighter">
+    <div class="container text-center">
+      <h4>Polymorphic Productions <span style="font-size: 8px;">LLC</span></h4>
+      <ul class="list-horizontal-unstyled icon-lg margin-top-30">
+        <li><a href="https://www.facebook.com/polymorphic.productions.llc"><i class="fab fa-facebook-f"></i></a></li>
+        <li><a href="https://twitter.com/PolymorphicProd"><i class="fab fa-twitter"></i></a></li>
+        <li><a href="https://www.instagram.com/polymorphic.productions/"><i class="fab fa-instagram"></i></a></li>
+      </ul>
+    </div><!-- end container -->
+  </div><!-- end footer -->
+  <div class="footer-bottom bg-dark">
+    <div class="container">
+      <div class="row">
+        <div class="col-12 col-md-6 text-center text-md-left">
+          <p>© 2018 Polymorphic Productions LLC, All Rights Reserved.</p>
+        </div>
+        <div class="col-12 col-md-6 text-center text-md-right">
+          <ul class="list-horizontal-unstyled">
+            <li><a href="/policy">Policy</a></li>
+            <li><a href="/terms-and-conditions">Terms &amp; Conditions</a></li>
+          </ul>
+        </div>
+      </div><!-- end row -->
+    </div><!-- end container -->
+  </div><!-- end footer-bottom -->
+</footer>

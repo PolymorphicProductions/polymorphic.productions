@@ -1,0 +1,38 @@
+//
+// Your Custom Styles //
+//
+
+img {
+  max-height: 609px;
+}
+
+// Overrides
+
+.display-4 {
+  font-family: "Abril Fatface", cursive;
+  font-weight: normal !important;
+  @include media-breakpoint-down(sm) {
+    font-size: 30px;
+  }
+}
+
+.page-title-lg .container,
+.page-title-lg .container-fluid {
+  padding: 140px 20px;
+  h1 {
+    font-family: "Abril Fatface", cursive;
+    font-weight: normal !important;
+  }
+}
+
+.timeline-content {
+  min-height: 450px;
+}
+
+#posts {
+  padding: 50px 0;
+}
+
+.new_user .required:after {
+  content: "";
+}

@@ -1,0 +1,28 @@
+<header>
+  <nav class="navbar navbar-absolute navbar-fixed navbar-shrink"><!-- add 'navbar-dark/navbar-grey/navbar-transparent/navbar-transparent-dark' -->
+    <div class="container">
+
+      <a class="navbar-brand" href="/">
+        <h5>Polymorphic Productions</h5>
+      </a>
+
+      <ul class="nav dropdown-dark">
+        <%= if @current_user do %>
+        <li class="nav-item">
+          <a class="nav-link" href="<%= Routes.user_path @conn, :index %>">Users</a>
+        </li>
+
+        <li class="nav-item"><a class="nav-link" href="<%= Routes.user_path(@conn, :show, @current_user.id) %>"><%= @current_user.email %></a></li>
+        <li class="nav-item"><%= link "Logout", to: Routes.session_path(@conn, :delete, @current_user), method: :delete, class: "nav-link" %></li>
+        <% else %>
+        <li class="nav-item"><a class="nav-link" href="<%= Routes.user_path @conn, :new %>">Sign Up</a></li>
+        <li class="nav-item"><a class="nav-link" href="<%= Routes.session_path @conn, :new %>">Login</a></li>
+        <% end %>
+      </ul>
+
+      <button class="nav-toggle-btn">
+        <span class="lines"></span>
+      </button><!-- toggle button will show when screen resolution is less than 992px -->
+    </div><!-- end container -->
+  </nav><!-- end navbar -->
+</header>
