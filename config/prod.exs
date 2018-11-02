@@ -11,7 +11,6 @@ use Mix.Config
 # before starting your production server.
 config :polymorphic_productions, PolymorphicProductionsWeb.Endpoint,
   http: [
-    :inet6,
     otp_app: :isafe,
     port: 4000
     # cipher_suite: :strong,
@@ -19,7 +18,7 @@ config :polymorphic_productions, PolymorphicProductionsWeb.Endpoint,
     # certfile: "/etc/letsencrypt/live/polymorphic.productions/cert.pem",
     # cacertfile: "/etc/letsencrypt/live/polymorphic.productions/chain.pem"
   ],
-  url: [host: "polymorphic.productions", scheme: "https"],
+  url: [host: "polymorphic.productions"],
   cache_static_manifest: "priv/static/cache_manifest.json",
   server: true
 
