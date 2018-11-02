@@ -13,7 +13,7 @@ config :polymorphic_productions, PolymorphicProductionsWeb.Endpoint,
   http: [
     :inet6,
     otp_app: :isafe,
-    port: 443
+    port: 4000
     # cipher_suite: :strong,
     # keyfile: "/etc/letsencrypt/live/polymorphic.productions/privkey.pem",
     # certfile: "/etc/letsencrypt/live/polymorphic.productions/cert.pem",
