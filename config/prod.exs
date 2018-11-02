@@ -17,9 +17,13 @@ config :polymorphic_productions, PolymorphicProductionsWeb.Endpoint,
     # certfile: "/etc/letsencrypt/live/polymorphic.productions/cert.pem",
     # cacertfile: "/etc/letsencrypt/live/polymorphic.productions/chain.pem"
   ],
-  url: [host: "polymorphic.productions", port: 4000],
+  url: [host: "polymorphic.productions"],
   cache_static_manifest: "priv/static/cache_manifest.json",
-  server: true
+  server: true,
+  root: ".",
+  version: Mix.Project.config()[:version],
+  debug_errors: true,
+  code_reloader: true,
 
 # Do not print debug messages in production
 config :logger, level: :info
