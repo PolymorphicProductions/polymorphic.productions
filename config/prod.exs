@@ -10,7 +10,7 @@ use Mix.Config
 # which you should run after static files are built and
 # before starting your production server.
 config :polymorphic_productions, PolymorphicProductionsWeb.Endpoint,
-  https: [
+  http: [
     :inet6,
     otp_app: :isafe,
     port: 443
