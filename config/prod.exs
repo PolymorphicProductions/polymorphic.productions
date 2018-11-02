@@ -13,11 +13,11 @@ config :polymorphic_productions, PolymorphicProductionsWeb.Endpoint,
   https: [
     :inet6,
     otp_app: :isafe,
-    port: 443,
-    cipher_suite: :strong,
-    keyfile: "/etc/letsencrypt/live/polymorphic.productions/privkey.pem",
-    certfile: "/etc/letsencrypt/live/polymorphic.productions/cert.pem",
-    cacertfile: "/etc/letsencrypt/live/polymorphic.productions/chain.pem"
+    port: 443
+    # cipher_suite: :strong,
+    # keyfile: "/etc/letsencrypt/live/polymorphic.productions/privkey.pem",
+    # certfile: "/etc/letsencrypt/live/polymorphic.productions/cert.pem",
+    # cacertfile: "/etc/letsencrypt/live/polymorphic.productions/chain.pem"
   ],
   url: [host: "polymorphic.productions", port: 443, scheme: "https"],
   cache_static_manifest: "priv/static/cache_manifest.json",

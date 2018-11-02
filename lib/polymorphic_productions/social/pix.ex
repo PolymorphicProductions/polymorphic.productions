@@ -68,9 +68,9 @@ defmodule PolymorphicProductions.Social.Pix do
        ) do
     import Mogrify
 
-    %{path: new_image} = open(path) |> resize("1100x") |> save()
+    # %{path: new_image} = open(path) |> resize("1100x") |> save()
 
-    new_image
+    path
     |> S3.Upload.stream_file()
     |> S3.upload("polymorphic-productions", "/photos/" <> filename, acl: :public_read)
     |> ExAws.request()
