@@ -18,7 +18,7 @@ defmodule PolymorphicProductionsWeb.SessionControllerTest do
   test "rendering login form fails for user that is already logged in", %{conn: conn, user: user} do
     conn = conn |> add_phauxth_session(user) |> send_resp(:ok, "/")
     conn = get(conn, session_path(conn, :new))
-    assert redirected_to(conn) == page_path(conn, :index)
+    assert redirected_to(conn) == pix_path(conn, :index)
   end
 
   test "login succeeds", %{conn: conn} do
@@ -34,7 +34,7 @@ defmodule PolymorphicProductionsWeb.SessionControllerTest do
   test "login fails for user that is already logged in", %{conn: conn, user: user} do
     conn = conn |> add_phauxth_session(user) |> send_resp(:ok, "/")
     conn = post(conn, session_path(conn, :create), session: @create_attrs)
-    assert redirected_to(conn) == page_path(conn, :index)
+    assert redirected_to(conn) == pix_path(conn, :index)
   end
 
   test "login fails for invalid password", %{conn: conn} do
@@ -45,7 +45,7 @@ defmodule PolymorphicProductionsWeb.SessionControllerTest do
   test "logout succeeds and session is deleted", %{conn: conn, user: user} do
     conn = conn |> add_phauxth_session(user) |> send_resp(:ok, "/")
     conn = delete(conn, session_path(conn, :delete, user))
-    assert redirected_to(conn) == page_path(conn, :index)
+    assert redirected_to(conn) == pix_path(conn, :index)
     conn = get(conn, user_path(conn, :index))
     assert redirected_to(conn) == session_path(conn, :new)
     assert Accounts.list_sessions(user.id) == %{}

@@ -18,7 +18,7 @@ defmodule PolymorphicProductionsWeb.ConfirmController do
       {:error, message} ->
         conn
         |> put_flash(:error, message)
-        |> redirect(to: Routes.page_path(conn, :index))
+        |> redirect(to: Routes.pix_path(conn, :index))
     end
   end
 end

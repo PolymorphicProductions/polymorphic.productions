@@ -48,7 +48,14 @@ defmodule PolymorphicProductions.MixProject do
       {:cowboy, "~> 2.5"},
       {:edeliver, ">= 1.6.0"},
       {:distillery, "~> 2.0", warn_missing: false},
-      {:argon2_elixir, "~> 1.3"}
+      {:argon2_elixir, "~> 1.3"},
+      {:mogrify, "~> 0.6.1"},
+      {:ex_aws, "~> 2.0"},
+      {:ex_aws_s3, "~> 2.0"},
+      {:hackney, "~> 1.9"},
+      {:sweet_xml, "~> 0.6"},
+      {:uuid, "~> 1.1"},
+      {:timex, "~> 3.1"}
     ]
   end
 

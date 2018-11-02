@@ -20,14 +20,14 @@ defmodule PolymorphicProductionsWeb.PasswordResetControllerTest do
     valid_attrs = %{email: "gladys@example.com"}
     conn = post(conn, password_reset_path(conn, :create), password_reset: valid_attrs)
     assert conn.private.phoenix_flash["info"] =~ "your inbox for instructions"
-    assert redirected_to(conn) == page_path(conn, :index)
+    assert redirected_to(conn) == pix_path(conn, :index)
   end
 
   test "create function fails for no user", %{conn: conn} do
     invalid_attrs = %{email: "prettylady@example.com"}
     conn = post(conn, password_reset_path(conn, :create), password_reset: invalid_attrs)
     assert conn.private.phoenix_flash["info"] =~ "your inbox for instructions"
-    assert redirected_to(conn) == page_path(conn, :index)
+    assert redirected_to(conn) == pix_path(conn, :index)
   end
 
   test "reset password succeeds for correct key", %{conn: conn} do

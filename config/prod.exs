@@ -28,6 +28,22 @@ config :logger, level: :info
 
 config :polymorphic_productions, PolymorphicProductionsWeb.Mailer, adapter: Bamboo.MailgunAdapter
 
+# Use Jason for JSON parsing in Phoenix and Ecto
+config :phoenix, :json_library, Jason
+
+# Import environment specific config. This must remain at the bottom
+# of this file so it overrides the configuration defined above.
+
+config :ex_aws,
+  s3: [
+    scheme: "https://",
+    # Note You must specify the region in the host s3.{region}.amazonaws.com
+    host: "polymorphic-productions.s3.us-west-2.amazonaws.com",
+    # Note even though you have specified host to include the
+    # region you still have to set it in the config. :(
+    region: "us-west-2"
+  ]
+
 # ## SSL Support
 #
 # To get SSL working, you will need to add the `https` key

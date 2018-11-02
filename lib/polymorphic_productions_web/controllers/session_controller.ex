@@ -46,7 +46,7 @@ defmodule PolymorphicProductionsWeb.SessionController do
     |> delete_session(:session_id)
     |> Remember.delete_rem_cookie()
     |> put_flash(:info, "User successfully logged out.")
-    |> redirect(to: Routes.page_path(conn, :index))
+    |> redirect(to: Routes.pix_path(conn, :index))
   end
 
   # This function adds a remember_me cookie to the conn.

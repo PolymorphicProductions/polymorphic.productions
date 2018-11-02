@@ -18,7 +18,7 @@ defmodule PolymorphicProductionsWeb.Router do
   scope "/", PolymorphicProductionsWeb do
     pipe_through(:browser)
 
-    get("/", PageController, :index)
+    resources("/", PixController)
     resources("/users", UserController)
     resources("/sessions", SessionController, only: [:new, :create, :delete])
     get("/confirm", ConfirmController, :index)

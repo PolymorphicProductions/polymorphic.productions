@@ -1,0 +1,36 @@
+<div class="section">
+  <div class="container">
+    <%= for pic <- @pics do %>
+    <div class="row justify-content-md-center">
+      <div class="col-lg-10">
+        <%= link (img_tag pic.asset), to: Routes.pix_path(@conn, :show, pic) %>
+      </div>
+    </div>
+    <div class="row justify-content-md-center">
+      <div class="col-lg-10">
+        <div class="row">
+          <div class="col-lg-3">
+            <div class="margin-bottom-20">
+              <h6 class="heading-uppercase no-margin">Date</h6>
+              <span><%= pic.inserted_at %></span>
+            </div>
+            <div>
+
+              <%#= link "Edit", to: Routes.pix_path(@conn, :edit, pic) %>
+              <%#= link "Delete", to: Routes.pix_path(@conn, :delete, pic), method: :delete, data: [confirm: "Are you sure?"] %>  
+           
+            </div>
+          </div>
+          
+          <div class="col-lg-8">
+            <%= pic.description %>
+          </div>
+        </div><!-- end row -->
+      </div>
+    </div>
+    <% end %>
+    <span>
+      <%#= link "New Pic", to: Routes.pix_path(@conn, :new) %>
+    </span>
+  </div>
+</div>

@@ -33,7 +33,7 @@ defmodule PolymorphicProductionsWeb.Authorize do
   def guest_check(%Plug.Conn{assigns: %{current_user: _current_user}} = conn, _opts) do
     conn
     |> put_flash(:error, "You need to log out to view this page")
-    |> redirect(to: Routes.page_path(conn, :index))
+    |> redirect(to: Routes.pix_path(conn, :index))
     |> halt()
   end
 
@@ -83,7 +83,7 @@ defmodule PolymorphicProductionsWeb.Authorize do
 
     conn
     |> put_flash(:error, "You are not authorized to view this page")
-    |> redirect(to: Routes.page_path(conn, :index))
+    |> redirect(to: Routes.pix_path(conn, :index))
     |> halt()
   end
 
