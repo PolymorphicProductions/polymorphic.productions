@@ -11,8 +11,7 @@
         <div class="row">
           <div class="col-lg-3">
             <div class="margin-bottom-20">
-              <h6 class="heading-uppercase no-margin">Date</h6>
-              <span><%= pic.inserted_at %></span>
+              <span><%= format_date pic.inserted_at %></span>
             </div>
             <div>
 

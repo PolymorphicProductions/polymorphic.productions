@@ -22,6 +22,7 @@ config :polymorphic_productions, PolymorphicProductionsWeb.Endpoint,
   server: true,
   root: ".",
   version: Mix.Project.config()[:version],
+  debug_errors: false,
   code_reloader: false
 
 # Do not print debug messages in production
