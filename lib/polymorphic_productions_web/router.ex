@@ -18,12 +18,13 @@ defmodule PolymorphicProductionsWeb.Router do
   scope "/", PolymorphicProductionsWeb do
     pipe_through(:browser)
 
-    resources("/", PixController)
+    resources("/snapshots", PixController)
     resources("/users", UserController)
     resources("/sessions", SessionController, only: [:new, :create, :delete])
     get("/confirm", ConfirmController, :index)
     resources("/password_resets", PasswordResetController, only: [:new, :create])
     get("/password_resets/edit", PasswordResetController, :edit)
     put("/password_resets/update", PasswordResetController, :update)
+    get("/", PageController, :index)
   end
 end

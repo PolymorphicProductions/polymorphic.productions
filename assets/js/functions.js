@@ -1,3 +1,7 @@
+import $ from "jquery";
+window.jQuery = $;
+window.$ = $;
+
 $(function() {
   "use strict";
 
@@ -8,10 +12,10 @@ $(function() {
   var $body = document.body;
 
   $(window).on("load", function() {
-    $body.addClass("loaded");
+    $($body).addClass("loaded");
   });
 
-  if ($body.attr("data-preloader") === "1") {
+  if ($($body).attr("data-preloader") === "1") {
     $body.append(
       $("<div class='preloader preloader-1'><div><span></span></div></div>")
     );
@@ -443,22 +447,22 @@ $(function() {
   /*===============================================
     Portfolio
   ===============================================*/
-  $(".portfolio-wrapper").imagesLoaded(function() {
-    var $portfolioWrapper = $(".portfolio-wrapper").isotope({
-      itemSelector: ".portfolio-item",
-      transitionDuration: 300 // 0.3 second
-    });
-    var filter = $(".filter ul li");
+  // $(".portfolio-wrapper").imagesLoaded(function() {
+  //   var $portfolioWrapper = $(".portfolio-wrapper").isotope({
+  //     itemSelector: ".portfolio-item",
+  //     transitionDuration: 300 // 0.3 second
+  //   });
+  //   var filter = $(".filter ul li");
 
-    // Portfolio Filter //
-    filter.on("click", function() {
-      var filterValue = $(this).attr("data-filter");
-      $portfolioWrapper.isotope({ filter: filterValue });
+  //   // Portfolio Filter //
+  //   filter.on("click", function() {
+  //     var filterValue = $(this).attr("data-filter");
+  //     $portfolioWrapper.isotope({ filter: filterValue });
 
-      filter.removeClass("active");
-      $(this).addClass("active");
-    });
-  });
+  //     filter.removeClass("active");
+  //     $(this).addClass("active");
+  //   });
+  // });
 
   /*===============================================
     Owl Carousel Sliders
@@ -557,9 +561,9 @@ $(function() {
   /*===============================================
     Blog Masonry
   ===============================================*/
-  $(".blog-masonry").masonry({
-    itemSelector: ".blog-post-box"
-  });
+  // $(".blog-masonry").masonry({
+  //   itemSelector: ".blog-post-box"
+  // });
 
   /*===============================================
     Magnific Popup
@@ -652,9 +656,9 @@ $(function() {
   /*===============================================
     Parallax
   ===============================================*/
-  $(".parallax").jarallax({
-    speed: 0.2
-  });
+  // $(".parallax").jarallax({
+  //   speed: 0.2
+  // });
 
   /*===============================================
     Countdown
@@ -737,29 +741,29 @@ $(function() {
   /*===============================================
     Fun Facts Counter
   ===============================================*/
-  $(".facts-wrapper").appear(
-    function() {
-      var fcounter = $(".facts-counter");
+  // $(".facts-wrapper").appear(
+  //   function() {
+  //     var fcounter = $(".facts-counter");
 
-      fcounter.each(function() {
-        $(this)
-          .prop("Counter", 0)
-          .animate(
-            {
-              Counter: $(this).text()
-            },
-            {
-              duration: 3000,
-              easing: "swing",
-              step: function(now) {
-                $(this).text(Math.ceil(now));
-              }
-            }
-          );
-      });
-    },
-    { accX: 0, accY: -10 }
-  );
+  //     fcounter.each(function() {
+  //       $(this)
+  //         .prop("Counter", 0)
+  //         .animate(
+  //           {
+  //             Counter: $(this).text()
+  //           },
+  //           {
+  //             duration: 3000,
+  //             easing: "swing",
+  //             step: function(now) {
+  //               $(this).text(Math.ceil(now));
+  //             }
+  //           }
+  //         );
+  //     });
+  //   },
+  //   { accX: 0, accY: -10 }
+  // );
 
   /*===============================================
     Quantity

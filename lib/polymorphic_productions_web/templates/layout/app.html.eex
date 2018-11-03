@@ -17,7 +17,7 @@
 
 <body data-preloader="1">
 
-  <%= render "header.html", conn: @conn, current_user: @current_user %>
+  <%= render "header.html", conn: @conn, current_user: @current_user, view_module: @view_module, view_template: @view_template  %>
 
   <div class="section">
     <div class="container">

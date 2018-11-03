@@ -1,32 +1,54 @@
-<div class="jumbotron">
-  <h2>
-    <%= gettext "Welcome to %{name}! - and Phauxth", name: "Phoenix" %>
-  </h2>
-  <p class="lead">A secure and extensible authentication library for Plug-based applications</p>
+<div class="section-fullscreen bg-image parallax" style="background-image: none; z-index: 0;"
+  data-jarallax-original-styles="background-image: url(http://localhost:3000/assets/home_header_4-c73faf221043a1acb3fa110957c723f61922224db57b7b473e3a42bc713e8b6b.jpg)">
+  <div class="bg-black-05">
+    <div class="container">
+      <div class="position-middle">
+        <div class="row">
+          <div class="col-12 col-sm-10 col-md-8 col-lg-8">
+            <h1 class="display-4 font-weight-bold">Your personal creative digital metamorphosis</h1>
+          </div>
+        </div>
+      </div>
+
+      <!-- scrolldown button -->
+      <div class="position-bottom icon-lg">
+        <a class="scrolldown" href="#services">
+          <i class="ti-arrow-down"></i>
+        </a>
+      </div>
+    </div><!-- end container -->
+  </div>
+  <div id="jarallax-container-0" style="position: absolute; top: 0px; left: 0px; width: 100%; height: 100%; overflow: hidden; pointer-events: none; z-index: -100;">
+    <div style="background-position: 50% 50%; background-size: cover; background-repeat: no-repeat; background-image: url(&quot;http://localhost:3000/assets/home_header_4-c73faf221043a1acb3fa110957c723f61922224db57b7b473e3a42bc713e8b6b.jpg&quot;); position: fixed; top: 0px; left: 0px; width: 1440px; height: 352px; overflow: hidden; pointer-events: none; margin-top: 0px; transform: translate3d(0px, 0px, 0px);"></div>
+  </div>
 </div>
 
-<div class="row marketing">
-  <div class="col-lg-6">
-    <h4>Phauxth authentication</h4>
-    <ul>
-      <li>
-        <a href="https://hexdocs.pm/phauxth">Docs</a>
-      </li>
-      <li>
-        <a href="https://github.com/riverrun/phauxth">Source</a>
-      </li>
-    </ul>
-  </div>
+<div id="services" class="section border-bottom">
+  <div class="container">
+    <div class="row text-center">
+      <!-- Services box 1 -->
+      <div class="col-12 col-md-4 icon-3xl">
+        <i class="ti-camera text-dark"></i>
+        <h5 class="margin-top-20">Photography</h5>
+        <p>From commercial product shoots to family portraits and weddings I can help you add that extra spark of
+          creativity and professionalism while always working within your budget.</p>
+      </div>
 
-  <div class="col-lg-6">
-    <h4>Phoenix web framework</h4>
-    <ul>
-      <li>
-        <a href="http://phoenixframework.org/docs/overview">Phoenix guides</a>
-      </li>
-      <li>
-        <a href="https://github.com/phoenixframework/phoenix">Phoenix source</a>
-      </li>
-    </ul>
-  </div>
+      <!-- Services box 2 -->
+      <div class="col-12 col-md-4 icon-3xl">
+        <i class="ti-video-clapper text-dark"></i>
+        <h5 class="margin-top-20">Videography</h5>
+        <p>Lights! Camera! Drones? Ask us how our drones can add that extra something to your shoots. From the first
+          shutter to the last after effects pre compile I have all Videography needs covered.</p>
+      </div>
+
+      <!-- Services box 3 -->
+      <div class="col-12 col-md-4 icon-3xl">
+        <i class="ti-desktop text-dark"></i>
+        <h5 class="margin-top-20">Web Development</h5>
+        <p>With over a decade of web development experience from Ruby, PHP, Elixir to animated Adobe Flash banner ads I
+          have seen and done it all. Need a site? Ask us how I can build you one within your budget.</p>
+      </div>
+    </div><!-- end row -->
+  </div><!-- end container -->
 </div>
