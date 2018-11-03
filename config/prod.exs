@@ -17,7 +17,7 @@ config :polymorphic_productions, PolymorphicProductionsWeb.Endpoint,
     # certfile: "/etc/letsencrypt/live/polymorphic.productions/cert.pem",
     # cacertfile: "/etc/letsencrypt/live/polymorphic.productions/chain.pem"
   ],
-  url: [host: "polymorphic.productions"],
+  url: [host: "polymorphic.productions", scheme: "https", port: 443],
   cache_static_manifest: "priv/static/cache_manifest.json",
   server: true,
   root: ".",
