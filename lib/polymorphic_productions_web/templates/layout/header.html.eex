@@ -7,6 +7,9 @@
       </a>
 
       <ul class="nav dropdown-dark">
+        <li class="nav-item">
+          <a class="nav-link" href="<%= Routes.pix_path @conn, :index %>">Snapshots</a>
+        </li>
         <%= if @current_user do %>
         <li class="nav-item">
           <a class="nav-link" href="<%= Routes.user_path @conn, :index %>">Users</a>
