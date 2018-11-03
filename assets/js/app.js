@@ -16,7 +16,6 @@ import "bootstrap";
 // import "retinajs";
 // import "imagesloaded";
 //import "isotope.pkgd";
-// import "jarallax";
 // import "magnific-popup";
 //import "owl-carousel";
 

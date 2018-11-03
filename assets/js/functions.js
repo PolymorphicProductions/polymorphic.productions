@@ -1,4 +1,6 @@
 import $ from "jquery";
+import { jarallax } from "jarallax";
+
 window.jQuery = $;
 window.$ = $;
 
@@ -656,9 +658,10 @@ $(function() {
   /*===============================================
     Parallax
   ===============================================*/
-  // $(".parallax").jarallax({
-  //   speed: 0.2
-  // });
+
+  jarallax(document.querySelectorAll(".parallax"), {
+    speed: 0.2
+  });
 
   /*===============================================
     Countdown
