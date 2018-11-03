@@ -10,6 +10,7 @@ defmodule PolymorphicProductions.Social.Pix do
 
   schema "pics" do
     field(:asset, :string)
+    field(:asset_preview, :string)
     field(:description, :string)
     field(:photo, :any, virtual: true)
     timestamps()
@@ -68,18 +69,27 @@ defmodule PolymorphicProductions.Social.Pix do
        ) do
     import Mogrify
 
-    # %{path: new_image} = open(path) |> resize("1100x") |> save()
+    %{path: new_image} = open(path) |> resize("1024x") |> save()
+
+    new_image
+    |> S3.Upload.stream_file()
+    |> S3.upload("polymorphic-productions", "/photos/preview/" <> filename, acl: :public_read)
+    |> ExAws.request()
+    |> IO.inspect()
 
     path
     |> S3.Upload.stream_file()
     |> S3.upload("polymorphic-productions", "/photos/" <> filename, acl: :public_read)
     |> ExAws.request()
-    |> IO.inspect()
 
     changeset
     |> put_change(
       :asset,
       "https://d1sv288qkuffrb.cloudfront.net/polymorphic-productions/photos/" <> filename
+    )
+    |> put_change(
+      :asset_preview,
+      "https://d1sv288qkuffrb.cloudfront.net/polymorphic-productions/photos/preview/" <> filename
     )
   end
 

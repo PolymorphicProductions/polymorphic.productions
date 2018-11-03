@@ -12,11 +12,11 @@ defmodule PolymorphicProductionsWeb.PixView do
       <meta property="og:type" content="image/jpeg" />
       <meta property="og:url" content="#{Routes.pix_url(assigns[:conn], :show, assigns[:pix])}" />
       <meta property="og:title" content="Polymorphic Productions Snapshot" />
-      <meta property="og:description" content="" />
+      <meta property="og:description" content="#{assigns[:pix].description}" />
       <meta property="og:site_name" content="Polymorphic Productions" />
       <meta name="twitter:site" content="@PolymorphicProd">
-      <meta name="twitter:title" content="Polymorphic Productions Snaps">
-      <meta name="twitter:description" content="Snap Shots / Street Photography">
+      <meta name="twitter:title" content="Polymorphic Productions | Snaps">
+      <meta name="twitter:description" content="#{assigns[:pix].description}">
       <meta name="twitter:card" content="summary_large_image">
       <meta name="twitter:widgets:new-embed-design" content="on">
       <meta property="og:image"      content="#{assigns[:pix].asset}" />

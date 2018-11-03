@@ -37,6 +37,16 @@ config :logger, :console,
 config :phoenix, :json_library, Jason
 config :ecto, :json_library, Jason
 
+config :ex_aws,
+  s3: [
+    scheme: "https://",
+    # Note You must specify the region in the host s3.{region}.amazonaws.com
+    host: "polymorphic-productions.s3.us-west-2.amazonaws.com",
+    # Note even though you have specified host to include the
+    # region you still have to set it in the config. :(
+    region: "us-west-2"
+  ]
+
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
 import_config "#{Mix.env()}.exs"
