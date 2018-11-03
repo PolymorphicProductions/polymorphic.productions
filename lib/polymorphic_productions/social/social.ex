@@ -18,7 +18,8 @@ defmodule PolymorphicProductions.Social do
 
   """
   def list_pics do
-    Repo.all(Pix)
+    from(q in Pix, order_by: q.inserted_at)
+    |> Repo.all()
   end
 
   @doc """
