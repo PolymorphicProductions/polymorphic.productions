@@ -14,9 +14,6 @@
 
         <li class="nav-item"><a class="nav-link" href="<%= Routes.user_path(@conn, :show, @current_user.id) %>"><%= @current_user.email %></a></li>
         <li class="nav-item"><%= link "Logout", to: Routes.session_path(@conn, :delete, @current_user), method: :delete, class: "nav-link" %></li>
-        <% else %>
-        <li class="nav-item"><a class="nav-link" href="<%= Routes.user_path @conn, :new %>">Sign Up</a></li>
-        <li class="nav-item"><a class="nav-link" href="<%= Routes.session_path @conn, :new %>">Login</a></li>
         <% end %>
       </ul>
 
