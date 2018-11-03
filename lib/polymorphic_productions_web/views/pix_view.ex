@@ -19,8 +19,8 @@ defmodule PolymorphicProductionsWeb.PixView do
       <meta name="twitter:description" content="#{assigns[:pix].description}">
       <meta name="twitter:card" content="summary_large_image">
       <meta name="twitter:widgets:new-embed-design" content="on">
-      <meta property="og:image"      content="#{assigns[:pix].asset}" />
-      <meta name="twitter:image:src" content="#{assigns[:pix].asset}">
+      <meta property="og:image"      content="#{assigns[:pix].asset_preview}" />
+      <meta name="twitter:image:src" content="#{assigns[:pix].asset_preview}">
       """
     }
   end
