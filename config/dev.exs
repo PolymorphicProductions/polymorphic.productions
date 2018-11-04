@@ -71,3 +71,13 @@ config :polymorphic_productions, PolymorphicProductions.Repo,
   database: "polymorphic_productions_dev",
   hostname: "localhost",
   pool_size: 10
+
+config :sentry,
+  dsn: System.get_env("PP_SENTRY_DNS"),
+  environment_name: :dev,
+  enable_source_code_context: true,
+  root_source_code_path: File.cwd!(),
+  tags: %{
+    env: "development"
+  },
+  included_environments: [:dev]

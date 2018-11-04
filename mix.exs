@@ -20,7 +20,7 @@ defmodule PolymorphicProductions.MixProject do
   def application do
     [
       mod: {PolymorphicProductions.Application, []},
-      extra_applications: [:logger, :runtime_tools]
+      extra_applications: [:sentry, :logger, :runtime_tools]
     ]
   end
 
@@ -54,7 +54,8 @@ defmodule PolymorphicProductions.MixProject do
       {:hackney, "~> 1.9"},
       {:sweet_xml, "~> 0.6"},
       {:uuid, "~> 1.1"},
-      {:timex, "~> 3.1"}
+      {:timex, "~> 3.1"},
+      {:sentry, "~> 6.4"}
     ]
   end
 
