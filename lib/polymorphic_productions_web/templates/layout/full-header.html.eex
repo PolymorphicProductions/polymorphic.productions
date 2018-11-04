@@ -13,6 +13,10 @@
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.2/css/all.css" integrity="sha384-/rXc/GQVaYpyDdyxK+ecHPVYJSN9bmVFBvjA/9eOB+pb3F2w2N6fc5qB9Ew5yIns"
     crossorigin="anonymous">
   <%= render_existing @view_module, "social." <> @view_template, assigns %>
+
+  <%= if Application.get_env(:polymorphic_productions, :render_tracking) do %>
+    <%= render "tracking.html"%>
+  <% end %>
 </head>
 
 <body data-preloader="1">

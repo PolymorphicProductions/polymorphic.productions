@@ -46,6 +46,7 @@ config :ex_aws,
     region: "us-west-2"
   ]
 
+config :polymorphic_productions, render_tracking: false
 # ## SSL Support
 #
 # To get SSL working, you will need to add the `https` key

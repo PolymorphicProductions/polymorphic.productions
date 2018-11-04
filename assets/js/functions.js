@@ -86,7 +86,6 @@ $(function() {
   ===============================================*/
   var nav = $(".nav");
   var navToggle = $(".nav-toggle-btn");
-  debugger;
   //
   // Show Nav menu on Toggle //
   //
