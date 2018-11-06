@@ -10,14 +10,11 @@ $(function() {
   /*===============================================
     Preloaders
   ===============================================*/
-  var $body = $("body");
   var $body = document.body;
-
   $(window).on("load", function() {
-    $($body).addClass("loaded");
+    $body.addClass("loaded");
   });
-
-  if ($($body).attr("data-preloader") === "1") {
+  if ($body.attr("data-preloader") === "1") {
     $body.append(
       $("<div class='preloader preloader-1'><div><span></span></div></div>")
     );
@@ -605,54 +602,54 @@ $(function() {
   //
   // Lightbox - Youtube video //
   //
-  $(".popup-youtube").each(function() {
-    var popupYoutube = $(this);
-    var youtubeSrc = popupYoutube.attr("data-youtube-src");
+  // $(".popup-youtube").each(function() {
+  //   var popupYoutube = $(this);
+  //   var youtubeSrc = popupYoutube.attr("data-youtube-src");
 
-    popupYoutube.magnificPopup({
-      items: { src: youtubeSrc },
-      type: "iframe",
-      fixedContentPos: false,
-      removalDelay: 200,
-      preloader: false,
-      iframe: {
-        patterns: {
-          youtube: {
-            index: "youtube.com/", // String that detects type of video (in this case YouTube). Simply via url.indexOf(index).
-            id: "v=",
-            src: youtubeSrc
-          }
-        },
-        srcAction: "iframe_src" // Templating object key. First part defines CSS selector, second attribute. "iframe_src" means: find "iframe" and set attribute "src".
-      }
-    });
-  });
+  //   popupYoutube.magnificPopup({
+  //     items: { src: youtubeSrc },
+  //     type: "iframe",
+  //     fixedContentPos: false,
+  //     removalDelay: 200,
+  //     preloader: false,
+  //     iframe: {
+  //       patterns: {
+  //         youtube: {
+  //           index: "youtube.com/", // String that detects type of video (in this case YouTube). Simply via url.indexOf(index).
+  //           id: "v=",
+  //           src: youtubeSrc
+  //         }
+  //       },
+  //       srcAction: "iframe_src" // Templating object key. First part defines CSS selector, second attribute. "iframe_src" means: find "iframe" and set attribute "src".
+  //     }
+  //   });
+  // });
 
   //
   // Lightbox - Vimeo video //
   //
-  $(".popup-vimeo").each(function() {
-    var popupVimeo = $(this);
-    var vimeoSrc = popupVimeo.attr("data-vimeo-src");
+  // $(".popup-vimeo").each(function() {
+  //   var popupVimeo = $(this);
+  //   var vimeoSrc = popupVimeo.attr("data-vimeo-src");
 
-    popupVimeo.magnificPopup({
-      items: { src: vimeoSrc },
-      type: "iframe",
-      fixedContentPos: false,
-      removalDelay: 200,
-      preloader: false,
-      iframe: {
-        patterns: {
-          vimeo: {
-            index: "vimeo.com/", // String that detects type of video (in this case YouTube). Simply via url.indexOf(index).
-            id: "/",
-            src: vimeoSrc
-          }
-        },
-        srcAction: "iframe_src" // Templating object key. First part defines CSS selector, second attribute. "iframe_src" means: find "iframe" and set attribute "src".
-      }
-    });
-  });
+  //   popupVimeo.magnificPopup({
+  //     items: { src: vimeoSrc },
+  //     type: "iframe",
+  //     fixedContentPos: false,
+  //     removalDelay: 200,
+  //     preloader: false,
+  //     iframe: {
+  //       patterns: {
+  //         vimeo: {
+  //           index: "vimeo.com/", // String that detects type of video (in this case YouTube). Simply via url.indexOf(index).
+  //           id: "/",
+  //           src: vimeoSrc
+  //         }
+  //       },
+  //       srcAction: "iframe_src" // Templating object key. First part defines CSS selector, second attribute. "iframe_src" means: find "iframe" and set attribute "src".
+  //     }
+  //   });
+  // });
 
   /*===============================================
     Parallax
