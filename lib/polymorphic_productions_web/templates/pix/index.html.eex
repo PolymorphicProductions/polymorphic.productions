@@ -3,7 +3,7 @@
     <%= for pic <- @pics do %>
     <div class="row justify-content-md-center">
       <div class="col-lg-10">
-        <%= link (img_tag pic.asset), to: Routes.pix_path(@conn, :show, pic) %>
+        <%= link (img_tag pic.asset_preview), to: Routes.pix_path(@conn, :show, pic) %>
       </div>
     </div>
     <div class="row justify-content-md-center">

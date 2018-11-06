@@ -2,7 +2,7 @@
   <div class="container">
     <div class="row justify-content-md-center">
       <div class="col-lg-12">
-        <%= link (img_tag @pix.asset), to: Routes.pix_path(@conn, :show, @pix) %>
+        <%= link (img_tag @pix.asset_preview), to: Routes.pix_path(@conn, :show, @pix) %>
       </div>
       <div class="col-lg-12">
         <div class="section">
