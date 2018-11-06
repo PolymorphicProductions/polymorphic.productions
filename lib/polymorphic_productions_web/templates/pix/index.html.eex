@@ -28,8 +28,10 @@
       </div>
     </div>
     <% end %>
-    <span>
+    
+    <div>
+      <%= paginate @conn, @kerosene, theme: :bootstrap4, next_label: ">>", previous_label: "<<", class: "justify-content-center  margin-top-70" %>
       <%#= link "New Pic", to: Routes.pix_path(@conn, :new) %>
-    </span>
+    </div>
   </div>
 </div>

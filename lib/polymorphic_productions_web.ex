@@ -29,8 +29,9 @@ defmodule PolymorphicProductionsWeb do
 
   def view do
     quote do
-      use Phoenix.View, root: "lib/polymorphic_productions_web/templates",
-                        namespace: PolymorphicProductionsWeb
+      use Phoenix.View,
+        root: "lib/polymorphic_productions_web/templates",
+        namespace: PolymorphicProductionsWeb
 
       # Import convenience functions from controllers
       import Phoenix.Controller, only: [get_flash: 1, get_flash: 2, view_module: 1]
@@ -41,6 +42,8 @@ defmodule PolymorphicProductionsWeb do
       import PolymorphicProductionsWeb.ErrorHelpers
       import PolymorphicProductionsWeb.Gettext
       alias PolymorphicProductionsWeb.Router.Helpers, as: Routes
+
+      import Kerosene.HTML
     end
   end
 

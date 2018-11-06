@@ -8,9 +8,10 @@ defmodule PolymorphicProductionsWeb.PixController do
 
   plug(:admin_check when action in [:new, :edit, :update, :delete])
 
-  def index(conn, _params) do
-    pics = Social.list_pics()
-    render(conn, "index.html", pics: pics)
+  def index(conn, params) do
+    {pics, kerosene} = Social.list_pics(params)
+
+    render(conn, "index.html", pics: pics, kerosene: kerosene)
   end
 
   def new(conn, _params) do

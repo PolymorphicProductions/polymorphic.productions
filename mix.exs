@@ -55,7 +55,8 @@ defmodule PolymorphicProductions.MixProject do
       {:sweet_xml, "~> 0.6"},
       {:uuid, "~> 1.1"},
       {:timex, "~> 3.1"},
-      {:sentry, "~> 6.4"}
+      {:sentry, "~> 6.4"},
+      {:kerosene, "~> 0.8.1"}
     ]
   end
 

@@ -1,7 +1,8 @@
 defmodule PolymorphicProductionsWeb.Router do
   use PolymorphicProductionsWeb, :router
-  use Plug.ErrorHandler
-  use Sentry.Plug
+
+  # use Plug.ErrorHandler
+  # use Sentry.Plug
 
   if Mix.env() == :dev do
     # If using Phoenix

@@ -17,10 +17,10 @@ defmodule PolymorphicProductions.Social do
       [%Pix{}, ...]
 
   """
-  def list_pics do
+  def list_pics(params) do
     Pix
     |> from(order_by: [desc: :inserted_at])
-    |> Repo.all()
+    |> Repo.paginate(params)
   end
 
   @doc """
