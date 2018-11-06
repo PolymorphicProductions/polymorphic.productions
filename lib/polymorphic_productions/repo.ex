@@ -3,5 +3,5 @@ defmodule PolymorphicProductions.Repo do
     otp_app: :polymorphic_productions,
     adapter: Ecto.Adapters.Postgres
 
-  use Kerosene, per_page: 2, next_label: ">>", previous_label: "<<"
+  use Kerosene, per_page: 10
 end
