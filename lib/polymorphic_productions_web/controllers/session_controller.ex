@@ -36,9 +36,6 @@ defmodule PolymorphicProductionsWeb.SessionController do
   end
 
   def delete(%Plug.Conn{assigns: %{current_user: _user}} = conn, _) do
-    import IEx
-    IEx.pry()
-
     {:ok, _} =
       conn
       |> get_session(:phauxth_session_id)
