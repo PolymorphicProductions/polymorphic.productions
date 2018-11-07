@@ -2,6 +2,8 @@ defmodule PolymorphicProductionsWeb.PageController do
   use PolymorphicProductionsWeb, :controller
 
   def index(conn, _params) do
-    render(conn, "index.html", layout: {PolymorphicProductionsWeb.LayoutView, "full-header.html"})
+    conn
+    |> assign(:nav_class, "navbar navbar-absolute navbar-fixed")
+    |> render("index.html", layout: {PolymorphicProductionsWeb.LayoutView, "full-header.html"})
   end
 end

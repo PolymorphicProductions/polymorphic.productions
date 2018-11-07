@@ -24,8 +24,4 @@ defmodule PolymorphicProductionsWeb.PixView do
       """
     }
   end
-
-  def render("navbar.index.html", assigns) do
-    "navbar navbar-sticky navbar-sticky-apply"
-  end
 end
