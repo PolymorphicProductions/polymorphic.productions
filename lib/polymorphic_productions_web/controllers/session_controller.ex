@@ -36,14 +36,17 @@ defmodule PolymorphicProductionsWeb.SessionController do
   end
 
   def delete(%Plug.Conn{assigns: %{current_user: _user}} = conn, _) do
+    import IEx
+    IEx.pry()
+
     {:ok, _} =
       conn
-      |> get_session(:session_id)
+      |> get_session(:phauxth_session_id)
       |> Sessions.get_session()
       |> Sessions.delete_session()
 
     conn
-    |> delete_session(:session_id)
+    |> delete_session(:phauxth_session_id)
     |> Remember.delete_rem_cookie()
     |> put_flash(:info, "User successfully logged out.")
     |> redirect(to: Routes.pix_path(conn, :index))

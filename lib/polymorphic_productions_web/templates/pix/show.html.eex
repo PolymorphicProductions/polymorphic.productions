@@ -9,13 +9,18 @@
           <div class="container">
             <div class="row">
               <div class="col-12 col-lg-3">
+
                 <div class="margin-bottom-20">
                   <span><%= format_date @pix.inserted_at %></span>
                 </div>
+
+                <%= if @current_user && @current_user.admin do %>
                 <div>
                   <%= link "Edit", to: Routes.pix_path(@conn, :edit, @pix) %>
                   <%= link "Delete", to: Routes.pix_path(@conn, :delete, @pix), method: :delete, data: [confirm: "Are you sure?"] %>  
                 </div>
+                <% end %>
+                
               </div>
               <div class="col-12 col-lg-8">
                 <%= @pix.description %>
