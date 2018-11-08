@@ -3,7 +3,12 @@
     <div class="container">
 
       <a class="navbar-brand" href="/">
-        <h5>Polymorphic Productions</h5>
+        <h5>
+            <span class="icon-shape logo" /></span>
+            <span class="name d-none d-sm-inline">
+              Polymorphic Productions
+            </span>
+        </h5>
       </a>
 
       <ul class="nav dropdown-dark">
