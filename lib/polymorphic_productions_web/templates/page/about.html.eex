@@ -24,7 +24,7 @@
           <br/>As of the end of 2016 I've been working in Elixir.<br/>
         </p>
         <p>
-          <a href="<%= Routes.static_path(@conn, "/resume.pdf") %>" class="btn margin-top-20">Download Resume</a>
+          <a href="/resume.pdf" class="btn margin-top-20">Download Resume</a>
         </p>
 
         <div class="row margin-top-30">
