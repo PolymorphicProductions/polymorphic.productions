@@ -6,4 +6,10 @@ defmodule PolymorphicProductionsWeb.PageController do
     |> assign(:nav_class, "navbar navbar-absolute navbar-fixed")
     |> render("index.html", layout: {PolymorphicProductionsWeb.LayoutView, "full-header.html"})
   end
+
+  def about(conn, _params) do
+    conn
+    |> assign(:nav_class, "navbar navbar-absolute navbar-fixed")
+    |> render("about.html", layout: {PolymorphicProductionsWeb.LayoutView, "full-header.html"})
+  end
 end

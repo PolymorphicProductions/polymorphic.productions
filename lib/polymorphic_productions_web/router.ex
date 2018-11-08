@@ -28,6 +28,7 @@ defmodule PolymorphicProductionsWeb.Router do
     resources("/password_resets", PasswordResetController, only: [:new, :create])
     get("/password_resets/edit", PasswordResetController, :edit)
     put("/password_resets/update", PasswordResetController, :update)
+    get("/about", PageController, :about)
     get("/", PageController, :index)
   end
 end

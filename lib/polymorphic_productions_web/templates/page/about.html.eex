@@ -1,0 +1,304 @@
+<div class="bg-image parallax" style="background-image: url( <%= Routes.static_path(@conn, "/images/home_header_3.jpg")%> )">
+  <div class="page-title-lg bg-black-05 text-center">
+    <div class="container">
+      <h1 class="font-weight-light">About Me</h1>
+      <p>Please pardon the narcissism.</p>
+    </div><!-- end container -->
+  </div>
+</div>
+
+<!-- About section -->
+<div class="section">
+  <div class="container">
+    <div class="row align-items-center col-spacing-50">
+      <div class="col-12 col-lg-4">
+        <img src="<%= Routes.static_path(@conn, "/images/headshot.jpg") %>">
+      </div>
+
+      <div class="col-12 col-lg-8">
+        <h6 class="heading-uppercase">Developer / Designer / Creator</h6>
+        <h3>Hello, I'm Josh Chernoff</h3>
+        <p>
+          Polymorphic Productions is currently a one man show. I started Polymorphic Productions as my professional alias as a freelancer.
+          <br/> I started out in flash in 2003 and moved into PHP in 2009 then into Ruby in 2011.
+          <br/>As of the end of 2016 I've been working in Elixir.<br/>
+        </p>
+        <p>
+          <a href="<%= Routes.static_path(@conn, "/resume.pdf") %>" class="btn margin-top-20">Download Resume</a>
+        </p>
+
+        <div class="row margin-top-30">
+
+          <div class="col-12 col-lg-6">
+            <div class="progress-box">
+            <h6>Ruby / Ruby on Rails</h6>
+            <div class="progress">
+              <div class="progress-bar" role="progressbar" style="width: 100%;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">
+                <span>5+ years</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="progress-box">
+            <h6>Elixir / Phoenix</h6>
+            <div class="progress">
+              <div class="progress-bar" role="progressbar" style="width: 60%;" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100">
+                <span>1 year</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="progress-box">
+            <h6>PHP / Wordpress</h6>
+            <div class="progress">
+              <div class="progress-bar" role="progressbar" style="width: 80%;" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100">
+                <span>4 years</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="progress-box">
+            <h6>Dev Ops / Shell</h6>
+            <div class="progress">
+              <div class="progress-bar" role="progressbar" style="width: 70%;" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100">
+                <span>3 years</span>
+              </div>
+            </div>
+          </div>
+        </div>
+          <div class="col-12 col-lg-6">
+            <div class="progress-box">
+              <h6>Flash / AS3 </h6>
+              <div class="progress">
+                <div class="progress-bar" role="progressbar" style="width: 100%;" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100">
+                  <span>6+ years</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="progress-box">
+              <h6>After Effects</h6>
+              <div class="progress">
+                <div class="progress-bar" role="progressbar" style="width: 100%;" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100">
+                  <span>6+ years</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="progress-box">
+              <h6>Photoshop</h6>
+              <div class="progress">
+                <div class="progress-bar" role="progressbar" style="width: 100%;" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100">
+                  <span>6+ years</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="progress-box">
+              <h6>Illustrator</h6>
+              <div class="progress">
+                <div class="progress-bar" role="progressbar" style="width: 60%;" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100">
+                  <span>2 years</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="progress-box">
+              <h6>Blender 3d</h6>
+              <div class="progress">
+                <div class="progress-bar" role="progressbar" style="width: 40%;" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100">
+                  <span>1 year</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div><!-- end row(inner) -->
+      </div>
+    </div><!-- end row -->
+  </div><!-- end container -->
+</div>
+<!-- end About section -->
+
+
+<!-- Timeline section -->
+<div class="section">
+  <div class="container">
+    <div class="timeline-wrapper">
+
+      <div class="timeline">
+        <div class="timeline-date">
+          <h6 class="heading-uppercase">Feb 2017 - Apr 2018 - 1 year</h6>
+          <p>Full Stack Developer / Dev Ops / Elixir / Designer<p/>
+          <div><a href="http://impactnw.org"><%= img_tag Routes.static_path(@conn, "/images/impactnw.png") %></a></div>
+
+        </div>
+        <div class="timeline-content">
+          <h6>Impact NW</h6>
+          <p>
+            I worked as the only developer responsible for creating a project that would be used to capture all of the client intake data for all of the services provided at Impact NW. Being a non profit though, the project was terminated early due to funding and staffing issues. Luckily they afforded me an amazing opportunity to work in elixir and I was able to grow my skill.
+          </p>
+        </div>
+      </div>
+
+      <div class="timeline">
+        <div class="timeline-date">
+          <h6 class="heading-uppercase">Apr 2014 – Mar 2017 - 3 years</h6>
+          <p>Server Developer / Ruby / Rails<p/>
+          <div><a href="http://www.crowdcompass.com/"><%= img_tag Routes.static_path(@conn, "/images/cc.png") %></a></div>
+        </div>
+
+        <div class="timeline-content">
+          <h6>Crowd Compass ("CVENT")</h6>
+          <p>
+           Every 3 weeks I begin a sprint with a team of other server developers, quality engineers, and a product manager. I follow scrum and agile practices to point stories then select which stories I will commit to doing for the rest of the sprint. Based on our velocity I commit to completing N number of stories of which I individually delegate from a priority ordered list. From there I mostly work alone completing the acceptance criteria of the given story I’m working on. Once the work is ready for a pull request and peer approval by the rest of my team I will push a branch to one of our 18 ruby on rails application repositories. Given I have written sufficient specs and refactor based on peer review I then will deploy the code changes via a Jenkins server to our qa server for review by our team’s Quality Engineer.
+           </p>
+
+           <p>
+           I have watched crowdcompass rapidly grow over the last 3 years and later seen the parent company Cvent get acquired by Vista equity partners. Currently I will have been their most senior developer by hire date of the 21st of February 2017.  This means I’ve seen a lot of my good friends move on. I’ve had a great time growing and learning but I think it’s also my time to move on too.
+           </p>
+        </div>
+      </div>
+
+      <div class="timeline">
+        <div class="timeline-date">
+          <h6 class="heading-uppercase">2013</h6>
+          <div><a href="http://techpartner.intel.com/campaigns/nuc/"><%= img_tag Routes.static_path(@conn, "/images/nuc.png") %></a></div>
+
+        </div>
+        <div class="timeline-content">
+          <h6>Intel Nuc - Quango / Developer</h6>
+
+          <p>
+          Completely inspired by the Mac Pro website were scrolling the site deconstructs the hardware. I was hired as a JS developer to create something similar to that effect.
+          Beyond the interactive elements this site is completely static.
+          </p>
+          <p>
+            link: <a href="http://techpartner.intel.com/campaigns/nuc/">http://techpartner.intel.com/campaigns/nuc/</a>
+          </p>
+        </div>
+      </div>
+
+      <div class="timeline">
+        <div class="timeline-date">
+          <h6 class="heading-uppercase">Sept 2012 - Nov 2013 - 1 Year</h6>
+          <p>JR Ruby Developer</p>
+          <div><a href="http://deployedresources.com/"><%= img_tag Routes.static_path(@conn, "/images/dr.png") %></a></div>
+
+        </div>
+        <div class="timeline-content">
+          <h6>The Able Few</h6>
+
+          <p>
+            As a jr ruby developer, I built many sites for clients using ruby on rails. I also spent a fair amount of time working on front end styling and UX.
+          </p>
+          <p>
+            An example of one of the many sites I developed as an employee of the Able Few is <a href="http://deployedresources.com/">http://deployedresources.com/</a>
+          </p>
+        </div>
+      </div>
+
+      <div class="timeline">
+        <div class="timeline-date">
+          <h6 class="heading-uppercase">2012</h6>
+          <div><a href="http://whatayanuts.com/"><%= img_tag Routes.static_path(@conn, "/images/wryn.png") %></a></div>
+
+        </div>
+        <div class="timeline-content">
+          <h6>Whatayanuts - Freelance Design / Developer JS / PHP / Wordpress</h6>
+
+          <p>
+            With flash falling out of favor in 2010 this was my first interactive website where I decided to use JavaScript exclusively.
+
+            This website was also my first attempt at making a fully responsive website even though the contractor did not provide responsive designs. 
+
+            Using wordpress and JQuery I was able to turn PSDs into a fully functioning interactive website within about a weeks time even though I was the only developer on the project.
+
+          </p>
+          <p>
+            link: <a href="http://whatayanuts.com/">http://whatayanuts.com/</a>
+          </p>
+        </div>
+      </div>
+
+      <div class="timeline">
+        <div class="timeline-date">
+          <h6 class="heading-uppercase">2011</h6>
+          <div><%= img_tag  Routes.static_path(@conn, "/images/fire_alarm1.png") %></div>
+
+        </div>
+        <div class="timeline-content">
+          <h6>Energizer - Matchbox design Flash / PHP </h6>
+
+          <p>
+            Check your battery was an interactive fire escape planning tool that energizer used to promote their batteries.
+
+            The goal of the website was to allow you to drawl a fire escape route of your home with the aid of interactive tools.
+
+            Many other promotional contracts followed this with energizer such as “komen’s race for the cure” interactive Facebook ads.
+
+          </p>
+
+        </div>
+      </div>
+
+      <div class="timeline">
+        <div class="timeline-date">
+          <h6 class="heading-uppercase">2010</h6>
+          <div><%= img_tag Routes.static_path(@conn, "/images/mattel.png") %></div>
+
+        </div>
+        <div class="timeline-content">
+          <h6>Shop Matel - Freelance Design / Developer</h6>
+
+          <p>
+            The Christmas of 2009 I was fortunate enough to be able to create the landing pages for mattel’s shopping site.
+
+            Working on the interactive elements for Barbie, hot wheels, Disney and mattel’s board games felt like a very high point in my flash career.
+
+            But sadly this type of work was short lived as flash's popularity fell dramatically with the push off the cliff from Apple and iPhone and 2010.
+
+          </p>
+
+        </div>
+      </div>
+
+      <div class="timeline">
+        <div class="timeline-date">
+          <h6 class="heading-uppercase">2009</h6>
+          <div><%= img_tag Routes.static_path(@conn, "/images/food.png") %></div>
+
+        </div>
+        <div class="timeline-content">
+          <h6>Freelance Design / Developer / Flash</h6>
+
+          <p>
+            Cook or be cooked was a real-time cooking game for the Nintendo Wii developed by the food network.
+
+            This was one of the only completely full flash websites I had ever created. It presented challenges that I had never anticipated having to deal with before.
+            I learned new concepts such as deep linking that allowed you to use URLs to navigate with in a flash application.
+
+            This was also the first time I really started to take notice of design patterns such as mvc. 
+
+            Watching food cook in real time as a videogame was apparently not as fun as the food network had hoped, who knew?
+          </p>
+        </div>
+      </div>
+
+      <div class="timeline">
+        <div class="timeline-date">
+          <h6 class="heading-uppercase">2008</h6>
+          <div><%= img_tag Routes.static_path(@conn, "/images/hallmark.png") %></div>
+
+        </div>
+        <div class="timeline-content">
+          <h6>Hallmark Park - Freelance Design / Developer / Flash</h6>
+          <p>
+            This project was possibly the one that really created the most potential for me to continue to grow in my flash career. Hallmark park was a mass multiplayer online game where kids could play multiple mini games within a larger game. The online game leveraged technologies such as a flash media server for real-time interactivity. This was also the first time I had the opportunity to work on with large team of developers. 
+          </p>
+        </div>
+      </div>
+
+    </div><!-- end timeline-wrapper -->
+  </div><!-- end container -->
+</div>
+<!-- end Timeline section -->

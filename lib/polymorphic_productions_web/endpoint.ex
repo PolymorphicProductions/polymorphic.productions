@@ -14,7 +14,7 @@ defmodule PolymorphicProductionsWeb.Endpoint do
     at: "/",
     from: :polymorphic_productions,
     gzip: false,
-    only: ~w(css fonts images js favicon.ico robots.txt)
+    only: ~w(css fonts images js favicon.ico robots.txt resume.pdf)
   )
 
   # Code reloading can be explicitly enabled under the
