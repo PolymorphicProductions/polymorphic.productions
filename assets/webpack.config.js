@@ -6,12 +6,6 @@ const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 
 module.exports = (env, options) => ({
-  optimization: {
-    minimizer: [
-      new UglifyJsPlugin({ cache: true, parallel: true, sourceMap: false }),
-      new OptimizeCSSAssetsPlugin({})
-    ]
-  },
   entry: {
     "./js/app.js": ["./js/app.js"].concat(glob.sync("./vendor/**/*.js"))
   },
@@ -55,6 +49,12 @@ module.exports = (env, options) => ({
         test: /\.css$/,
         use: [MiniCssExtractPlugin.loader, "css-loader"]
       }
+    ]
+  },
+  optimization: {
+    minimizer: [
+      new UglifyJsPlugin({ cache: false, parallel: false, sourceMap: false }),
+      new OptimizeCSSAssetsPlugin({})
     ]
   },
   plugins: [

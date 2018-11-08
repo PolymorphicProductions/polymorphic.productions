@@ -27,7 +27,6 @@
 
   <%= render "footer.html", conn: @conn %>
 
-  <script type="text/javascript" src="<%= Routes.static_path(@conn, "/js/app.js") %>"></script>
   <script src="<%= Routes.static_path(@conn, "/js/app.js") %>"></script>
 
 </body>

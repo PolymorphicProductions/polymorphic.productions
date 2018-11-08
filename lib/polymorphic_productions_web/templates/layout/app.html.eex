@@ -28,7 +28,6 @@
     <div class="container">
       <div class="row justify-content-md-center">
         <div class="col-lg-12">
-
           <div class="row">
             <div class="col-lg-12">
 
@@ -60,6 +59,7 @@
                 <%= get_flash(@conn, :error) %>
               </div>
               <% end %>
+
             </div>
           </div>
 
@@ -69,11 +69,10 @@
       </div>
     </div>
   </div>
+
   <%= render "footer.html", conn: @conn %>
 
-  <script type="text/javascript" src="<%= Routes.static_path(@conn, "/js/app.js") %>"></script>
   <script src="<%= Routes.static_path(@conn, "/js/app.js") %>"></script>
 
 </body>
-
 </html>

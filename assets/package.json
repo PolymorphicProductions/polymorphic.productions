@@ -3,7 +3,7 @@
   "license": "MIT",
   "scripts": {
     "deploy": "webpack --mode production",
-    "watch": "webpack --mode development --watch-stdin "
+    "watch": "webpack --mode development --watch-stdin"
   },
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.4.2",
