@@ -60,7 +60,12 @@
             <%= if @current_user do %>
             <h4 class="margin-bottom-50 text-center">Write a Comment</h4>
             <div class="text-right">
-              <form>
+                <%= form_for @changeset, Routes.pix_comment_path(@conn, :create, @pix), fn f -> %>
+                <%= if @changeset.action do %>
+                  <div class="alert alert-danger">
+                    <p>Oops, something went wrong! Please check the errors below.</p>
+                  </div>
+                <% end %>
                 <div class="form-row">
                   <div class="col-12 col-sm-6">
                     <input type="text" name="name" placeholder="Name" required>
@@ -69,9 +74,11 @@
                     <input type="email" name="email" placeholder="E-Mail" required>
                   </div>
                 </div>
-                <textarea name="message" placeholder="Message"></textarea>
-                <button class="button button-lg button-dark" type="submit">Post Comment</button>
-              </form>
+                <%= textarea f, :body, placeholder: "Message"%>
+                <%= error_tag f, :body %>
+
+                <%= submit "Post Comment", class: "button button-lg button-dark" %>
+              <% end %>
             </div>
             <% else %>
             <h4 class="margin-bottom-50 text-center">                    

@@ -5,6 +5,7 @@ defmodule PolymorphicProductionsWeb.PixController do
 
   alias PolymorphicProductions.Social
   alias PolymorphicProductions.Social.Pix
+  alias PolymorphicProductions.Social.Comment
 
   plug(:admin_check when action in [:new, :edit, :update, :delete])
 
@@ -32,8 +33,10 @@ defmodule PolymorphicProductionsWeb.PixController do
   end
 
   def show(conn, %{"id" => id}) do
+    changeset = Social.change_comment(%Comment{})
+
     pix = Social.get_pix!(id)
-    render(conn, "show.html", pix: pix)
+    render(conn, "show.html", pix: pix, changeset: changeset)
   end
 
   def edit(conn, %{"id" => id}) do

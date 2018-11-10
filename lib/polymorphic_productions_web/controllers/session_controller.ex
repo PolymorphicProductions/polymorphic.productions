@@ -20,7 +20,15 @@ defmodule PolymorphicProductionsWeb.SessionController do
     render(conn, "new.html", request_path: nil)
   end
 
-  def create(conn, %{"session" => %{"request_path" => request_path} = params}) do
+  def create(conn, %{"session" => %{"request_path" => request_path}} = params) do
+    {_, params} = pop_in(params, ["session", "request_path"])
+
+    conn
+    |> put_session(:request_path, request_path)
+    |> create(params)
+  end
+
+  def create(conn, %{"session" => params}) do
     case Login.verify(params) do
       {:ok, user} ->
         {:ok, %{id: session_id}} = Sessions.create_session(%{user_id: user.id})
@@ -30,19 +38,13 @@ defmodule PolymorphicProductionsWeb.SessionController do
         |> Authenticate.add_session(session_id)
         |> add_remember_me(user.id, params)
         |> put_flash(:info, "User successfully logged in.")
-        |> redirect(
-          to: get_session(conn, :request_path) || request_path || Routes.user_path(conn, :index)
-        )
+        |> redirect(to: get_session(conn, :request_path) || Routes.page_path(conn, :index))
 
       {:error, message} ->
         conn
         |> put_flash(:error, message)
         |> redirect(to: Routes.session_path(conn, :new))
     end
-  end
-
-  def create(conn, %{"session" => _} = params) do
-    create(conn, Map.put(params, "request_path", nil))
   end
 
   def delete(%Plug.Conn{assigns: %{current_user: _user}} = conn, _) do

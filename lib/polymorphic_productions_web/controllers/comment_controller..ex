@@ -5,6 +5,7 @@ defmodule PolymorphicProductionsWeb.CommentController do
 
   alias PolymorphicProductions.Social
   alias PolymorphicProductions.Social.Pix
+  alias PolymorphicProductions.Social.Comment
   alias PolymorphicProductionsWeb.PixView
 
   # plug(:admin_check when action in [:new, :edit, :update, :delete])
@@ -21,8 +22,12 @@ defmodule PolymorphicProductionsWeb.CommentController do
     #   {:error, %Ecto.Changeset{} = changeset} ->
     #     render(conn, "new.html", changeset: changeset)
     # end
+
     pix = Social.get_pix!(pix_id)
-    render(conn, PixView, "show.html", pix: pix)
+
+    conn
+    |> put_flash(:info, "Pix updated successfully.")
+    |> redirect(to: Routes.pix_path(conn, :show, pix))
   end
 
   def update(conn, %{"id" => id, "pix" => pix_params}) do
