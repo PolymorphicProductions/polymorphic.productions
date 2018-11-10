@@ -12,7 +12,7 @@ defmodule PolymorphicProductionsWeb.CommentController do
   plug(:id_check when action in [:update, :delete])
   plug(:user_check when action in [:create])
 
-  def create(conn, %{"pix_id" => pix_id}) do
+  def create(conn, %{"pix_id" => pix_id} = params) do
     # case Social.create_pix(pix_params) do
     #   {:ok, pix} ->
     #     conn
@@ -26,7 +26,7 @@ defmodule PolymorphicProductionsWeb.CommentController do
     pix = Social.get_pix!(pix_id)
 
     conn
-    |> put_flash(:info, "Pix updated successfully.")
+    |> put_flash(:info, "Comment add successfully.")
     |> redirect(to: Routes.pix_path(conn, :show, pix))
   end
 
