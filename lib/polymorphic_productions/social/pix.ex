@@ -6,6 +6,7 @@ defmodule PolymorphicProductions.Social.Pix do
 
   @primary_key {:id, :binary_id, autogenerate: true}
   @foreign_key_type :binary_id
+
   @extension_whitelist ~w(.jpg .jpeg .png)
 
   schema "pics" do
@@ -13,6 +14,8 @@ defmodule PolymorphicProductions.Social.Pix do
     field(:asset_preview, :string)
     field(:description, :string)
     field(:photo, :any, virtual: true)
+    has_many(:comments, PolymorphicProductions.Social.Comment)
+
     timestamps()
   end
 

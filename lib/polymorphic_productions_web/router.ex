@@ -22,6 +22,11 @@ defmodule PolymorphicProductionsWeb.Router do
     pipe_through(:browser)
 
     resources("/snapshots", PixController)
+
+    resources "/snapshots", PixController, only: [] do
+      resources("/comments", CommentController, only: [:create, :delete, :update])
+    end
+
     resources("/users", UserController)
     resources("/sessions", SessionController, only: [:new, :create, :delete])
     get("/confirm", ConfirmController, :index)
