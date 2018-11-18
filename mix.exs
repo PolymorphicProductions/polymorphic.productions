@@ -10,7 +10,8 @@ defmodule PolymorphicProductions.MixProject do
       compilers: [:phoenix, :gettext] ++ Mix.compilers(),
       start_permanent: Mix.env() == :prod,
       aliases: aliases(),
-      deps: deps()
+      deps: deps(),
+      preferred_cli_env: ["coveralls.html": :test]
     ]
   end
 
@@ -57,7 +58,8 @@ defmodule PolymorphicProductions.MixProject do
       {:timex, "~> 3.1"},
       {:sentry, "~> 6.4"},
       {:kerosene, "~> 0.8.1"},
-      {:social_parser, "~> 2.0"}
+      {:social_parser, "~> 2.0"},
+      {:excoveralls, "~> 0.10.2"}
     ]
   end
 
