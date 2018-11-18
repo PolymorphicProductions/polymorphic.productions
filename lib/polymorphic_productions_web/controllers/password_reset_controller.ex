@@ -10,20 +10,14 @@ defmodule PolymorphicProductionsWeb.PasswordResetController do
   end
 
   def create(conn, %{"password_reset" => %{"email" => email}}) do
-    case Accounts.create_password_reset(%{"email" => email}) do
-      {:ok, _} ->
-        key = Token.sign(%{"email" => email})
-        Email.reset_request(conn, email, key)
-
-        conn
-        |> put_flash(:info, "Check your inbox for instructions on how to reset your password")
-        |> redirect(to: Routes.pix_path(conn, :index))
-
-      _ ->
-        conn
-        |> put_flash(:error, "No user with that email was found")
-        |> redirect(to: Routes.password_reset_path(conn, :new))
+    if Accounts.create_password_reset(%{"email" => email}) do
+      key = Token.sign(%{"email" => email})
+      Email.reset_request(email, key)
     end
+
+    conn
+    |> put_flash(:info, "Check your inbox for instructions on how to reset your password")
+    |> redirect(to: Routes.page_path(conn, :index))
   end
 
   def edit(conn, %{"key" => key}) do
@@ -52,7 +46,7 @@ defmodule PolymorphicProductionsWeb.PasswordResetController do
     Email.reset_success(user.email)
 
     conn
-    |> delete_session(:session_id)
+    |> delete_session(:phauxth_session_id)
     |> put_flash(:info, "Your password has been reset")
     |> redirect(to: Routes.session_path(conn, :new))
   end

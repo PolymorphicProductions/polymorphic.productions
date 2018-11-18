@@ -27,7 +27,7 @@ defmodule PolymorphicProductionsWeb.UserController do
     case Accounts.create_user(user_params) do
       {:ok, user} ->
         Log.info(%Log{user: user.id, message: "user created"})
-        Email.confirm_request(email, key)
+        Email.confirm_request(conn, email, key)
 
         conn
         |> put_flash(:info, "User created successfully.")

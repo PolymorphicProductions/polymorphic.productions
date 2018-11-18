@@ -37,10 +37,14 @@ defmodule PolymorphicProductionsWeb.Email do
   @doc """
   An email with a confirmation link in it.
   """
-  def confirm_request(address, key) do
+  def confirm_request(conn, address, key) do
     prep_mail(address)
     |> subject("Confirm your account")
     |> text_body("Confirm your email here http://www.example.com/confirm?key=#{key}")
+    |> assign(:address, address)
+    |> assign(:key, key)
+    |> assign(:conn, conn)
+    |> render("invite.html")
     |> Mailer.deliver_now()
   end
 

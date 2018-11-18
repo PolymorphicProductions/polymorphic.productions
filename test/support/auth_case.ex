@@ -2,7 +2,8 @@ defmodule PolymorphicProductionsWeb.AuthCase do
   use Phoenix.ConnTest
 
   import Ecto.Changeset
-  alias PolymorphicProductions.{Accounts, Repo}
+  alias PolymorphicProductions.{Accounts, Repo, Sessions}
+  alias PolymorphicProductionsWeb.Auth.Token
 
   def add_user(email) do
     user = %{email: email, password: "reallyHard2gue$$"}
@@ -10,26 +11,32 @@ defmodule PolymorphicProductionsWeb.AuthCase do
     user
   end
 
+  def gen_key(email), do: Token.sign(%{"email" => email})
+
   def add_user_confirmed(email) do
-    add_user(email)
-    |> change(%{confirmed_at: DateTime.utc_now()})
+    email
+    |> add_user()
+    |> change(%{confirmed_at: now()})
     |> Repo.update!()
   end
 
   def add_reset_user(email) do
-    add_user(email)
-    |> change(%{confirmed_at: DateTime.utc_now()})
-    |> change(%{reset_sent_at: DateTime.utc_now()})
+    email
+    |> add_user()
+    |> change(%{confirmed_at: now()})
+    |> change(%{reset_sent_at: now()})
     |> Repo.update!()
   end
 
-  def add_phauxth_session(conn, user) do
-    session_id = Phauxth.Login.gen_session_id("F")
-    Accounts.add_session(user, session_id, System.system_time(:second))
-    Phauxth.Login.add_session(conn, session_id, user.id)
+  def add_session(conn, user) do
+    {:ok, %{id: session_id}} = Sessions.create_session(%{user_id: user.id})
+
+    conn
+    |> put_session(:phauxth_session_id, session_id)
+    |> configure_session(renew: true)
   end
 
-  def gen_key(email) do
-    Phauxth.Token.sign(PolymorphicProductionsWeb.Endpoint, %{"email" => email})
+  defp now do
+    DateTime.utc_now() |> DateTime.truncate(:second)
   end
 end

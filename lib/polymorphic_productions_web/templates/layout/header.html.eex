@@ -25,8 +25,8 @@
         <%= if @current_user.admin do %>
         <li class="nav-item"><a class="nav-link" href="<%= Routes.user_path @conn, :index %>">Users</a></li>
         <% end %>
-        <li class="nav-item"><a class="nav-link" href="<%= Routes.user_path(@conn, :show, @current_user.id) %>"><%= @current_user.email %></a></li>
-        <li class="nav-item"><%= link "Logout", to: Routes.session_path(@conn, :delete, @current_user), method: :delete, class: "nav-link" %></li>
+        <li class="nav-item"><a class="nav-link" href="<%= Routes.user_path(@conn, :show, @current_user) %>"><%= @current_user.email %></a></li>
+        <li class="nav-item"><%= link "Logout", to: Routes.session_path(@conn, :delete, current_session(@conn)), method: :delete, class: "nav-link" %></li>
         <%= else %>
         <li class="nav-item"><%= link "Login", to: Routes.session_path(@conn, :new), class: "nav-link" %></li>
         <li class="nav-item"><%= link "Signup", to: Routes.user_path(@conn, :new), class: "nav-link" %></li>

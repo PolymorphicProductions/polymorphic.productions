@@ -2,15 +2,10 @@
 #
 #     mix run priv/repo/seeds.exs
 #
-# It is also run when you use the command `mix ecto.setup`
+# Inside the script, you can read and write to any of your
+# repositories directly:
 #
-
-users = [
-  %{email: "jane.doe@example.com", password: "password"},
-  %{email: "john.smith@example.org", password: "password"}
-]
-
-for user <- users do
-  {:ok, user} = PolymorphicProductions.Accounts.create_user(user)
-  PolymorphicProductions.Accounts.confirm_user(user)
-end
+#     PolymorphicProductions.Repo.insert!(%PolymorphicProductions.SomeSchema{})
+#
+# We recommend using the bang functions (`insert!`, `update!`
+# and so on) as they will fail if something goes wrong.

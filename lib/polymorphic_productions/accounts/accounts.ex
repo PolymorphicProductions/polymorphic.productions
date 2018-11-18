@@ -28,6 +28,14 @@ defmodule PolymorphicProductions.Accounts do
     Repo.get_by(User, email: email)
   end
 
+  def get_by(%{"user_id" => user_id}), do: Repo.get(User, user_id)
+
+  @doc """
+  Creates a session for the user.
+  This is used by Phauxth.Remember.
+  """
+  def create_session(attrs), do: Sessions.create_session(attrs)
+
   @doc """
   Gets a single user.
 
