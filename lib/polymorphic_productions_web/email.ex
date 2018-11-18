@@ -51,7 +51,7 @@ defmodule PolymorphicProductionsWeb.Email do
   @doc """
   An email with a link to reset the password.
   """
-  def reset_request(conn, address, nil) do
+  def reset_request(_conn, _address, nil) do
     # DO we cant to nofitfy there was no user found?
     # prep_mail(address)
     # |> subject("Reset your password")

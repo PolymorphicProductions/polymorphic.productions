@@ -62,7 +62,7 @@ defmodule PolymorphicProductionsWeb.Authorize do
 
   def admin_check(
         %Plug.Conn{
-          assigns: %{current_user: %User{admin: true} = current_user}
+          assigns: %{current_user: %User{admin: true}}
         } = conn,
         _opts
       ) do

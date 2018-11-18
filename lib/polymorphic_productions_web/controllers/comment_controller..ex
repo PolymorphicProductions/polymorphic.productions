@@ -4,15 +4,12 @@ defmodule PolymorphicProductionsWeb.CommentController do
   import PolymorphicProductionsWeb.Authorize
 
   alias PolymorphicProductions.Social
-  alias PolymorphicProductions.Social.Pix
-  alias PolymorphicProductions.Social.Comment
-  alias PolymorphicProductionsWeb.PixView
 
   # plug(:admin_check when action in [:new, :edit, :update, :delete])
   plug(:id_check when action in [:update, :delete])
   plug(:user_check when action in [:create])
 
-  def create(conn, %{"pix_id" => pix_id} = params) do
+  def create(conn, %{"pix_id" => pix_id}) do
     # case Social.create_pix(pix_params) do
     #   {:ok, pix} ->
     #     conn

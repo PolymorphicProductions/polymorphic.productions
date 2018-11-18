@@ -12,7 +12,7 @@ defmodule PolymorphicProductionsWeb.PasswordResetController do
   def create(conn, %{"password_reset" => %{"email" => email}}) do
     if Accounts.create_password_reset(%{"email" => email}) do
       key = Token.sign(%{"email" => email})
-      Email.reset_request(email, key)
+      Email.reset_request(conn, email, key)
     end
 
     conn
