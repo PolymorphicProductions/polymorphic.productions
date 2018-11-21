@@ -34,13 +34,22 @@
             <h6>Ruby / Ruby on Rails</h6>
             <div class="progress">
               <div class="progress-bar" role="progressbar" style="width: 100%;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">
-                <span>5+ years</span>
+                <span>5 years</span>
               </div>
             </div>
           </div>
 
           <div class="progress-box">
             <h6>Elixir / Phoenix</h6>
+            <div class="progress">
+              <div class="progress-bar" role="progressbar" style="width: 60%;" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100">
+                <span>1 year</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="progress-box">
+            <h6>JS(ES6) / React </h6>
             <div class="progress">
               <div class="progress-bar" role="progressbar" style="width: 60%;" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100">
                 <span>1 year</span>
@@ -104,7 +113,7 @@
             </div>
 
             <div class="progress-box">
-              <h6>Blender 3d</h6>
+              <h6>Photography</h6>
               <div class="progress">
                 <div class="progress-bar" role="progressbar" style="width: 40%;" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100">
                   <span>1 year</span>
@@ -125,6 +134,31 @@
   <div class="container">
     <div class="timeline-wrapper">
 
+    <div class="timeline">
+        <div class="timeline-date">
+          <h6 class="heading-uppercase">April 2018 - Current </h6>
+          <p>Full Stack Developer / Dev Ops / Elixir / Designer<p/>
+        </div>
+        <div class="timeline-content">
+          <h6>Self Employed / Freelancer</h6>
+          
+          <h6>Description:</h6> 
+          <p class="mb-5">I currently uphold a few small contracts with a variety of companies as a Ruby developer.</p> 
+
+          <h6>Duties:</h6> 
+          <p class="mb-5">Most commonly at the moment I’m working to support legacy systems and upgrade libraries and refactor code where I can.</p> 
+
+          <h6>Tech:</h6> 
+          <p class="mb-5">With my background recently being primarily a ruby developer I find that most of my clients are asking for help in Rails applications and occasionally DevOps tasks which require linux and unix.</p> 
+
+          <h6>Challenges:</h6> 
+          <p class="mb-5">While contracting is keeping my lights on, it presents challenges that can not necessarily be solved with technology. At its hardest I find it difficult to justify to the stakeholders why upholding quality over expediency is important. I find I often lose that battle and have to accommodate where I can to compensate for cost and development time.</p> 
+
+          <h6>Successes and Accomplishments: </h6> 
+          <p class="mb-5">While not having all of my disposable time taken up by any one organization I find time to further my academics. I’ve spent this time to help and contribute to open source projects where I can. Most recently I’ve contributed to ThoughtBot’s Bambo library and as well I’ve been recently appointed the manager / lead organizer for the Portland Elixir user group monthly meetup. I have since started a project to host a white label phoenix application that hopefully will provide a free webspace to all the elixir user groups.  https://github.com/PDX-Elixir-Group/elixir.group</p>
+        </div>
+      </div>
+
       <div class="timeline">
         <div class="timeline-date">
           <h6 class="heading-uppercase">Feb 2017 - Apr 2018 - 1 year</h6>
@@ -134,9 +168,20 @@
         </div>
         <div class="timeline-content">
           <h6>Impact NW</h6>
-          <p>
-            I worked as the only developer responsible for creating a project that would be used to capture all of the client intake data for all of the services provided at Impact NW. Being a non profit though, the project was terminated early due to funding and staffing issues. Luckily they afforded me an amazing opportunity to work in elixir and I was able to grow my skill.
-          </p>
+          <h6>Description:</h6> 
+          <p class="mb-5">Impact NW is a large non profit that services the greater Portland area providing a wide range of social services to people in need. https://impactnw.org/</p>
+
+          <h6>Duties:</h6>
+          <p class="mb-5">I was tasked with developing an internal data entry tool. The tool would be used to track the intake of new clients, track the progress of current clients, and generate reports for compliance and oversight.</p> 
+
+          <h6>Tech:</h6>
+          <p class="mb-5">I was given the chance to learn and apply my knowledge of  Elixir, Phoenix, Postgres and Nginx. Test coverage was upheld at around 80 to 90%. I had implemented the system for deployments and automated CI tests. </p>
+
+          <h6>Challenges:</h6>
+          <p class="mb-5">The biggest challenge for me while working at Impact NW was a lack of resourcing. Aside from one database engineer (“who was not very accessible”)  I was the only other technically inclined employee. At the start of my employment the then current and entire tech team had been let go leaving just me as the primary developer for the whole organization. While attempts to hire more technically inclined employees happened sadly I was not allowed to be a part of that process and in the end more employees had been hired but who had no prior technical backgrounds. These decisions ultimately undermined my efforts and I chose to leave my position as the result.</p>
+
+          <h6>Successes and Accomplishments:</h6>
+          <p class="mb-5">During my time with Impact NW I was able to learn and apply elixir as the primary language used for their application. I learned a great deal about how to deploy and maintain a fault tolerant Phoenix app. I was also able to support quality assurance of my code with approximately 80%+ test coverage. I also found  new skills in working at being 508 and hipaa compliant while being responsible for highly volatile and sensitive data. I also took pride that I worked for an organization that upholds quality values and does a great service for the disadvantaged and needy of our community. </p> 
         </div>
       </div>
 
@@ -149,13 +194,21 @@
 
         <div class="timeline-content">
           <h6>Crowd Compass ("CVENT")</h6>
-          <p>
-           Every 3 weeks I begin a sprint with a team of other server developers, quality engineers, and a product manager. I follow scrum and agile practices to point stories then select which stories I will commit to doing for the rest of the sprint. Based on our velocity I commit to completing N number of stories of which I individually delegate from a priority ordered list. From there I mostly work alone completing the acceptance criteria of the given story I’m working on. Once the work is ready for a pull request and peer approval by the rest of my team I will push a branch to one of our 18 ruby on rails application repositories. Given I have written sufficient specs and refactor based on peer review I then will deploy the code changes via a Jenkins server to our qa server for review by our team’s Quality Engineer.
-           </p>
+          <h6>Description:</h6>
+          <p class="mb-5">Crowdcompass is now known as Cvent, Crowdcompass is a mobile app platform used by organizers and attendees of conferences https://www.crowdcompass.com/</p>
 
-           <p>
-           I have watched crowdcompass rapidly grow over the last 3 years and later seen the parent company Cvent get acquired by Vista equity partners. Currently I will have been their most senior developer by hire date of the 21st of February 2017.  This means I’ve seen a lot of my good friends move on. I’ve had a great time growing and learning but I think it’s also my time to move on too.
-           </p>
+          <h6>Duties:</h6>
+          <p class="mb-5">Work in a team to implement features and resolve bugs for the mobile api and admin web based dashboard. 
+          We tried and used many different workflow styles such as kanban and agile with two to three week sprints. In addition to writing code I helped revise and clarify technical specifications for upcoming projects and bugs.</p> 
+
+          <h6>Tech:</h6>
+          <p class="mb-5">Ruby and Ruby on Rails was the primary tech used supported by a Postgres database. Jenkins was used for deployments. Jira for ticket tracking. </p>
+
+          <h6>Challenges:</h6>
+          <p class="mb-5">During my almost 3 year position at crowdcompass I saw two acquisitions. This produced what felt like a constant restructuring of the organization. I saw multiple attempts to restructure the development team's workflow and the structure of the team as a whole. This made it very difficult to quantify my own personal and professional growth. </p>
+
+          <h6>Successes and Accomplishments: </h6>
+          <p class="mb-5">Until this position I had never worked on applications that was expected to support tens of thousands of concurrent users. It was very satisfying being in a position that upheld quality over expediency. I learned a great deal about multi service driven applications. As well a learned a great deal of soft skills while working in a large and diverse organization that generally worked hard to create a peaceful and inclusive work environment. </p>
         </div>
       </div>
 
