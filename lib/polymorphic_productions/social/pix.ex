@@ -78,7 +78,6 @@ defmodule PolymorphicProductions.Social.Pix do
     |> S3.Upload.stream_file()
     |> S3.upload("polymorphic-productions", "/photos/preview/" <> filename, acl: :public_read)
     |> ExAws.request()
-    |> IO.inspect()
 
     path
     |> S3.Upload.stream_file()

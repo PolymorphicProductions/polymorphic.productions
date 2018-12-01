@@ -6,6 +6,7 @@ defmodule PolymorphicProductions.Accounts.User do
   alias PolymorphicProductions.Sessions.Session
 
   schema "users" do
+    field(:name, :string)
     field(:email, :string)
     field(:password, :string, virtual: true)
     field(:password_hash, :string)
@@ -19,14 +20,14 @@ defmodule PolymorphicProductions.Accounts.User do
   @doc false
   def changeset(user, attrs) do
     user
-    |> cast(attrs, [:email])
-    |> validate_required([:email])
+    |> cast(attrs, [:name, :email])
+    |> validate_required([:name, :email])
   end
 
   def create_changeset(%__MODULE__{} = user, attrs) do
     user
-    |> cast(attrs, [:email, :password])
-    |> validate_required([:email, :password])
+    |> cast(attrs, [:name, :email, :password])
+    |> validate_required([:name, :email, :password])
     |> unique_email
     |> validate_password(:password)
     |> put_pass_hash

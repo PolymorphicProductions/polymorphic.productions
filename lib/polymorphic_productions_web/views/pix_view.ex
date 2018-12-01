@@ -24,4 +24,10 @@ defmodule PolymorphicProductionsWeb.PixView do
       """
     }
   end
+
+  def time_ago(time) do
+    {:ok, relative_str} = time |> Timex.format("{relative}", :relative)
+
+    relative_str
+  end
 end

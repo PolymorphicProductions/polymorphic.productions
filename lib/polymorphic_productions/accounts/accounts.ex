@@ -86,7 +86,7 @@ defmodule PolymorphicProductions.Accounts do
   Makes a password reset request.
   """
   def create_password_reset(attrs) do
-    case get_by(attrs) |> IO.inspect() do
+    case get_by(attrs) do
       %PolymorphicProductions.Accounts.User{} = user ->
         user
         |> User.password_reset_changeset(DateTime.utc_now())

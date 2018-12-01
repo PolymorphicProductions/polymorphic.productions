@@ -38,12 +38,13 @@ defmodule PolymorphicProductions.Social do
       ** (Ecto.NoResultsError)
 
   """
-  def get_pix!(id) do
-    comments_query = from(c in Comment, where: c.approved == true)
+  @get_pix_defaults %{preload: []}
+  def get_pix!(id, options \\ []) do
+    %{preload: preload} = Enum.into(options, @get_pix_defaults)
 
     from(p in Pix,
       where: p.id == ^id,
-      preload: [comments: ^comments_query]
+      preload: ^preload
     )
     |> Repo.one!()
   end
@@ -140,7 +141,8 @@ defmodule PolymorphicProductions.Social do
       ** (Ecto.NoResultsError)
 
   """
-  def get_comment!(id), do: Repo.get!(Comment, id)
+  def get_comment!(id),
+    do: from(c in Comment, preload: [:user, :pix]) |> Repo.get!(id)
 
   @doc """
   Creates a comment.

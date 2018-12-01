@@ -24,7 +24,7 @@ defmodule PolymorphicProductionsWeb.Router do
     resources("/snapshots", PixController)
 
     resources "/snapshots", PixController, only: [] do
-      resources("/comments", CommentController, only: [:create, :delete, :update])
+      resources("/comments", CommentController, only: [:show, :create, :delete, :update])
     end
 
     resources("/users", UserController)

@@ -32,17 +32,16 @@
         <div class="row">
           <div class="col-12 col-sm-10 offset-sm-1 col-md-10">
             <h4 class="margin-bottom-50 text-center">Comments</h4>
-
-            <%= for _comment <- @pix.comments do %>
+            <%= for comment <- @pix.comments do %>
             <!-- Comment box -->
             <div class="comment-box">
               <div class="comment-user-avatar">
                 <i class="fa fa-user"></i>
               </div>
               <div class="comment-content">
-                <span class="comment-time">2 hours ago</span>
-                <h6 class="font-weight-normal">John Smith</h6>
-                <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.</p>
+                <span class="comment-time"><%= time_ago comment.inserted_at %></span>
+                <h6 class="font-weight-normal">FIX ME<%#@= comment.name %></h6>
+                <p><%= comment.body %></p>
               </div>
             </div><!-- end Comment box -->
             <% end %>
@@ -66,17 +65,8 @@
                     <p>Oops, something went wrong! Please check the errors below.</p>
                   </div>
                 <% end %>
-                <div class="form-row">
-                  <div class="col-12 col-sm-12">
-                     <%= text_input f, :email, placeholder: "Name" %>
-                  </div>
-                </div>
-               
-                
-
                 <%= textarea f, :body, placeholder: "Message"%>
                 <%= error_tag f, :body %>
-
                 <%= submit "Post Comment", class: "button button-lg button-dark" %>
               <% end %>
             </div>

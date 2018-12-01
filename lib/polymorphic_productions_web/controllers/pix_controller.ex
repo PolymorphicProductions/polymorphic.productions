@@ -4,8 +4,8 @@ defmodule PolymorphicProductionsWeb.PixController do
   import PolymorphicProductionsWeb.Authorize
 
   alias PolymorphicProductions.Social
-  alias PolymorphicProductions.Social.Pix
-  alias PolymorphicProductions.Social.Comment
+  alias PolymorphicProductions.Social.{Pix, Comment}
+  alias PolymorphicProductions.Repo
 
   plug(:admin_check when action in [:new, :edit, :update, :delete])
 
@@ -35,7 +35,13 @@ defmodule PolymorphicProductionsWeb.PixController do
   def show(conn, %{"id" => id}) do
     changeset = Social.change_comment(%Comment{})
 
-    pix = Social.get_pix!(id)
+    pix =
+      Social.get_pix!(id,
+        preload: [
+          comments: Comment |> Repo.approved() |> Repo.order_by_oldest()
+        ]
+      )
+
     render(conn, "show.html", pix: pix, changeset: changeset)
   end
 

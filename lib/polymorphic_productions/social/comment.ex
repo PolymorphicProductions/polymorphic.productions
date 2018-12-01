@@ -6,10 +6,9 @@ defmodule PolymorphicProductions.Social.Comment do
 
   schema "comments" do
     field(:approved, :boolean, default: false)
-    field(:author, :string)
     field(:body, :string)
     belongs_to(:pix, Pix, type: :binary_id)
-    belongs_to(:user, User)
+    belongs_to(:user, User, foreign_key: :author_id)
 
     timestamps()
   end
@@ -17,7 +16,24 @@ defmodule PolymorphicProductions.Social.Comment do
   @doc false
   def changeset(comment, attrs) do
     comment
-    |> cast(attrs, [:name, :body, :approved])
-    |> validate_required([:name, :body, :approved])
+    |> cast(attrs, [:body, :approved])
+    |> validate_required([:body, :approved])
+    |> put_pix(attrs)
+    |> put_approved(attrs)
+  end
+
+  defp put_pix(changeset, %{"pix" => pix}) do
+    changeset
+    |> put_assoc(:pix, pix)
+  end
+
+  defp put_pix(changeset, _), do: changeset
+
+  defp put_approved(changeset, %{"author" => author}) do
+    put_change(changeset, :approved, true)
+  end
+
+  defp put_approved(changeset, a) do
+    changeset
   end
 end
