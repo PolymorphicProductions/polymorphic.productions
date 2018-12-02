@@ -3,6 +3,8 @@ defmodule PolymorphicProductionsWeb.PixController do
 
   import PolymorphicProductionsWeb.Authorize
 
+  import Ecto.Query
+
   alias PolymorphicProductions.Social
   alias PolymorphicProductions.Social.{Pix, Comment}
   alias PolymorphicProductions.Repo
@@ -38,7 +40,7 @@ defmodule PolymorphicProductionsWeb.PixController do
     pix =
       Social.get_pix!(id,
         preload: [
-          comments: Comment |> Repo.approved() |> Repo.order_by_oldest()
+          comments: {Comment |> Repo.approved() |> Repo.order_by_oldest(), :user}
         ]
       )
 

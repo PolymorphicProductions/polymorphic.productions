@@ -40,7 +40,7 @@
               </div>
               <div class="comment-content">
                 <span class="comment-time"><%= time_ago comment.inserted_at %></span>
-                <h6 class="font-weight-normal">FIX ME<%#@= comment.name %></h6>
+                <h6 class="font-weight-normal"><%= comment.user.name %></h6>
                 <p><%= comment.body %></p>
               </div>
             </div><!-- end Comment box -->

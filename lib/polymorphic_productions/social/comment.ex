@@ -19,21 +19,16 @@ defmodule PolymorphicProductions.Social.Comment do
     |> cast(attrs, [:body, :approved])
     |> validate_required([:body, :approved])
     |> put_pix(attrs)
+    |> put_author(attrs)
     |> put_approved(attrs)
   end
 
-  defp put_pix(changeset, %{"pix" => pix}) do
-    changeset
-    |> put_assoc(:pix, pix)
-  end
+  defp put_author(changeset, %{"author" => author}), do: put_assoc(changeset, :user, author)
+  defp put_author(changeset, _), do: changeset
 
+  defp put_pix(changeset, %{"pix" => pix}), do: put_assoc(changeset, :pix, pix)
   defp put_pix(changeset, _), do: changeset
 
-  defp put_approved(changeset, %{"author" => author}) do
-    put_change(changeset, :approved, true)
-  end
-
-  defp put_approved(changeset, a) do
-    changeset
-  end
+  defp put_approved(changeset, %{"author" => author}), do: put_change(changeset, :approved, true)
+  defp put_approved(changeset, _), do: changeset
 end
