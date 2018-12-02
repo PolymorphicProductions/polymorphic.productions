@@ -37,28 +37,16 @@ defmodule PolymorphicProductionsWeb.Email do
   @doc """
   An email with a confirmation link in it.
   """
-  def confirm_request(conn, address, key) do
-    prep_mail(address)
-    |> subject("Confirm your account")
-    |> text_body("Confirm your email here http://www.example.com/confirm?key=#{key}")
-    |> assign(:address, address)
+  def confirm_request(conn, user, key) do
+    prep_mail(user.email)
+    |> subject("Confirm your account | Polymorphic Productions")
+    |> text_body("Confirm your email here #{Routes.confirm_url(conn, :index, key: key)}")
+    |> put_html_layout({PolymorphicProductionsWeb.Mailer.LayoutView, "email.html"})
+    |> assign(:user, user)
     |> assign(:key, key)
     |> assign(:conn, conn)
     |> render("invite.html")
     |> Mailer.deliver_now()
-  end
-
-  @doc """
-  An email with a link to reset the password.
-  """
-  def reset_request(_conn, _address, nil) do
-    # DO we cant to nofitfy there was no user found?
-    # prep_mail(address)
-    # |> subject("Reset your password")
-    # |> text_body(
-    #   "You requested a password reset, but no user is associated with the email you provided."
-    # )
-    # |> Mailer.deliver_now()
   end
 
   def reset_request(conn, address, key) do
@@ -80,6 +68,7 @@ defmodule PolymorphicProductionsWeb.Email do
   """
   def confirm_success(address) do
     prep_mail(address)
+    |> put_html_layout({PolymorphicProductionsWeb.Mailer.LayoutView, "email.html"})
     |> subject("Confirmed account")
     |> text_body("Your account has been confirmed.")
     |> Mailer.deliver_now()
@@ -90,6 +79,7 @@ defmodule PolymorphicProductionsWeb.Email do
   """
   def reset_success(address) do
     prep_mail(address)
+    |> put_html_layout({PolymorphicProductionsWeb.Mailer.LayoutView, "email.html"})
     |> subject("Password reset")
     |> text_body("Your password has been reset.")
     |> Mailer.deliver_now()
@@ -99,7 +89,5 @@ defmodule PolymorphicProductionsWeb.Email do
     new_email()
     |> to(address)
     |> from("noreply@polymorphic.productions")
-
-    # |> put_header("reply-to", "noreply@impactnw.org")
   end
 end

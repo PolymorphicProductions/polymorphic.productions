@@ -1,4 +1,3 @@
-
 defmodule PolymorphicProductionsWeb.EmailTest do
   use ExUnit.Case
   use Bamboo.Test
