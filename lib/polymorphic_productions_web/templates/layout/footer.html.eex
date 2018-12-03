@@ -6,6 +6,9 @@
         <li><a href="https://www.facebook.com/polymorphic.productions.llc"><i class="fab fa-facebook-f"></i></a></li>
         <li><a href="https://twitter.com/PolymorphicProd"><i class="fab fa-twitter"></i></a></li>
         <li><a href="https://www.instagram.com/polymorphic.productions/"><i class="fab fa-instagram"></i></a></li>
+        <li><a href="https://www.instagram.com/polymorphic.productions/"><i class="fab fa-stack-overflow"></i></a></li>
+        <li><a href="https://www.instagram.com/polymorphic.productions/"><i class="fab fa-github"></i></a></li>
+        <li><a href="https://www.instagram.com/polymorphic.productions/"><i class="fab fa-youtube"></i></a></li>
       </ul>
     </div><!-- end container -->
   </div><!-- end footer -->
@@ -13,12 +16,12 @@
     <div class="container">
       <div class="row">
         <div class="col-12 col-md-6 text-center text-md-left">
-          <p>© 2018 Polymorphic Productions LLC, All Rights Reserved.</p>
+          <p><i class="fas fa-copyright"></i> 2018 Polymorphic Productions LLC, All Rights Reserved.</p>
         </div>
         <div class="col-12 col-md-6 text-center text-md-right">
           <ul class="list-horizontal-unstyled">
-            <li><a href="/policy">Policy</a></li>
-            <li><a href="/terms-and-conditions">Terms &amp; Conditions</a></li>
+            <li><a href="/privacy"><i class="fas fa-user-secret"></i> Privacy</a></li>
+            <li><a href="/terms"><i class="fas fa-file-signature"></i> Terms &amp; Conditions</a></li>
           </ul>
         </div>
       </div><!-- end row -->

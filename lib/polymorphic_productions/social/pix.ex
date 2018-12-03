@@ -2,12 +2,15 @@ defmodule PolymorphicProductions.Social.Pix do
   use Ecto.Schema
   import Ecto.Changeset
 
-  alias ExAws.S3
+  alias PolymorphicProductions.Assets.{Uploader, Processor}
 
   @primary_key {:id, :binary_id, autogenerate: true}
   @foreign_key_type :binary_id
 
   @extension_whitelist ~w(.jpg .jpeg .png)
+
+  @processor Application.fetch_env!(:polymorphic_productions, :asset_processor)
+  @uploader Application.fetch_env!(:polymorphic_productions, :asset_uploader)
 
   schema "pics" do
     field(:asset, :string)
@@ -24,10 +27,7 @@ defmodule PolymorphicProductions.Social.Pix do
     pic
     |> cast(attrs, [:description, :photo])
     |> validate_attachment()
-    # |> put_asset()
-    # Upload to S3
     |> upload_attachment()
-    # Perform any other validations 
     |> validate_required([:description, :asset])
   end
 
@@ -51,38 +51,25 @@ defmodule PolymorphicProductions.Social.Pix do
 
   defp validate_attachment(changeset), do: changeset
 
-  # defp put_asset(
-  #        %Ecto.Changeset{valid?: true, changes: %{photo: %Plug.Upload{filename: filename}}} =
-  #          changeset
-  #      ) do
-  #   # Set the string for asset based on the known config for S3
-  #   changeset |> IO.inspect()
-
-  #   changeset
-  #   |> put_change(:asset, "some/config/path" <> filename)
-  # end
-
-  # defp put_asset(changeset), do: changeset
-
   defp upload_attachment(
          %Ecto.Changeset{
            valid?: true,
-           changes: %{photo: %Plug.Upload{filename: filename, path: path}}
+           changes: %{photo: %Plug.Upload{filename: filename, path: image_path}}
          } = changeset
        ) do
-    import Mogrify
+    %{path: scaled_image_path} = @processor.scale_image(image_path)
 
-    %{path: new_image} = open(path) |> resize("1024x") |> save()
+    @uploader.upload(
+      scaled_image_path,
+      "/photos/preview/",
+      filename
+    )
 
-    new_image
-    |> S3.Upload.stream_file()
-    |> S3.upload("polymorphic-productions", "/photos/preview/" <> filename, acl: :public_read)
-    |> ExAws.request()
-
-    path
-    |> S3.Upload.stream_file()
-    |> S3.upload("polymorphic-productions", "/photos/" <> filename, acl: :public_read)
-    |> ExAws.request()
+    @uploader.upload(
+      image_path,
+      "/photos/",
+      filename
+    )
 
     changeset
     |> put_change(

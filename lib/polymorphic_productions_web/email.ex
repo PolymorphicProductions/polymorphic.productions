@@ -33,6 +33,25 @@ defmodule PolymorphicProductionsWeb.Email do
 
   import Bamboo.Email
   alias PolymorphicProductionsWeb.Mailer
+  alias PolymorphicProductionsWeb.Mailer.LayoutView
+
+  @doc """
+  An email sent from the contact form
+  """
+  def contact_request(
+        conn,
+        %{id: _, email: email, name: name, subject: subject, message: message} = contact
+      ) do
+    new_email()
+    |> to("jchernoff@polymorhpic.production")
+    |> from({name, email})
+    |> put_html_layout({LayoutView, "email.html"})
+    |> assign(:contact, contact)
+    |> assign(:conn, conn)
+    |> subject(subject)
+    |> render("contact.html")
+    |> Mailer.deliver_now()
+  end
 
   @doc """
   An email with a confirmation link in it.
@@ -40,19 +59,19 @@ defmodule PolymorphicProductionsWeb.Email do
   def confirm_request(conn, user, key) do
     prep_mail(user.email)
     |> subject("Confirm your account | Polymorphic Productions")
-    |> text_body("Confirm your email here #{Routes.confirm_url(conn, :index, key: key)}")
-    |> put_html_layout({PolymorphicProductionsWeb.Mailer.LayoutView, "email.html"})
+    # |> text_body("Confirm your email here #{Routes.confirm_path(conn, :index, key: key)}")
+    |> put_html_layout({LayoutView, "email.html"})
     |> assign(:user, user)
     |> assign(:key, key)
     |> assign(:conn, conn)
     |> render("invite.html")
-    |> Mailer.deliver_now()
+    |> Mailer.deliver_later()
   end
 
   def reset_request(conn, address, key) do
     prep_mail(address)
     |> subject("Reset your password")
-    |> put_html_layout({PolymorphicProductionsWeb.Mailer.LayoutView, "email.html"})
+    |> put_html_layout({LayoutView, "email.html"})
     |> text_body(
       "Reset your password at https://polymorphic.productions/password_resets/edit?key=#{key}"
     )
@@ -68,9 +87,10 @@ defmodule PolymorphicProductionsWeb.Email do
   """
   def confirm_success(address) do
     prep_mail(address)
-    |> put_html_layout({PolymorphicProductionsWeb.Mailer.LayoutView, "email.html"})
+    |> put_html_layout({LayoutView, "email.html"})
     |> subject("Confirmed account")
     |> text_body("Your account has been confirmed.")
+    |> render("confirm_success.html")
     |> Mailer.deliver_now()
   end
 
@@ -79,7 +99,7 @@ defmodule PolymorphicProductionsWeb.Email do
   """
   def reset_success(address) do
     prep_mail(address)
-    |> put_html_layout({PolymorphicProductionsWeb.Mailer.LayoutView, "email.html"})
+    |> put_html_layout({LayoutView, "email.html"})
     |> subject("Password reset")
     |> text_body("Your password has been reset.")
     |> Mailer.deliver_now()

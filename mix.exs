@@ -4,7 +4,7 @@ defmodule PolymorphicProductions.MixProject do
   def project do
     [
       app: :polymorphic_productions,
-      version: "0.2.2",
+      version: "0.2.3",
       elixir: "~> 1.5",
       elixirc_paths: elixirc_paths(Mix.env()),
       compilers: [:phoenix, :gettext] ++ Mix.compilers(),
@@ -22,7 +22,7 @@ defmodule PolymorphicProductions.MixProject do
   def application do
     [
       mod: {PolymorphicProductions.Application, []},
-      extra_applications: [:sentry, :logger, :runtime_tools]
+      extra_applications: [:ex_machina, :sentry, :logger, :runtime_tools]
     ]
   end
 
@@ -44,7 +44,8 @@ defmodule PolymorphicProductions.MixProject do
       {:phoenix_live_reload, "~> 1.0", only: :dev},
       {:gettext, "~> 0.11"},
       {:jason, "~> 1.0"},
-      {:phauxth, github: "riverrun/phauxth", override: true},
+      # {:phauxth, github: "riverrun/phauxth", override: true},
+      {:phauxth, "~> 2.0.0"},
       {:bcrypt_elixir, "~> 1.0"},
       {:bamboo, "~> 1.1"},
       {:edeliver, ">= 1.6.0"},
@@ -60,7 +61,8 @@ defmodule PolymorphicProductions.MixProject do
       {:sentry, "~> 6.4"},
       {:kerosene, "~> 0.8.1"},
       {:social_parser, "~> 2.0"},
-      {:excoveralls, "~> 0.10.2"}
+      {:excoveralls, "~> 0.10.2"},
+      {:ex_machina, "~> 2.2"}
     ]
   end
 

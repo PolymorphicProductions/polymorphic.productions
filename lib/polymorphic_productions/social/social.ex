@@ -9,6 +9,8 @@ defmodule PolymorphicProductions.Social do
   alias PolymorphicProductions.Social.Pix
   alias PolymorphicProductions.Social.Comment
 
+  alias PolymorphicProductions.Assets.{Uploader, Processer}
+
   @doc """
   Returns the list of pics.
 
@@ -18,7 +20,7 @@ defmodule PolymorphicProductions.Social do
       [%Pix{}, ...]
 
   """
-  def list_pics(params) do
+  def list_pics(params \\ %{}) do
     Pix
     |> from(order_by: [desc: :inserted_at])
     |> Repo.paginate(params)

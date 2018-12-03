@@ -1,35 +1,58 @@
-<h2>New User</h2>
+<div
+  class="section-fullscreen bg-image"
+  style="background-image: url(<%= Routes.static_path(@conn, "/images/login2.jpg") %>)"
+>
+  <div class="bg-black-07">
+    <div class="container text-center">
+      <div class="position-middle">
+        <div class="row">
+          <div
+            class="col-12 col-sm-8 offset-sm-2 col-md-6 offset-md-3 col-lg-4 offset-lg-4"
+          >
+            <h4 class="font-weight-light margin-bottom-30">Registration</h4>
+            <%= form_for @changeset, Routes.user_path(@conn, :create), fn f -> %> 
 
-<%= form_for @changeset, Routes.user_path(@conn, :create), fn f -> %>
-<%= if @changeset.action do %>
-<div class="alert alert-danger">
-  <p>Please check the errors below.</p>
+              <%= if @changeset.action do %>
+                <div class="alert alert-danger"><p>Please check the errors below.</p></div>
+              <% end %>
+              <%= text_input f, :name, placeholder: "User Name" %> 
+              <%= error_tag f, :name %>
+
+              <%= text_input f, :email, placeholder: "Email" %> 
+              <%= error_tag f, :email %>
+
+              <%= password_input f, :password,  placeholder: "Password" %> 
+              <%= error_tag f, :password %>
+
+              <%= submit "Register", class: "button button-lg button-outline-white-2 button-fullwidth" %>
+            <% end %>
+            <div class="margin-top-30">
+              <p>
+                By signing up, you agree to our <a href="#">Terms of Use</a>
+              </p>
+            </div>
+          </div>
+        </div>
+        <!-- end row -->
+      </div>
+    </div>
+    <!-- end container -->
+  </div>
 </div>
-<% end %>
 
-<div class="form-group">
-  <%= label f, :name, class: "control-label" %>
-  <%= text_input f, :name, class: "form-control" %>
-  <%= error_tag f, :name %>
-</div>
+<%#= if @changeset.action do %>
+<%# <div class="alert alert-danger"><p>Please check the errors below.</p></div> %>
+<%# end %>
 
+<%# <div class="form-group"> %>
+  <%#= label f, :email, class: "control-label" %> <%#= text_input f, :email,
+  class: "form-control" %> <%#= error_tag f, :email %>
+<%# </div> %>
 
-<div class="form-group">
-  <%= label f, :email, class: "control-label" %>
-  <%= text_input f, :email, class: "form-control" %>
-  <%= error_tag f, :email %>
-</div>
+  <%#= label f, :password, class: "control-label" %> <%#= password_input f,
+  :password, class: "form-control" %> <%#= error_tag f, :password %>
 
-<div class="form-group">
-  <%= label f, :password, class: "control-label" %>
-  <%= password_input f, :password, class: "form-control" %>
-  <%= error_tag f, :password %>
-</div>
+<%#= submit "Submit", class: "btn btn-primary" %>
+<%# end %>
 
-<div class="form-group">
-  <%= submit "Submit", class: "btn btn-primary" %>
-</div>
-<% end %>
-
-<span>
-  <%= link "Back", to: Routes.user_path(@conn, :index) %></span>
+<%#= link "Back", to: Routes.user_path(@conn, :index) %>

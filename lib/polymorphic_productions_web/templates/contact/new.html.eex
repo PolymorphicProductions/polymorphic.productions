@@ -1,0 +1,78 @@
+<div class="bg-image parallax" style="background-image: url( <%= Routes.static_path(@conn, "/images/header1.jpg")%> )">
+  <div class="page-title-lg bg-black-05 text-center">
+    <div class="container">
+      <h1 class="font-weight-light">Contact Me</h1>
+      <p>
+        There are four ways, and only four ways, in which we have contact
+        with the world. <br />
+        We are evaluated and classified by these four contacts: <br />
+        what we do, how we look, what we say, and how we say it.
+        <br /> - Dale Carnegie
+      </p>
+    </div><!-- end container -->
+  </div>
+</div>
+
+<div class="section">
+  <div class="container text-center">
+    <div class="row">
+      <div class="col-12 col-sm-6 col-md-4 icon-3xl">
+        <i class="fas fa-thumbtack"></i>
+        <h6 class="heading-uppercase margin-top-20">Location</h6>
+        <p>Portland OR, 97202</p>
+      </div>
+
+      <div class="col-12 col-sm-6 col-md-4 icon-3xl">
+        <i class="fas fa-envelope""></i>
+        <h6 class="heading-uppercase margin-top-20">Email</h6>
+        <p>
+          <a href="mailto:jchernoff@polymorphic.productions">
+            jchernoff@polymorphic.productions
+          </a>
+        </p>
+      </div>
+
+      <div class="col-12 col-sm-6 col-md-4 icon-3xl">
+        <i class="fas fa-phone""></i>
+        <h6 class="heading-uppercase margin-top-20">Phone</h6>
+        <p>1-(971) 533-7446</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Contact Form section -->
+<div class="section no-padding-top">
+  <div class="container">
+    <div class="contact-form">
+      <%= form_for @changeset, Routes.contact_path(@conn, :create), [as: :contact], fn f -> %>
+      <%= if f.errors != [] do %>
+      <div class="alert alert-danger">
+        <p>Please check the errors below:</p>
+      </div>
+      <% end %>
+
+
+        <div class="form-row">
+          <div class="col-12 col-sm-6">
+            <%= text_input f, :name, class: "", placeholder: "Name", required: true %>
+            <%= error_tag f, :name %>          
+          </div>
+          <div class="col-12 col-sm-6">
+            <%= text_input f, :email, class: "", placeholder: "E-Mail" %>
+            <%= error_tag f, :email %>      
+          </div>
+        </div>
+        <%= text_input f, :subject, class: "", placeholder: "Subject", required: true %>
+        <%= error_tag f, :subject %>  
+        <%= textarea f, :message, class: "", placeholder: "Message", required: true %>
+        <%= error_tag f, :message %>   
+        <%= submit "Send Message", class: "button button-xl button-dark" %>
+      <% end %>
+    </div>
+    <!-- end contact-form -->
+  </div>
+  <!-- end container -->
+</div>
+<!-- end Contact Form section -->

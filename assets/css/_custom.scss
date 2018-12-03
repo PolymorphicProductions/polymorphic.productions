@@ -2,9 +2,9 @@
 // Your Custom Styles //
 //
 
-img {
-  max-height: 609px;
-}
+// img {
+//   max-height: 609px;
+// }
 
 // Overrides
 
@@ -37,10 +37,6 @@ img {
   content: "";
 }
 
-.section,
-.section-md {
-  padding: 50px 0;
-}
 .section.bg-image .container,
 .section.bg-image .container-fluid,
 .section-md.bg-image .container,
@@ -110,7 +106,7 @@ img {
 .icon-shape {
   /* use !important to prevent issues with browser extensions that change fonts */
   font-family: "icomoon" !important;
-  speak: none;
+  //speak: none;
   font-style: normal;
   font-weight: normal;
   font-variant: normal;

@@ -7,7 +7,10 @@ use Mix.Config
 
 # General application configuration
 config :polymorphic_productions,
-  ecto_repos: [PolymorphicProductions.Repo]
+  ecto_repos: [PolymorphicProductions.Repo],
+  render_tracking: false,
+  asset_uploader: PolymorphicProductions.Assets.Uploader,
+  asset_processor: PolymorphicProductions.Assets.Processor
 
 # Configures the endpoint
 config :polymorphic_productions, PolymorphicProductionsWeb.Endpoint,
@@ -46,8 +49,6 @@ config :ex_aws,
     # region you still have to set it in the config. :(
     region: "us-west-2"
   ]
-
-config :polymorphic_productions, render_tracking: false
 
 config :kerosene, :html, theme: :foundation
 

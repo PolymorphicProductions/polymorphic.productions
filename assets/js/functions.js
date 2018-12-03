@@ -745,33 +745,6 @@ if ($(".accordion li").hasClass("active")) {
 }
 
 /*===============================================
-    Fun Facts Counter
-  ===============================================*/
-// $(".facts-wrapper").appear(
-//   function() {
-//     var fcounter = $(".facts-counter");
-
-//     fcounter.each(function() {
-//       $(this)
-//         .prop("Counter", 0)
-//         .animate(
-//           {
-//             Counter: $(this).text()
-//           },
-//           {
-//             duration: 3000,
-//             easing: "swing",
-//             step: function(now) {
-//               $(this).text(Math.ceil(now));
-//             }
-//           }
-//         );
-//     });
-//   },
-//   { accX: 0, accY: -10 }
-// );
-
-/*===============================================
     Quantity
   ===============================================*/
 $(".product-quantity .button-circle").on("click", function() {
@@ -840,71 +813,6 @@ $('[data-toggle="popover"]').popover();
     Tooltip
   ===============================================*/
 $('[data-toggle="tooltip"]').tooltip();
-
-/*===============================================
-    Google Maps
-  ===============================================*/
-var mapCanvas = $("#map-canvas");
-
-if (mapCanvas.length) {
-  var initLatitude = mapCanvas.attr("data-latitude");
-  var initLongitude = mapCanvas.attr("data-longitude");
-
-  var map = new GMaps({
-    el: "#map-canvas",
-    lat: initLatitude,
-    lng: initLongitude,
-    zoom: 16,
-    scrollwheel: false
-  });
-
-  map.addMarker({
-    lat: initLatitude,
-    lng: initLongitude
-  });
-}
-
-/*===============================================
-    Contact Form
-  ===============================================*/
-$("#contactform").on("submit", function(e) {
-  var name = $("#name").val();
-  var email = $("#email").val();
-  var subject = $("#subject").val();
-  var message = $("#message").val();
-
-  if (name === "") {
-    $("#name").addClass("error-color");
-  }
-  if (email === "") {
-    $("#email").addClass("error-color");
-  }
-  if (subject === "") {
-    $("#subject").addClass("error-color");
-  }
-  if (message === "") {
-    $("#message").addClass("error-color");
-  } else {
-    $.ajax({
-      url: "../../assets/php/contact-form.php",
-      data: $(this).serialize(),
-      type: "POST",
-      success: function(data) {
-        $("#success").addClass("show-result"); //=== Show Success Message==
-        $("#contactform").each(function() {
-          this.reset();
-        });
-      },
-      error: function(data) {
-        $("#error").addClass("show-result"); //===Show Error Message====
-      }
-    });
-    var forms = $("#contactform input, #contactform textarea");
-    forms.removeClass("error-color");
-  }
-
-  e.preventDefault();
-});
 
 function hasClass(el, className) {
   return el.classList

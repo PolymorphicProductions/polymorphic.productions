@@ -54,8 +54,8 @@ defmodule PolymorphicProductionsWeb.Authorize do
       conn
     else
       conn
-      |> put_flash(:error, "You are not authorized to view this page")
-      |> redirect(to: Routes.user_path(conn, :show, current_user))
+      |> put_flash(:error, "🤦‍♂️ You are not authorized to view this page 👮‍♂️")
+      |> redirect(to: Routes.page_path(conn, :index))
       |> halt()
     end
   end
@@ -69,17 +69,26 @@ defmodule PolymorphicProductionsWeb.Authorize do
     conn
   end
 
-  def admin_check(conn, _opts) do
+  def admin_check(
+        %Plug.Conn{
+          assigns: %{current_user: %User{}}
+        } = conn,
+        _opts
+      ) do
     conn
-    |> put_flash(:error, "You are not authorized to view this page")
-    |> redirect(to: Routes.pix_path(conn, :index))
+    |> put_flash(:error, "🤦‍♂️ You are not authorized to view this page 👮‍♂️")
+    |> redirect(to: Routes.page_path(conn, :index))
     |> halt()
+  end
+
+  def admin_check(conn, _opts) do
+    need_login(conn)
   end
 
   defp need_login(conn) do
     conn
     |> put_session(:request_path, current_path(conn))
-    |> put_flash(:error, "You need to log in to view this page")
+    |> put_flash(:error, "🤦‍♂️ You need to log in to view this page 👮‍♂️")
     |> redirect(to: Routes.session_path(conn, :new))
     |> halt()
   end

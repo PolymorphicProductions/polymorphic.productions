@@ -6,7 +6,9 @@ defmodule PolymorphicProductionsWeb.PasswordResetController do
   alias PolymorphicProductionsWeb.{Auth.Token, Email}
 
   def new(conn, _params) do
-    render(conn, "new.html")
+    conn
+    |> assign(:nav_class, "navbar navbar-absolute navbar-fixed")
+    |> render("new.html", layout: {PolymorphicProductionsWeb.LayoutView, "full-header.html"})
   end
 
   def create(conn, %{"password_reset" => %{"email" => email}}) do

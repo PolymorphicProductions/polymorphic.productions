@@ -3,36 +3,39 @@ defmodule PolymorphicProductions.SocialTest do
 
   alias PolymorphicProductions.Social
 
+  import PolymorphicProductions.Factory
+
   describe "pics" do
     alias PolymorphicProductions.Social.Pix
 
-    @valid_attrs %{asset: "some asset", description: "some description"}
-    @update_attrs %{asset: "some updated asset", description: "some updated description"}
-    @invalid_attrs %{asset: nil, description: nil}
-
-    def pix_fixture(attrs \\ %{}) do
-      {:ok, pix} =
-        attrs
-        |> Enum.into(@valid_attrs)
-        |> Social.create_pix()
-
-      pix
-    end
+    @valid_attrs string_params_for(:pix)
+    @update_attrs string_params_for(:pix)
+    @invalid_attrs Map.from_struct(%PolymorphicProductions.Social.Pix{})
 
     test "list_pics/0 returns all pics" do
-      pix = pix_fixture()
-      assert Social.list_pics() == [pix]
+      pix = insert(:pix)
+      {pics, _kerosene} = Social.list_pics()
+      assert pics == [pix]
     end
 
     test "get_pix!/1 returns the pix with given id" do
-      pix = pix_fixture()
+      pix = insert(:pix)
       assert Social.get_pix!(pix.id) == pix
     end
 
     test "create_pix/1 with valid data creates a pix" do
-      assert {:ok, %Pix{} = pix} = Social.create_pix(@valid_attrs)
-      assert pix.asset == "some asset"
-      assert pix.description == "some description"
+      param =
+        Map.merge(@valid_attrs, %{"photo" => PolymorphicProductions.Mocks.Uploader.upload_plug()})
+
+      assert {:ok, %Pix{} = pix} = Social.create_pix(param)
+
+      assert pix.asset ==
+               "https://d1sv288qkuffrb.cloudfront.net/polymorphic-productions/photos/user_avatar.jpg"
+
+      assert pix.asset_preview ==
+               "https://d1sv288qkuffrb.cloudfront.net/polymorphic-productions/photos/preview/user_avatar.jpg"
+
+      assert(pix.description == "A street photo of ...")
     end
 
     test "create_pix/1 with invalid data returns error changeset" do
@@ -40,28 +43,27 @@ defmodule PolymorphicProductions.SocialTest do
     end
 
     test "update_pix/2 with valid data updates the pix" do
-      pix = pix_fixture()
+      pix = insert(:pix)
       assert {:ok, %Pix{} = pix} = Social.update_pix(pix, @update_attrs)
 
-      
       assert pix.asset == "some updated asset"
       assert pix.description == "some updated description"
     end
 
     test "update_pix/2 with invalid data returns error changeset" do
-      pix = pix_fixture()
+      pix = insert(:pix)
       assert {:error, %Ecto.Changeset{}} = Social.update_pix(pix, @invalid_attrs)
       assert pix == Social.get_pix!(pix.id)
     end
 
     test "delete_pix/1 deletes the pix" do
-      pix = pix_fixture()
+      pix = insert(:pix)
       assert {:ok, %Pix{}} = Social.delete_pix(pix)
       assert_raise Ecto.NoResultsError, fn -> Social.get_pix!(pix.id) end
     end
 
     test "change_pix/1 returns a pix changeset" do
-      pix = pix_fixture()
+      pix = insert(:pix)
       assert %Ecto.Changeset{} = Social.change_pix(pix)
     end
   end
@@ -69,33 +71,24 @@ defmodule PolymorphicProductions.SocialTest do
   describe "comments" do
     alias PolymorphicProductions.Social.Comment
 
-    @valid_attrs %{approved: true, author: "some author", body: "some body"}
-    @update_attrs %{approved: false, author: "some updated author", body: "some updated body"}
-    @invalid_attrs %{approved: nil, author: nil, body: nil}
-
-    def comment_fixture(attrs \\ %{}) do
-      {:ok, comment} =
-        attrs
-        |> Enum.into(@valid_attrs)
-        |> Social.create_comment()
-
-      comment
-    end
+    @valid_attrs %{approved: true, user: "some user", body: "some body"}
+    @update_attrs %{approved: false, user: "some updated user", body: "some updated body"}
+    @invalid_attrs %{approved: nil, user: nil, body: nil}
 
     test "list_comments/0 returns all comments" do
-      comment = comment_fixture()
+      comment = insert(:comment)
       assert Social.list_comments() == [comment]
     end
 
     test "get_comment!/1 returns the comment with given id" do
-      comment = comment_fixture()
+      comment = insert(:comment)
       assert Social.get_comment!(comment.id) == comment
     end
 
     test "create_comment/1 with valid data creates a comment" do
       assert {:ok, %Comment{} = comment} = Social.create_comment(@valid_attrs)
       assert comment.approved == true
-      assert comment.author == "some author"
+      assert comment.user == "some user"
       assert comment.body == "some body"
     end
 
@@ -104,29 +97,28 @@ defmodule PolymorphicProductions.SocialTest do
     end
 
     test "update_comment/2 with valid data updates the comment" do
-      comment = comment_fixture()
+      comment = insert(:comment)
       assert {:ok, %Comment{} = comment} = Social.update_comment(comment, @update_attrs)
 
-      
       assert comment.approved == false
-      assert comment.author == "some updated author"
+      assert comment.user == "some updated user"
       assert comment.body == "some updated body"
     end
 
     test "update_comment/2 with invalid data returns error changeset" do
-      comment = comment_fixture()
+      comment = insert(:comment)
       assert {:error, %Ecto.Changeset{}} = Social.update_comment(comment, @invalid_attrs)
       assert comment == Social.get_comment!(comment.id)
     end
 
     test "delete_comment/1 deletes the comment" do
-      comment = comment_fixture()
+      comment = insert(:comment)
       assert {:ok, %Comment{}} = Social.delete_comment(comment)
       assert_raise Ecto.NoResultsError, fn -> Social.get_comment!(comment.id) end
     end
 
     test "change_comment/1 returns a comment changeset" do
-      comment = comment_fixture()
+      comment = insert(:comment)
       assert %Ecto.Changeset{} = Social.change_comment(comment)
     end
   end

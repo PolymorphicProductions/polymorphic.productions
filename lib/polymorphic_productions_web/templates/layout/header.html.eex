@@ -13,23 +13,49 @@
 
       <ul class="nav dropdown-dark">
 
+        <!-- <li class="nav-item nav-dropdown">
+          <a class="nav-link" href="#">Services</a>
+              <ul class="dropdown-menu">
+            <li><a href="#">Development</a></li>
+            <li><a href="#">Photography</a></li>
+            <li><a href="#">Videography</a></li>
+            <li><a href="#">DevOps</a></li>
+          </ul>
+        </li> -->
+
+         <!-- <li class="nav-item">
+          <a class="nav-link" href="<%#= Routes.pix_path @conn, :index %>">Blog</a>
+        </li> -->
         <li class="nav-item">
           <a class="nav-link" href="<%= Routes.pix_path @conn, :index %>">Snapshots</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="<%= Routes.page_path @conn, :about %>">About</a>
         </li>
+         <li class="nav-item">
+          <a class="nav-link" href="<%= Routes.contact_path @conn, :new %>">Contact</a>
+        </li>
 
         <%= if @current_user do %>
+          <%= if @current_user.admin do %>
+            <li class="nav-item"><a class="nav-link" href="<%= Routes.user_path @conn, :index %>">Users</a></li>
+          <% end %>
 
-        <%= if @current_user.admin do %>
-        <li class="nav-item"><a class="nav-link" href="<%= Routes.user_path @conn, :index %>">Users</a></li>
-        <% end %>
-        <li class="nav-item"><a class="nav-link" href="<%= Routes.user_path(@conn, :show, @current_user) %>"><%= @current_user.name %></a></li>
-        <li class="nav-item"><%= link "Logout", to: Routes.session_path(@conn, :delete, current_session(@conn)), method: :delete, class: "nav-link" %></li>
+          <li class="nav-item nav-dropdown">
+          <a class="nav-link" href="#"><%= @current_user.name%></a>
+              <ul class="dropdown-menu">
+            <li><%= link "Account", to: Routes.user_path(@conn, :show, @current_user) %></li>
+            <li>><%= link "Logout", to: Routes.session_path(@conn, :delete, current_session(@conn)), method: :delete %></li>
+          </ul>
+        </li>
         <% else %>
-        <li class="nav-item"><%= link "Login", to: Routes.session_path(@conn, :new), class: "nav-link" %></li>
-        <li class="nav-item"><%= link "Signup", to: Routes.user_path(@conn, :new), class: "nav-link" %></li>
+        <li class="nav-item nav-dropdown">
+          <a class="nav-link" href="#">Acount</a>
+            <ul class="dropdown-menu">
+            <li><%= link "Login", to: Routes.session_path(@conn, :new) %></li>
+            <li><%= link "Signup", to: Routes.user_path(@conn, :new) %></li>
+          </ul>
+        </li>
         <% end %>
       </ul>
 

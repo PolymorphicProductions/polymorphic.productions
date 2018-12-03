@@ -12,4 +12,16 @@ defmodule PolymorphicProductionsWeb.PageController do
     |> assign(:nav_class, "navbar navbar-absolute navbar-fixed")
     |> render("about.html", layout: {PolymorphicProductionsWeb.LayoutView, "full-header.html"})
   end
+
+  def terms(conn, _params) do
+    conn
+    |> assign(:nav_class, "navbar navbar-absolute navbar-fixed")
+    |> render("terms.html", layout: {PolymorphicProductionsWeb.LayoutView, "full-header.html"})
+  end
+
+  def privacy(conn, _params) do
+    conn
+    |> assign(:nav_class, "navbar navbar-absolute navbar-fixed")
+    |> render("privacy.html", layout: {PolymorphicProductionsWeb.LayoutView, "full-header.html"})
+  end
 end

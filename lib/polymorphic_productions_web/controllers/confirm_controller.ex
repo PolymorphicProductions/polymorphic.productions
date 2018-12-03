@@ -6,6 +6,9 @@ defmodule PolymorphicProductionsWeb.ConfirmController do
   alias PolymorphicProductionsWeb.Email
 
   def index(conn, params) do
+    import IEx
+    IEx.pry()
+
     case Confirm.verify(params) do
       {:ok, user} ->
         Accounts.confirm_user(user)
@@ -18,7 +21,7 @@ defmodule PolymorphicProductionsWeb.ConfirmController do
       {:error, message} ->
         conn
         |> put_flash(:error, message)
-        |> redirect(to: Routes.pix_path(conn, :index))
+        |> redirect(to: Routes.session_path(conn, :new))
     end
   end
 end

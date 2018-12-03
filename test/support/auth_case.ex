@@ -2,8 +2,26 @@ defmodule PolymorphicProductionsWeb.AuthCase do
   use Phoenix.ConnTest
 
   import Ecto.Changeset
+  import PolymorphicProductions.Factory
   alias PolymorphicProductions.{Accounts, Repo, Sessions}
   alias PolymorphicProductionsWeb.Auth.Token
+
+  def log_user_in(%{conn: conn}) do
+    user = insert(:user)
+    conn = conn |> add_session(user) |> send_resp(:ok, "/")
+    {:ok, %{conn: conn, user: user}}
+  end
+
+  def create_rando_user(%{conn: conn, user: user}) do
+    rando = insert(:user)
+    {:ok, %{conn: conn, user: user, rando: rando}}
+  end
+
+  def add_admin(email) do
+    user = %{email: email, password: "reallyHard2gue$$", admin: true}
+    {:ok, user} = Accounts.create_user(user)
+    user
+  end
 
   def add_user(email) do
     user = %{email: email, password: "reallyHard2gue$$"}

@@ -24,3 +24,8 @@ import "bootstrap";
 // Local files can be imported directly using relative paths, for example:
 // import socket from "./socket"
 import "./functions";
+
+import { photoswipe_init } from "./photoswipe_init";
+if (document.getElementsByClassName("gallery").length) {
+  photoswipe_init(".gallery");
+}

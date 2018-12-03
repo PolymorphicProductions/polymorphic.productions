@@ -11,7 +11,12 @@ defmodule PolymorphicProductionsWeb.SessionController do
   plug(:guest_check when action in [:new, :create])
 
   def new(conn, _) do
-    render(conn, "new.html")
+    conn
+    |> assign(:nav_class, "navbar navbar-absolute navbar-fixed")
+    |> render("new.html",
+      layout: {PolymorphicProductionsWeb.LayoutView, "full-header.html"},
+      request_path: nil
+    )
   end
 
   def create(conn, %{"session" => params}) do
@@ -29,20 +34,14 @@ defmodule PolymorphicProductionsWeb.SessionController do
     end
   end
 
-  def delete(%Plug.Conn{assigns: %{current_user: %{id: user_id}}} = conn, %{"id" => session_id}) do
-    case session_id |> Sessions.get_session() |> Sessions.delete_session() do
-      {:ok, %{user_id: ^user_id}} ->
-        conn
-        |> delete_session(:phauxth_session_id)
-        |> Remember.delete_rem_cookie()
-        |> put_flash(:info, "User successfully logged out.")
-        |> redirect(to: Routes.page_path(conn, :index))
+  def delete(%Plug.Conn{assigns: %{current_user: current_user}} = conn, _) do
+    {deleted_sessions_count, _} = Sessions.delete_user_sessions(current_user)
 
-      _ ->
-        conn
-        |> put_flash(:error, "Unauthorized")
-        |> redirect(to: Routes.user_path(conn, :index))
-    end
+    conn
+    |> delete_session(:phauxth_session_id)
+    |> Remember.delete_rem_cookie()
+    |> put_flash(:info, "See you next time. 👋")
+    |> redirect(to: Routes.page_path(conn, :index))
   end
 
   defp add_session(conn, user, params) do

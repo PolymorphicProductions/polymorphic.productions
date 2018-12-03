@@ -20,6 +20,8 @@ config :polymorphic_productions, PolymorphicProductionsWeb.Endpoint,
   watchers: [
     node: [
       "node_modules/webpack/bin/webpack.js",
+      "--config",
+      "webpack.config.dev.js",
       "--mode",
       "development",
       "--watch-stdin",
@@ -73,3 +75,5 @@ config :polymorphic_productions, PolymorphicProductions.Repo,
   pool_size: 10
 
 config :kerosene, :html, theme: :foundation
+
+import_config "dev.secret.exs"

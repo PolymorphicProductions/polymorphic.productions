@@ -29,7 +29,7 @@
 <body data-preloader="1">
 
   <%= render "header.html", conn: @conn, current_user: @current_user, view_module: @view_module, view_template: @view_template  %>
-
+  
   <%= render @view_module, @view_template, assigns %>
 
   <%= render "footer.html", conn: @conn %>

@@ -277,20 +277,14 @@
         <div class="timeline-date">
           <h6 class="heading-uppercase">2011</h6>
           <div><%= img_tag  Routes.static_path(@conn, "/images/fire_alarm1.png") %></div>
-
         </div>
         <div class="timeline-content">
           <h6>Energizer - Matchbox design Flash / PHP </h6>
-
           <p>
             Check your battery was an interactive fire escape planning tool that energizer used to promote their batteries.
-
             The goal of the website was to allow you to drawl a fire escape route of your home with the aid of interactive tools.
-
             Many other promotional contracts followed this with energizer such as “komen’s race for the cure” interactive Facebook ads.
-
           </p>
-
         </div>
       </div>
 
@@ -305,11 +299,8 @@
 
           <p>
             The Christmas of 2009 I was fortunate enough to be able to create the landing pages for mattel’s shopping site.
-
             Working on the interactive elements for Barbie, hot wheels, Disney and mattel’s board games felt like a very high point in my flash career.
-
             But sadly this type of work was short lived as flash's popularity fell dramatically with the push off the cliff from Apple and iPhone and 2010.
-
           </p>
 
         </div>
