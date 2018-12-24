@@ -6,9 +6,6 @@ defmodule PolymorphicProductionsWeb.ConfirmController do
   alias PolymorphicProductionsWeb.Email
 
   def index(conn, params) do
-    import IEx
-    IEx.pry()
-
     case Confirm.verify(params) do
       {:ok, user} ->
         Accounts.confirm_user(user)

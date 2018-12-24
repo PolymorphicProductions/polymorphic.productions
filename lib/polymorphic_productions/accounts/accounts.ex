@@ -1,4 +1,6 @@
 defmodule PolymorphicProductions.Accounts do
+  defdelegate authorize(action, user, params), to: PolymorphicProductions.Accounts.Policy
+
   @moduledoc """
   The Accounts context.
   """
@@ -36,6 +38,7 @@ defmodule PolymorphicProductions.Accounts do
   Raises `Ecto.NoResultsError` if the User does not exist.
   """
   def get_user(id), do: Repo.get(User, id)
+  def get_user!(id), do: Repo.get!(User, id)
 
   @doc """
   Creates a user.

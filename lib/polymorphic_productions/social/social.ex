@@ -1,4 +1,6 @@
 defmodule PolymorphicProductions.Social do
+  defdelegate authorize(action, user, params), to: PolymorphicProductions.Social.Policy
+
   @moduledoc """
   The Social context.
   """

@@ -6,7 +6,7 @@ defmodule PolymorphicProductionsWeb.UserControllerTest do
   # alias PolymorphicProductions.Accounts
   @create_attrs params_for(:user)
 
-  setup %{conn: conn} = config do
+  setup %{conn: conn} do
     conn = conn |> bypass_through(PolymorphicProductionsWeb.Router, [:browser]) |> get("/")
     {:ok, %{conn: conn}}
   end
@@ -68,7 +68,7 @@ defmodule PolymorphicProductionsWeb.UserControllerTest do
 
     test "does not renders form for editing different user", %{
       conn: conn,
-      user: user,
+      user: _user,
       rando: rando
     } do
       conn = get(conn, Routes.user_path(conn, :edit, rando))
@@ -80,45 +80,45 @@ defmodule PolymorphicProductionsWeb.UserControllerTest do
     end
 
     @tag skip: "TODO"
-    test "updates chosen user when data is valid", %{conn: conn} do
+    test "updates chosen user when data is valid", %{conn: _conn} do
     end
 
     @tag skip: "TODO"
-    test "does not update chosen user and renders errors when data is invalid", %{conn: conn} do
+    test "does not update chosen user and renders errors when data is invalid", %{conn: _conn} do
     end
 
     @tag skip: "TODO"
-    test "show current user's page", %{conn: conn} do
+    test "show current user's page", %{conn: _conn} do
     end
 
     @tag skip: "TODO"
-    test "deletes current user", %{conn: conn} do
+    test "deletes current user", %{conn: _conn} do
     end
 
     @tag skip: "TODO"
-    test "cannot delete other user", %{conn: conn} do
+    test "cannot delete other user", %{conn: _conn} do
     end
   end
 
   describe "authed admin" do
     @tag skip: "TODO"
-    test "renders form for editing any user", %{conn: conn} do
+    test "renders form for editing any user", %{conn: _conn} do
     end
 
     @tag skip: "TODO"
-    test "updates any user when data is valid", %{conn: conn} do
+    test "updates any user when data is valid", %{conn: _conn} do
     end
 
     @tag skip: "TODO"
-    test "does not update any user and renders errors when data is invalid", %{conn: conn} do
+    test "does not update any user and renders errors when data is invalid", %{conn: _conn} do
     end
 
     @tag skip: "TODO"
-    test "show any user's page", %{conn: conn} do
+    test "show any user's page", %{conn: _conn} do
     end
 
     @tag skip: "TODO"
-    test "deletes any user", %{conn: conn} do
+    test "deletes any user", %{conn: _conn} do
     end
   end
 end

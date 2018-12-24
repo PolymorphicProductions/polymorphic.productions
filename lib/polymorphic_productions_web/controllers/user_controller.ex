@@ -1,22 +1,18 @@
 defmodule PolymorphicProductionsWeb.UserController do
   use PolymorphicProductionsWeb, :controller
 
-  import PolymorphicProductionsWeb.Authorize
+  import PolymorphicProductionsWeb.Authenticate
+  plug(:authentication_check when action in [:show, :edit, :update])
 
   alias Phauxth.Log
   alias PolymorphicProductions.{Accounts, Accounts.User}
   alias PolymorphicProductionsWeb.{Auth.Token, Email}
 
-  # the following plugs are defined in the controllers/authorize.ex file
-  plug(:admin_check when action in [:index])
-  plug(:id_check when action in [:edit, :update, :delete, :show])
-
-  def index(conn, _params) do
-    users = Accounts.list_users()
-    render(conn, "index.html", users: users)
+  def action(conn, _) do
+    apply(__MODULE__, action_name(conn), [conn, conn.params, conn.assigns])
   end
 
-  def new(conn, _params) do
+  def new(conn, _params, _) do
     changeset = Accounts.change_user(%User{})
 
     conn
@@ -28,7 +24,8 @@ defmodule PolymorphicProductionsWeb.UserController do
     )
   end
 
-  def create(conn, %{"user" => user_params}) do
+  # TODO gate already signed in users
+  def create(conn, %{"user" => user_params}, _) do
     case Accounts.create_user(user_params) do
       {:ok, %User{email: email} = user} ->
         Log.info(%Log{user: user.id, message: "user created"})
@@ -49,33 +46,24 @@ defmodule PolymorphicProductionsWeb.UserController do
     end
   end
 
-  def show(%Plug.Conn{assigns: %{current_user: user}} = conn, %{"id" => id}) do
-    user = if id == to_string(user.id), do: user, else: Accounts.get_user(id)
-    render(conn, "show.html", user: user)
+  def show(conn, _, %{current_user: current_user}) do
+    render(conn, "show.html", user: current_user)
   end
 
-  def edit(%Plug.Conn{assigns: %{current_user: user}} = conn, _) do
-    changeset = Accounts.change_user(user)
-    render(conn, "edit.html", user: user, changeset: changeset)
+  def edit(conn, _, %{current_user: current_user}) do
+    changeset = Accounts.change_user(current_user)
+    render(conn, "edit.html", user: current_user, changeset: changeset)
   end
 
-  def update(%Plug.Conn{assigns: %{current_user: user}} = conn, %{"user" => user_params}) do
-    case Accounts.update_user(user, user_params) do
+  def update(conn, %{"user" => user_params}, %{current_user: current_user}) do
+    case Accounts.update_user(current_user, user_params) do
       {:ok, user} ->
         conn
         |> put_flash(:info, "User updated successfully.")
-        |> redirect(to: Routes.user_path(conn, :show, user))
+        |> redirect(to: Routes.user_path(conn, :show))
 
       {:error, %Ecto.Changeset{} = changeset} ->
-        render(conn, "edit.html", user: user, changeset: changeset)
+        render(conn, "edit.html", user: current_user, changeset: changeset)
     end
-  end
-
-  def delete(%Plug.Conn{assigns: %{current_user: user}} = conn, _) do
-    {:ok, _user} = Accounts.delete_user(user)
-
-    conn
-    |> put_flash(:info, "User deleted successfully.")
-    |> redirect(to: Routes.session_path(conn, :new))
   end
 end

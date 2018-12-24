@@ -9,7 +9,7 @@ jobs:
       - image: circleci/postgres:10.1-alpine
         environment:
           POSTGRES_USER: postgres
-          POSTGRES_DB: elixir_group_test
+          POSTGRES_DB: polymorphic_productions_test
           POSTGRES_PASSWORD:
 
     working_directory: ~/app
@@ -53,4 +53,4 @@ jobs:
       - run: mix coveralls.circle
 
       - store_test_results:
-          path: _build/test/lib/elixir_group
+          path: _build/test/lib/polymorphic_productions

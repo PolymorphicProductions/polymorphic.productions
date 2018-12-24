@@ -1,14 +1,13 @@
 defmodule PolymorphicProductionsWeb.SessionController do
   use PolymorphicProductionsWeb, :controller
 
-  import PolymorphicProductionsWeb.Authorize
-
   alias Phauxth.Remember
   alias PolymorphicProductions.Sessions
   alias PolymorphicProductionsWeb.Auth.Login
 
   # the following plug is defined in the controllers/authorize.ex file
-  plug(:guest_check when action in [:new, :create])
+  # import PolymorphicProductionsWeb.Authenticate
+  # plug(:guest_check when action in [:new, :create])
 
   def new(conn, _) do
     conn
@@ -25,7 +24,7 @@ defmodule PolymorphicProductionsWeb.SessionController do
         conn
         |> add_session(user, params)
         |> put_flash(:info, "User successfully logged in.")
-        |> redirect(to: get_session(conn, :request_path) || Routes.user_path(conn, :index))
+        |> redirect(to: get_session(conn, :request_path) || Routes.page_path(conn, :index))
 
       {:error, message} ->
         conn

@@ -24,6 +24,8 @@ defmodule PolymorphicProductionsWeb do
       import Plug.Conn
       import PolymorphicProductionsWeb.Gettext
       alias PolymorphicProductionsWeb.Router.Helpers, as: Routes
+
+      action_fallback(PolymorphicProductionsWeb.FallbackController)
     end
   end
 
