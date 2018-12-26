@@ -43,7 +43,7 @@ defmodule PolymorphicProductionsWeb.Email do
         %{id: _, email: email, name: name, subject: subject, message: message} = contact
       ) do
     new_email()
-    |> to({"Josh Chernoff", "jchernoff@polymorhpic.productions"})
+    |> to({"Josh Chernoff", "jchernoff@polymorphic.productions"})
     |> from({name, email})
     |> put_html_layout({LayoutView, "email.html"})
     |> assign(:contact, contact)
