@@ -5,8 +5,6 @@ defmodule PolymorphicProductions.Repo do
 
   import Ecto.Query
 
-  alias PolymorphicProductions.Social.{Comment}
-
   use Kerosene, per_page: 10
 
   def approved(query) do

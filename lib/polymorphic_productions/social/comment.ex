@@ -29,6 +29,6 @@ defmodule PolymorphicProductions.Social.Comment do
   defp put_pix(changeset, %{"pix" => pix}), do: put_assoc(changeset, :pix, pix)
   defp put_pix(changeset, _), do: changeset
 
-  defp put_approved(changeset, %{"author" => author}), do: put_change(changeset, :approved, true)
+  defp put_approved(changeset, %{"author" => _author}), do: put_change(changeset, :approved, true)
   defp put_approved(changeset, _), do: changeset
 end

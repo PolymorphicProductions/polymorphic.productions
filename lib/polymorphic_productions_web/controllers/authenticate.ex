@@ -7,7 +7,6 @@ defmodule PolymorphicProductionsWeb.Authenticate do
   import Phoenix.Controller
 
   alias PolymorphicProductionsWeb.Router.Helpers, as: Routes
-  alias PolymorphicProductions.Accounts.User
 
   @doc """
   Plug to check if a given user is logged in.

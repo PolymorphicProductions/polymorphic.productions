@@ -4,9 +4,7 @@ defmodule PolymorphicProductionsWeb.Admin.UserController do
   import PolymorphicProductionsWeb.Authenticate
   plug(:authentication_check)
 
-  alias Phauxth.Log
-  alias PolymorphicProductions.{Accounts, Accounts.User}
-  alias PolymorphicProductionsWeb.{Auth.Token, Email}
+  alias PolymorphicProductions.{Accounts}
 
   def action(conn, _) do
     apply(__MODULE__, action_name(conn), [conn, conn.params, conn.assigns])

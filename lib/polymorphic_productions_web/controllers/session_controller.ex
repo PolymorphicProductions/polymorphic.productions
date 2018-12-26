@@ -34,7 +34,7 @@ defmodule PolymorphicProductionsWeb.SessionController do
   end
 
   def delete(%Plug.Conn{assigns: %{current_user: current_user}} = conn, _) do
-    {deleted_sessions_count, _} = Sessions.delete_user_sessions(current_user)
+    {_deleted_sessions_count, _} = Sessions.delete_user_sessions(current_user)
 
     conn
     |> delete_session(:phauxth_session_id)

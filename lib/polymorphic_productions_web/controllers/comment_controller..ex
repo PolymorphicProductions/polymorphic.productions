@@ -11,7 +11,7 @@ defmodule PolymorphicProductionsWeb.CommentController do
   end
 
   def show(conn, %{"id" => id}, _) do
-    %{pix: pix} = comment = Social.get_comment!(id)
+    %{pix: pix} = Social.get_comment!(id)
 
     conn
     |> redirect(to: Routes.pix_path(conn, :show, pix) <> "##{id}")
@@ -25,7 +25,7 @@ defmodule PolymorphicProductionsWeb.CommentController do
     case comment_params
          |> Map.merge(%{"author" => current_user, "pix" => pix})
          |> Social.create_comment() do
-      {:ok, comment} ->
+      {:ok, _comment} ->
         conn
         |> put_flash(:info, "Comment submitted.")
         |> redirect(to: Routes.pix_path(conn, :show, pix) <> "#foo")

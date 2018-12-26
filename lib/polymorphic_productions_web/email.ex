@@ -38,13 +38,10 @@ defmodule PolymorphicProductionsWeb.Email do
   @doc """
   An email sent from the contact form
   """
-  def contact_request(
-        conn,
-        %{id: _, email: email, name: name, subject: subject, message: message} = contact
-      ) do
+  def contact_request(conn, %{email: from_email, name: from_name, subject: subject} = contact) do
     new_email()
     |> to({"Josh Chernoff", "jchernoff@polymorphic.productions"})
-    |> from({name, email})
+    |> from({from_name, from_email})
     |> put_html_layout({LayoutView, "email.html"})
     |> assign(:contact, contact)
     |> assign(:conn, conn)

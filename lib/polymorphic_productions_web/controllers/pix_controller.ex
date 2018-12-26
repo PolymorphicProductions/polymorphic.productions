@@ -4,8 +4,6 @@ defmodule PolymorphicProductionsWeb.PixController do
   import PolymorphicProductionsWeb.Authenticate
   plug(:authentication_check when action in [:new, :create])
 
-  import Ecto.Query
-
   alias PolymorphicProductions.Social
   alias PolymorphicProductions.Social.{Pix, Comment}
   alias PolymorphicProductions.Repo

@@ -60,7 +60,7 @@ defmodule PolymorphicProductionsWeb.UserController do
       {:ok, user} ->
         conn
         |> put_flash(:info, "User updated successfully.")
-        |> redirect(to: Routes.user_path(conn, :show))
+        |> redirect(to: Routes.user_path(conn, :show, user: user))
 
       {:error, %Ecto.Changeset{} = changeset} ->
         render(conn, "edit.html", user: current_user, changeset: changeset)

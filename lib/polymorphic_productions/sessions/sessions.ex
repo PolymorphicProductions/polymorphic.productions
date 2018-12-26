@@ -56,7 +56,4 @@ defmodule PolymorphicProductions.Sessions do
   def change_session(%Session{} = session) do
     Session.changeset(session, %{})
   end
-
-  defp get_all_user_sessions(%User{} = user) do
-  end
 end

@@ -11,8 +11,6 @@ defmodule PolymorphicProductions.Social do
   alias PolymorphicProductions.Social.Pix
   alias PolymorphicProductions.Social.Comment
 
-  alias PolymorphicProductions.Assets.{Uploader, Processer}
-
   @doc """
   Returns the list of pics.
 

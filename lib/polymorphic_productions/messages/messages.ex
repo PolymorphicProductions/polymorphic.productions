@@ -1,6 +1,4 @@
 defmodule PolymorphicProductions.Messages do
-  defdelegate authorize(action, user, params), to: PolymorphicProductions.Messages.Policy
-
   alias PolymorphicProductions.Messages.Contact
 
   @doc """

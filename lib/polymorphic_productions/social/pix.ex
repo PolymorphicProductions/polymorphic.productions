@@ -2,8 +2,6 @@ defmodule PolymorphicProductions.Social.Pix do
   use Ecto.Schema
   import Ecto.Changeset
 
-  alias PolymorphicProductions.Assets.{Uploader, Processor}
-
   @primary_key {:id, :binary_id, autogenerate: true}
   @foreign_key_type :binary_id
 
@@ -57,7 +55,7 @@ defmodule PolymorphicProductions.Social.Pix do
   defp upload_attachment(
          %Ecto.Changeset{
            valid?: true,
-           changes: %{photo: %Plug.Upload{filename: filename, path: image_path} = info}
+           changes: %{photo: %Plug.Upload{filename: filename, path: image_path}}
          } = changeset
        ) do
     %{path: scaled_image_path, height: scaled_height, width: scaled_width} =

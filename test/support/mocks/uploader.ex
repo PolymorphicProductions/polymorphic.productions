@@ -1,5 +1,5 @@
 defmodule PolymorphicProductions.Mocks.Uploader do
-  def upload(image_path, storage_path, filename) do
+  def upload(_image_path, _storage_path, _filename) do
   end
 
   def upload_plug do
