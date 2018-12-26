@@ -15,6 +15,9 @@ defmodule PolymorphicProductions.Social.Pix do
   schema "pics" do
     field(:asset, :string)
     field(:asset_preview, :string)
+    field(:asset_preview_width, :integer)
+    field(:asset_preview_height, :integer)
+
     field(:description, :string)
     field(:photo, :any, virtual: true)
     has_many(:comments, PolymorphicProductions.Social.Comment)
@@ -54,10 +57,11 @@ defmodule PolymorphicProductions.Social.Pix do
   defp upload_attachment(
          %Ecto.Changeset{
            valid?: true,
-           changes: %{photo: %Plug.Upload{filename: filename, path: image_path}}
+           changes: %{photo: %Plug.Upload{filename: filename, path: image_path} = info}
          } = changeset
        ) do
-    %{path: scaled_image_path} = @processor.scale_image(image_path)
+    %{path: scaled_image_path, height: scaled_height, width: scaled_width} =
+      @processor.scale_image(image_path) |> IO.inspect()
 
     @uploader.upload(
       scaled_image_path,
@@ -79,6 +83,14 @@ defmodule PolymorphicProductions.Social.Pix do
     |> put_change(
       :asset_preview,
       "https://d1sv288qkuffrb.cloudfront.net/polymorphic-productions/photos/preview/" <> filename
+    )
+    |> put_change(
+      :asset_preview_height,
+      scaled_height
+    )
+    |> put_change(
+      :asset_preview_width,
+      scaled_width
     )
   end
 

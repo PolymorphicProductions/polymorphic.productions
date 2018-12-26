@@ -12,15 +12,17 @@ export function photoswipe_init(gallerySelector) {
     };
   });
 
-  Array.prototype.forEach.call(links, link => {
+  Array.prototype.forEach.call(links, (link, index) => {
     link.onclick = e => {
       e.preventDefault();
-      console.log("WTF!");
 
       var $pswp = $(".pswp")[0],
         options = {
           bgOpacity: 0.85,
-          showHideOpacity: true
+          showHideOpacity: true,
+          index: index,
+          loop: false,
+          escKey: true
         };
 
       // Initialize PhotoSwipe

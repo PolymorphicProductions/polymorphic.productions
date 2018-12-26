@@ -4,7 +4,10 @@ defmodule PolymorphicProductions.Assets.Processor do
   def scale_image(path) do
     path
     |> open()
-    |> resize("1024x")
+    |> verbose
+    |> resize("1024x683>")
+    |> verbose
     |> save()
+    |> verbose
   end
 end
