@@ -2,7 +2,7 @@ defmodule PolymorphicProductions.Repo.Migrations.AddSocialTags do
   use Ecto.Migration
 
   def change do
-    # rename(table(:comments), :pix_id, to: :pic_id)
+    rename(table(:comments), :pix_id, to: :pic_id)
 
     create table(:tags) do
       add(:name, :text, null: false)
