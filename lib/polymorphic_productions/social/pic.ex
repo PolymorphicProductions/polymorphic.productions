@@ -35,6 +35,7 @@ defmodule PolymorphicProductions.Social.Pic do
     |> validate_required([:description, :asset])
     |> put_tags_list()
     |> parse_tags_assoc()
+    |> parse_description()
   end
 
   defp validate_attachment(
@@ -126,4 +127,15 @@ defmodule PolymorphicProductions.Social.Pic do
   end
 
   defp parse_tags_assoc(changeset), do: changeset
+
+  defp parse_description(
+         %Ecto.Changeset{valid?: true, changes: %{description: description}} = changeset
+       ) do
+    parsed_description =
+      String.replace(description, ~r/#(\S*)/, "<a href='/snapshots/tags/\\1'>#\\1</a>")
+
+    changeset |> put_change(:description, parsed_description)
+  end
+
+  defp parse_description(changeset), do: changeset
 end

@@ -21,7 +21,7 @@
 
       </div>
       <div class="col-lg-7">
-        <%= @pic.description %>
+        <%= raw @pic.description %>
       </div>
     </div>
 
