@@ -3,14 +3,13 @@ defmodule PolymorphicProductionsWeb.PixControllerTest do
 
   alias PolymorphicProductions.Social
 
-  @create_attrs %{asset: "some asset", description: "some description"}
+  @create_attrs %{
+    asset: "some asset",
+    description: "some description",
+    photo: %{photo: %Plug.Upload{filename: "foo"}}
+  }
   @update_attrs %{asset: "some updated asset", description: "some updated description"}
   @invalid_attrs %{asset: nil, description: nil}
-
-  def fixture(:pix) do
-    {:ok, pix} = Social.create_pix(@create_attrs)
-    pix
-  end
 
   describe "index" do
     test "lists all pics", %{conn: conn} do
@@ -75,14 +74,15 @@ defmodule PolymorphicProductionsWeb.PixControllerTest do
     test "deletes chosen pix", %{conn: conn, pix: pix} do
       conn = delete(conn, Routes.pix_path(conn, :delete, pix))
       assert redirected_to(conn) == Routes.pix_path(conn, :index)
-      assert_error_sent 404, fn ->
+
+      assert_error_sent(404, fn ->
         get(conn, Routes.pix_path(conn, :show, pix))
-      end
+      end)
     end
   end
 
   defp create_pix(_) do
-    pix = fixture(:pix)
+    {:ok, pix} = Social.create_pix(@create_attrs)
     {:ok, pix: pix}
   end
 end

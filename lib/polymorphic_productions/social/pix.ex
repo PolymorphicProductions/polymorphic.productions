@@ -59,7 +59,7 @@ defmodule PolymorphicProductions.Social.Pix do
          } = changeset
        ) do
     %{path: scaled_image_path, height: scaled_height, width: scaled_width} =
-      @processor.scale_image(image_path)
+      @processor.scale_image(image_path) |> IO.inspect()
 
     @uploader.upload(
       scaled_image_path,

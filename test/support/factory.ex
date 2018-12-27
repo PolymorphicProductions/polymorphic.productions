@@ -31,7 +31,7 @@ defmodule PolymorphicProductions.Factory do
     %PolymorphicProductions.Social.Comment{
       body: "foo bar baz",
       approved: true,
-      user: build(:user)
+      user: build(:user, password: nil)
     }
   end
 end
