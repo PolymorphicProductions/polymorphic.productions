@@ -59,10 +59,10 @@ defmodule PolymorphicProductionsWeb.SessionControllerTest do
     end
 
     test "redirects to previously requested resource", %{conn: conn, user: user} do
-      conn = get(conn, Routes.user_path(conn, :show, user))
+      conn = get(conn, Routes.user_path(conn, :show))
       assert redirected_to(conn) == Routes.session_path(conn, :new)
       conn = post(conn, Routes.session_path(conn, :create), session: @create_attrs)
-      assert redirected_to(conn) == Routes.user_path(conn, :show, user)
+      assert redirected_to(conn) == Routes.user_path(conn, :show)
     end
 
     test "remember me cookie is added / not added", %{conn: conn} do
@@ -78,7 +78,7 @@ defmodule PolymorphicProductionsWeb.SessionControllerTest do
       conn = conn |> add_session(user) |> send_resp(:ok, "/")
       conn = delete(conn, Routes.session_path(conn, :delete, user))
       assert redirected_to(conn) == Routes.page_path(conn, :index)
-      conn = get(conn, Routes.user_path(conn, :index))
+      conn = get(conn, Routes.user_path(conn, :show))
       assert redirected_to(conn) == Routes.session_path(conn, :new)
     end
   end

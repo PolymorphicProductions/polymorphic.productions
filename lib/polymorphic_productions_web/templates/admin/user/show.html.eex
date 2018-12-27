@@ -7,4 +7,4 @@
 </ul>
 
 
-<%= link "Edit", to: Routes.user_path(@conn, :edit, @user), class: "btn btn-secondary"%></span><br>
+<%= link "Edit", to: Routes.admin_user_path(@conn, :edit, @user), class: "btn btn-secondary"%></span><br>

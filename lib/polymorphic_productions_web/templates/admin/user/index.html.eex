@@ -14,7 +14,7 @@
       </td>
       <td class="text-right">
         <span>
-          <%= link "Show", to: Routes.user_path(@conn, :show, user), class: "btn btn-default btn-xs" %></span>
+          <%= link "Show", to: Routes.admin_user_path(@conn, :show, user), class: "btn btn-default btn-xs" %></span>
       </td>
     </tr>
     <% end %>
@@ -22,4 +22,3 @@
 </table>
 
 <span>
-  <%= link "New User", to: Routes.user_path(@conn, :new) %></span>

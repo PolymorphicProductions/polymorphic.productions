@@ -3,8 +3,7 @@
 <ul>
   <li>User Name: <%= @user.name %></li>
   <li>Email: <%= @user.email %></li>
-  <li>Admin? <%= @user.admin %></li>
 </ul>
 
 
-<%= link "Edit", to: Routes.user_path(@conn, :edit, @user), class: "btn btn-secondary"%></span><br>
+<%= link "Edit", to: Routes.user_path(@conn, :edit), class: "btn btn-secondary"%></span><br>

@@ -31,14 +31,17 @@ defmodule PolymorphicProductionsWeb.Router do
       resources("/comments", CommentController, only: [:show, :create, :delete, :update])
     end
 
-    resources("/users", Admin.UserController, only: [:index, :show, :edit, :update, :delete])
-
     get("/signup", UserController, :new)
     post("/signup", UserController, :create)
 
-    get("/user", UserController, :show)
-    get("/user/edit", UserController, :edit)
-    put("/user", UserController, :update)
+    get("/account", UserController, :show)
+    get("/account/edit", UserController, :edit)
+    put("/account", UserController, :update)
+
+    resources("/users", Admin.UserController,
+      only: [:index, :show, :edit, :update, :delete],
+      as: :admin_user
+    )
 
     resources("/sessions", SessionController, only: [:new, :create, :delete])
 
