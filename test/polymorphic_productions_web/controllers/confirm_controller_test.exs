@@ -5,7 +5,7 @@ defmodule PolymorphicProductionsWeb.ConfirmControllerTest do
 
   setup %{conn: conn} do
     conn = conn |> bypass_through(PolymorphicProductions.Router, :browser) |> get("/")
-    add_user("arthur@example.com")
+    add_user("arthur@example.com", "foobar")
     {:ok, %{conn: conn}}
   end
 

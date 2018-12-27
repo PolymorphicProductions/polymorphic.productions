@@ -5,6 +5,10 @@ defmodule PolymorphicProductionsWeb.SessionController do
   alias PolymorphicProductions.Sessions
   alias PolymorphicProductionsWeb.Auth.Login
 
+  import PolymorphicProductionsWeb.Authenticate
+  plug(:unauthentication_check when action in [:new, :create])
+  plug(:authentication_check when action in [:delete])
+
   # the following plug is defined in the controllers/authorize.ex file
   # import PolymorphicProductionsWeb.Authenticate
   # plug(:guest_check when action in [:new, :create])

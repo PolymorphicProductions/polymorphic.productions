@@ -3,21 +3,30 @@ defmodule PolymorphicProductionsWeb.SessionControllerTest do
 
   import PolymorphicProductionsWeb.AuthCase
 
-  @create_attrs %{email: "robin@example.com", password: "reallyHard2gue$$"}
-  @invalid_attrs %{email: "robin@example.com", password: "cannotGue$$it"}
-  @unconfirmed_attrs %{email: "lancelot@example.com", password: "reallyHard2gue$$"}
-  @rem_attrs %{email: "robin@example.com", password: "reallyHard2gue$$", remember_me: "true"}
+  @create_attrs %{email: "robin@example.com", password: "reallyHard2gue$$", name: "foobar"}
+  @invalid_attrs %{email: "robin@example.com", password: "cannotGue$$it", name: "foobar"}
+  @unconfirmed_attrs %{
+    email: "lancelot@example.com",
+    password: "reallyHard2gue$$",
+    name: "foobar"
+  }
+  @rem_attrs %{
+    email: "robin@example.com",
+    password: "reallyHard2gue$$",
+    remember_me: "true",
+    name: "foobar"
+  }
   @no_rem_attrs Map.merge(@rem_attrs, %{remember_me: "false"})
 
   setup %{conn: conn} do
     conn = conn |> bypass_through(PolymorphicProductionsWeb.Router, [:browser]) |> get("/")
-    add_user("lancelot@example.com")
-    user = add_user_confirmed("robin@example.com")
+    add_user("lancelot@example.com", "foobar")
+    user = add_user_confirmed("robin@example.com", "foobar")
     {:ok, %{conn: conn, user: user}}
   end
 
   describe "login form" do
-    test "rendering login form fails for user that is already logged in", %{
+    test "redirects to home page fo users that are already logged in", %{
       conn: conn,
       user: user
     } do
@@ -30,7 +39,7 @@ defmodule PolymorphicProductionsWeb.SessionControllerTest do
   describe "create session" do
     test "login succeeds", %{conn: conn} do
       conn = post(conn, Routes.session_path(conn, :create), session: @create_attrs)
-      assert redirected_to(conn) == Routes.user_path(conn, :index)
+      assert redirected_to(conn) == Routes.page_path(conn, :index)
     end
 
     test "login fails for user that is not yet confirmed", %{conn: conn} do

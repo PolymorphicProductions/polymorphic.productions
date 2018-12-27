@@ -5,6 +5,7 @@ defmodule PolymorphicProductions.Factory do
     %PolymorphicProductions.Accounts.User{
       email: sequence(:email, &"email-#{&1}@example.com"),
       password: "foobarbaz",
+      name: "foobar",
       admin: false
     }
   end
@@ -13,6 +14,7 @@ defmodule PolymorphicProductions.Factory do
     %PolymorphicProductions.Accounts.User{
       email: sequence(:email, &"admin-#{&1}@example.com"),
       password: "foobarbaz",
+      name: "foobar",
       admin: true
     }
   end

@@ -20,4 +20,17 @@ defmodule PolymorphicProductionsWeb.Authenticate do
   end
 
   def authentication_check(conn, _opts), do: conn
+
+  @doc """
+  Plug to check if a given user is not logged in.
+  """
+  def unauthentication_check(%Plug.Conn{assigns: %{current_user: %{}}} = conn, _opts) do
+    conn
+    |> put_session(:request_path, current_path(conn))
+    |> put_flash(:error, "🤦‍♂️ You are already signed in♂️")
+    |> redirect(to: Routes.page_path(conn, :index))
+    |> halt()
+  end
+
+  def unauthentication_check(conn, _opts), do: conn
 end

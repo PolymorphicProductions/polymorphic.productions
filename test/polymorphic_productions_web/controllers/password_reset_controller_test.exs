@@ -7,7 +7,7 @@ defmodule PolymorphicProductionsWeb.PasswordResetControllerTest do
 
   setup %{conn: conn} do
     conn = conn |> bypass_through(PolymorphicProductionsWeb.Router, :browser) |> get("/")
-    user = add_reset_user("gladys@example.com")
+    user = add_reset_user("gladys@example.com", "foobar")
     {:ok, %{conn: conn, user: user}}
   end
 

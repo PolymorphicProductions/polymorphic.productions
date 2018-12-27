@@ -23,24 +23,22 @@ defmodule PolymorphicProductionsWeb.AuthCase do
     user
   end
 
-  def add_user(email) do
-    user = %{email: email, password: "reallyHard2gue$$"}
+  def add_user(email, name) do
+    user = %{email: email, password: "reallyHard2gue$$", name: name}
     {:ok, user} = Accounts.create_user(user)
     user
   end
 
   def gen_key(email), do: Token.sign(%{"email" => email})
 
-  def add_user_confirmed(email) do
-    email
-    |> add_user()
+  def add_user_confirmed(email, name) do
+    add_user(email, name)
     |> change(%{confirmed_at: now()})
     |> Repo.update!()
   end
 
-  def add_reset_user(email) do
-    email
-    |> add_user()
+  def add_reset_user(email, name) do
+    add_user(email, name)
     |> change(%{confirmed_at: now()})
     |> change(%{reset_sent_at: now()})
     |> Repo.update!()
