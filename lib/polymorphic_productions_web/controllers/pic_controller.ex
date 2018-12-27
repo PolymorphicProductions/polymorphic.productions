@@ -44,6 +44,7 @@ defmodule PolymorphicProductionsWeb.PicController do
     pic =
       Social.get_pic!(id,
         preload: [
+          :tags,
           comments: {Comment |> Repo.approved() |> Repo.order_by_oldest(), :user}
         ]
       )
@@ -53,7 +54,7 @@ defmodule PolymorphicProductionsWeb.PicController do
 
   def edit(conn, %{"id" => id}, %{current_user: current_user}) do
     with :ok <- Bodyguard.permit(Social, :edit, current_user, nil) do
-      pic = Social.get_pic!(id)
+      pic = Social.get_pic!(id, preload: [:tags])
       changeset = Social.change_pic(pic)
       render(conn, "edit.html", pic: pic, changeset: changeset)
     end
@@ -61,7 +62,7 @@ defmodule PolymorphicProductionsWeb.PicController do
 
   def update(conn, %{"id" => id, "pic" => pic_params}, %{current_user: current_user}) do
     with :ok <- Bodyguard.permit(Social, :update, current_user, nil) do
-      pic = Social.get_pic!(id)
+      pic = Social.get_pic!(id, preload: [:tags])
 
       case Social.update_pic(pic, pic_params) do
         {:ok, pic} ->
@@ -77,7 +78,7 @@ defmodule PolymorphicProductionsWeb.PicController do
 
   def delete(conn, %{"id" => id}, %{current_user: current_user}) do
     with :ok <- Bodyguard.permit(Social, :delete, current_user, nil) do
-      pic = Social.get_pic!(id)
+      pic = Social.get_pic!(id, preload: [:tags])
       {:ok, _pic} = Social.delete_pic(pic)
 
       conn

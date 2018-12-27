@@ -1,7 +1,7 @@
 defmodule PolymorphicProductions.Social.Pic do
   use Ecto.Schema
   import Ecto.Changeset
-  alias PolymorphicProductions.Social.{Tagging, Tag, Pic}
+  alias PolymorphicProductions.Social.{Tagging, Tag}
 
   @primary_key {:id, :binary_id, autogenerate: true}
   @foreign_key_type :binary_id
@@ -21,7 +21,7 @@ defmodule PolymorphicProductions.Social.Pic do
     field(:photo, :any, virtual: true)
     field(:tag_list, {:array, :string}, virtual: true)
     has_many(:comments, PolymorphicProductions.Social.Comment)
-    many_to_many(:tags, Tag, join_through: "pic_tags")
+    many_to_many(:tags, Tag, join_through: "pic_tags", on_replace: :delete)
 
     timestamps()
   end
@@ -119,7 +119,7 @@ defmodule PolymorphicProductions.Social.Pic do
   defp put_tags_list(changeset), do: changeset
 
   defp parse_tags_assoc(
-         %Ecto.Changeset{valid?: true, changes: %{tags_list: tags_list}} = changeset
+         %Ecto.Changeset{valid?: true, changes: %{tag_list: _tags_list}} = changeset
        ) do
     changeset
     |> Tagging.changeset(PolymorphicProductions.Social.Tag, :tags, :tag_list)
