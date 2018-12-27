@@ -33,7 +33,7 @@ defmodule PolymorphicProductionsWeb.PixControllerTest do
   describe "new pix" do
     setup [:log_admin_in]
 
-    test "renders form", %{conn: conn, user: user} do
+    test "renders form", %{conn: conn} do
       conn = get(conn, Routes.pix_path(conn, :new))
       assert html_response(conn, 200) =~ "New Pix"
     end
@@ -42,7 +42,7 @@ defmodule PolymorphicProductionsWeb.PixControllerTest do
   describe "create pix" do
     setup [:log_admin_in]
 
-    test "redirects to show when data is valid", %{conn: conn, user: user} do
+    test "redirects to show when data is valid", %{conn: conn} do
       conn = post(conn, Routes.pix_path(conn, :create), pix: @create_attrs)
 
       assert %{id: id} = redirected_params(conn)
@@ -61,7 +61,7 @@ defmodule PolymorphicProductionsWeb.PixControllerTest do
   describe "edit pix" do
     setup [:create_pix, :log_admin_in]
 
-    test "renders form for editing chosen pix", %{conn: conn, pix: pix, user: user} do
+    test "renders form for editing chosen pix", %{conn: conn, pix: pix} do
       conn = get(conn, Routes.pix_path(conn, :edit, pix))
       assert html_response(conn, 200) =~ "Edit Pix"
     end
