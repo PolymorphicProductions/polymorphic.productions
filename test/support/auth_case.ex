@@ -12,6 +12,12 @@ defmodule PolymorphicProductionsWeb.AuthCase do
     {:ok, %{conn: conn, user: user}}
   end
 
+  def log_admin_in(%{conn: conn}) do
+    user = insert(:admin)
+    conn = conn |> add_session(user) |> send_resp(:ok, "/")
+    {:ok, %{conn: conn, user: user}}
+  end
+
   def create_rando_user(%{conn: conn, user: user}) do
     rando = insert(:user)
     {:ok, %{conn: conn, user: user, rando: rando}}
