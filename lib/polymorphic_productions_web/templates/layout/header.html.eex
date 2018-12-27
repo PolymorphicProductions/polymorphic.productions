@@ -24,10 +24,10 @@
         </li> -->
 
          <!-- <li class="nav-item">
-          <a class="nav-link" href="<%#= Routes.pix_path @conn, :index %>">Blog</a>
+          <a class="nav-link" href="<%#= Routes.pic_path @conn, :index %>">Blog</a>
         </li> -->
         <li class="nav-item">
-          <a class="nav-link" href="<%= Routes.pix_path @conn, :index %>">Snapshots</a>
+          <a class="nav-link" href="<%= Routes.pic_path @conn, :index %>">Snapshots</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="<%= Routes.page_path @conn, :about %>">About</a>

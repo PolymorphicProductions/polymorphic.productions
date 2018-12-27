@@ -1,4 +1,4 @@
-defmodule PolymorphicProductions.Repo.Migrations.AddInfoToPix do
+defmodule PolymorphicProductions.Repo.Migrations.AddInfoToPic do
   use Ecto.Migration
 
   def change do

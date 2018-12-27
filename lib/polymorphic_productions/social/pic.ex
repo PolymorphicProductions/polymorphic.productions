@@ -1,11 +1,12 @@
-defmodule PolymorphicProductions.Social.Pix do
+defmodule PolymorphicProductions.Social.Pic do
   use Ecto.Schema
   import Ecto.Changeset
+  alias PolymorphicProductions.Social.{Tagging, Tag, Pic}
 
   @primary_key {:id, :binary_id, autogenerate: true}
   @foreign_key_type :binary_id
 
-  @extension_whitelist ~w(.jpg .jpeg .png)
+  @extension_whitelist ~w(.jpg)
 
   @processor Application.fetch_env!(:polymorphic_productions, :asset_processor)
   @uploader Application.fetch_env!(:polymorphic_productions, :asset_uploader)
@@ -18,7 +19,9 @@ defmodule PolymorphicProductions.Social.Pix do
 
     field(:description, :string)
     field(:photo, :any, virtual: true)
+    field(:tag_list, {:array, :string}, virtual: true)
     has_many(:comments, PolymorphicProductions.Social.Comment)
+    many_to_many(:tags, Tag, join_through: "pic_tags")
 
     timestamps()
   end
@@ -30,6 +33,8 @@ defmodule PolymorphicProductions.Social.Pix do
     |> validate_attachment()
     |> upload_attachment()
     |> validate_required([:description, :asset])
+    |> put_tags_list()
+    |> parse_tags_assoc()
   end
 
   defp validate_attachment(
@@ -46,7 +51,7 @@ defmodule PolymorphicProductions.Social.Pix do
 
       _ ->
         changeset
-        |> Ecto.Changeset.add_error(:asset, "jpg or png only")
+        |> Ecto.Changeset.add_error(:asset, "jpg only")
     end
   end
 
@@ -93,4 +98,32 @@ defmodule PolymorphicProductions.Social.Pix do
   end
 
   defp upload_attachment(changeset), do: changeset
+
+  defp put_tags_list(
+         %Ecto.Changeset{valid?: true, changes: %{description: description}} = changeset
+       ) do
+    case SocialParser.extract(description, [:hashtags]) do
+      %{hashtags: hashs} ->
+        tag_list =
+          hashs
+          |> Enum.map(fn key -> String.replace(key, "#", "") end)
+
+        changeset
+        |> put_change(:tag_list, tag_list)
+
+      _ ->
+        changeset
+    end
+  end
+
+  defp put_tags_list(changeset), do: changeset
+
+  defp parse_tags_assoc(
+         %Ecto.Changeset{valid?: true, changes: %{tags_list: tags_list}} = changeset
+       ) do
+    changeset
+    |> Tagging.changeset(PolymorphicProductions.Social.Tag, :tags, :tag_list)
+  end
+
+  defp parse_tags_assoc(changeset), do: changeset
 end

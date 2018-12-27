@@ -1,5 +1,0 @@
-<h1>Edit Pix</h1>
-
-<%= render "form.html", Map.put(assigns, :action, Routes.pix_path(@conn, :update, @pix)) %>
-
-<span><%= link "Back", to: Routes.pix_path(@conn, :index) %></span>

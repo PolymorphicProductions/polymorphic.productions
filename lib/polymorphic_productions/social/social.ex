@@ -8,7 +8,7 @@ defmodule PolymorphicProductions.Social do
   import Ecto.Query, warn: false
   alias PolymorphicProductions.Repo
 
-  alias PolymorphicProductions.Social.Pix
+  alias PolymorphicProductions.Social.Pic
   alias PolymorphicProductions.Social.Comment
 
   @doc """
@@ -17,34 +17,34 @@ defmodule PolymorphicProductions.Social do
   ## Examples
 
       iex> list_pics()
-      [%Pix{}, ...]
+      [%Pic{}, ...]
 
   """
   def list_pics(params \\ %{}) do
-    Pix
+    Pic
     |> from(order_by: [desc: :inserted_at])
     |> Repo.paginate(params)
   end
 
   @doc """
-  Gets a single pix.
+  Gets a single pic.
 
-  Raises `Ecto.NoResultsError` if the Pix does not exist.
+  Raises `Ecto.NoResultsError` if the Pic does not exist.
 
   ## Examples
 
-      iex> get_pix!(123)
-      %Pix{}
+      iex> get_pic!(123)
+      %Pic{}
 
-      iex> get_pix!(456)
+      iex> get_pic!(456)
       ** (Ecto.NoResultsError)
 
   """
-  @get_pix_defaults %{preload: []}
-  def get_pix!(id, options \\ []) do
-    %{preload: preload} = Enum.into(options, @get_pix_defaults)
+  @get_pic_defaults %{preload: []}
+  def get_pic!(id, options \\ []) do
+    %{preload: preload} = Enum.into(options, @get_pic_defaults)
 
-    from(p in Pix,
+    from(p in Pic,
       where: p.id == ^id,
       preload: ^preload
     )
@@ -52,68 +52,68 @@ defmodule PolymorphicProductions.Social do
   end
 
   @doc """
-  Creates a pix.
+  Creates a pic.
 
   ## Examples
 
-      iex> create_pix(%{field: value})
-      {:ok, %Pix{}}
+      iex> create_pic(%{field: value})
+      {:ok, %Pic{}}
 
-      iex> create_pix(%{field: bad_value})
+      iex> create_pic(%{field: bad_value})
       {:error, %Ecto.Changeset{}}
 
   """
-  def create_pix(attrs \\ %{}) do
-    %Pix{}
-    |> Pix.changeset(attrs)
+  def create_pic(attrs \\ %{}) do
+    %Pic{}
+    |> Pic.changeset(attrs)
     |> Repo.insert()
   end
 
   @doc """
-  Updates a pix.
+  Updates a pic.
 
   ## Examples
 
-      iex> update_pix(pix, %{field: new_value})
-      {:ok, %Pix{}}
+      iex> update_pic(pic, %{field: new_value})
+      {:ok, %Pic{}}
 
-      iex> update_pix(pix, %{field: bad_value})
+      iex> update_pic(pic, %{field: bad_value})
       {:error, %Ecto.Changeset{}}
 
   """
-  def update_pix(%Pix{} = pix, attrs) do
-    pix
-    |> Pix.changeset(attrs)
+  def update_pic(%Pic{} = pic, attrs) do
+    pic
+    |> Pic.changeset(attrs)
     |> Repo.update()
   end
 
   @doc """
-  Deletes a Pix.
+  Deletes a Pic.
 
   ## Examples
 
-      iex> delete_pix(pix)
-      {:ok, %Pix{}}
+      iex> delete_pic(pic)
+      {:ok, %Pic{}}
 
-      iex> delete_pix(pix)
+      iex> delete_pic(pic)
       {:error, %Ecto.Changeset{}}
 
   """
-  def delete_pix(%Pix{} = pix) do
-    Repo.delete(pix)
+  def delete_pic(%Pic{} = pic) do
+    Repo.delete(pic)
   end
 
   @doc """
-  Returns an `%Ecto.Changeset{}` for tracking pix changes.
+  Returns an `%Ecto.Changeset{}` for tracking pic changes.
 
   ## Examples
 
-      iex> change_pix(pix)
-      %Ecto.Changeset{source: %Pix{}}
+      iex> change_pic(pic)
+      %Ecto.Changeset{source: %Pic{}}
 
   """
-  def change_pix(%Pix{} = pix) do
-    Pix.changeset(pix, %{})
+  def change_pic(%Pic{} = pic) do
+    Pic.changeset(pic, %{})
   end
 
   @doc """
@@ -144,7 +144,7 @@ defmodule PolymorphicProductions.Social do
 
   """
   def get_comment!(id),
-    do: from(c in Comment, preload: [:user, :pix]) |> Repo.get!(id)
+    do: from(c in Comment, preload: [:user, :pic]) |> Repo.get!(id)
 
   @doc """
   Creates a comment.

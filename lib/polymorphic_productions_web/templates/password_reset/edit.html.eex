@@ -19,4 +19,4 @@
 <% end %>
 
 <span>
-  <%= link "Back", to: Routes.pix_path(@conn, :index) %></span>
+  <%= link "Back", to: Routes.pic_path(@conn, :index) %></span>

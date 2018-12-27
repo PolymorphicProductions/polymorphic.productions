@@ -6,65 +6,65 @@ defmodule PolymorphicProductions.SocialTest do
   import PolymorphicProductions.Factory
 
   describe "pics" do
-    alias PolymorphicProductions.Social.Pix
+    alias PolymorphicProductions.Social.Pic
 
-    @valid_attrs string_params_for(:pix)
-    @update_attrs string_params_for(:pix)
-    @invalid_attrs Map.from_struct(%PolymorphicProductions.Social.Pix{})
+    @valid_attrs string_params_for(:pic)
+    @update_attrs string_params_for(:pic)
+    @invalid_attrs Map.from_struct(%PolymorphicProductions.Social.Pic{})
 
     test "list_pics/0 returns all pics" do
-      pix = insert(:pix)
+      pic = insert(:pic)
       {pics, _kerosene} = Social.list_pics()
-      assert pics == [pix]
+      assert pics == [pic]
     end
 
-    test "get_pix!/1 returns the pix with given id" do
-      pix = insert(:pix)
-      assert Social.get_pix!(pix.id) == pix
+    test "get_pic!/1 returns the pic with given id" do
+      pic = insert(:pic)
+      assert Social.get_pic!(pic.id) == pic
     end
 
-    test "create_pix/1 with valid data creates a pix" do
+    test "create_pic/1 with valid data creates a pic" do
       param =
         Map.merge(@valid_attrs, %{"photo" => PolymorphicProductions.Mocks.Uploader.upload_plug()})
 
-      assert {:ok, %Pix{} = pix} = Social.create_pix(param)
+      assert {:ok, %Pic{} = pic} = Social.create_pic(param)
 
-      assert pix.asset ==
+      assert pic.asset ==
                "https://d1sv288qkuffrb.cloudfront.net/polymorphic-productions/photos/user_avatar.jpg"
 
-      assert pix.asset_preview ==
+      assert pic.asset_preview ==
                "https://d1sv288qkuffrb.cloudfront.net/polymorphic-productions/photos/preview/user_avatar.jpg"
 
-      assert(pix.description == "A street photo of ...")
+      assert(pic.description == "A street photo of #PDX #OR")
     end
 
-    test "create_pix/1 with invalid data returns error changeset" do
-      assert {:error, %Ecto.Changeset{}} = Social.create_pix(@invalid_attrs)
+    test "create_pic/1 with invalid data returns error changeset" do
+      assert {:error, %Ecto.Changeset{}} = Social.create_pic(@invalid_attrs)
     end
 
-    test "update_pix/2 with valid data updates the pix" do
-      pix = insert(:pix)
-      assert {:ok, %Pix{} = pix} = Social.update_pix(pix, @update_attrs)
+    test "update_pic/2 with valid data updates the pic" do
+      pic = insert(:pic)
+      assert {:ok, %Pic{} = pic} = Social.update_pic(pic, @update_attrs)
 
-      assert pix.asset == @update_attrs["asset"]
-      assert pix.description == @update_attrs["description"]
+      assert pic.asset == @update_attrs["asset"]
+      assert pic.description == @update_attrs["description"]
     end
 
-    test "update_pix/2 with invalid data returns error changeset" do
-      pix = insert(:pix)
-      assert {:error, %Ecto.Changeset{}} = Social.update_pix(pix, @invalid_attrs)
-      assert pix == Social.get_pix!(pix.id)
+    test "update_pic/2 with invalid data returns error changeset" do
+      pic = insert(:pic)
+      assert {:error, %Ecto.Changeset{}} = Social.update_pic(pic, @invalid_attrs)
+      assert pic == Social.get_pic!(pic.id)
     end
 
-    test "delete_pix/1 deletes the pix" do
-      pix = insert(:pix)
-      assert {:ok, %Pix{}} = Social.delete_pix(pix)
-      assert_raise Ecto.NoResultsError, fn -> Social.get_pix!(pix.id) end
+    test "delete_pic/1 deletes the pic" do
+      pic = insert(:pic)
+      assert {:ok, %Pic{}} = Social.delete_pic(pic)
+      assert_raise Ecto.NoResultsError, fn -> Social.get_pic!(pic.id) end
     end
 
-    test "change_pix/1 returns a pix changeset" do
-      pix = insert(:pix)
-      assert %Ecto.Changeset{} = Social.change_pix(pix)
+    test "change_pic/1 returns a pic changeset" do
+      pic = insert(:pic)
+      assert %Ecto.Changeset{} = Social.change_pic(pic)
     end
   end
 
@@ -91,14 +91,13 @@ defmodule PolymorphicProductions.SocialTest do
     end
 
     test "get_comment!/1 returns the comment with given id" do
-      comment = insert(:comment, pix: nil)
+      comment = insert(:comment, pic: nil)
       assert Social.get_comment!(comment.id) == comment
     end
 
     test "create_comment/1 with valid data creates a comment" do
       assert {:ok, %Comment{} = comment} = Social.create_comment(@valid_attrs)
       assert comment.approved == true
-      # assert comment.user == @update_attrs["user"]
       assert comment.body == @update_attrs["body"]
     end
 
@@ -116,7 +115,7 @@ defmodule PolymorphicProductions.SocialTest do
     end
 
     test "update_comment/2 with invalid data returns error changeset" do
-      comment = insert(:comment, pix: nil)
+      comment = insert(:comment, pic: nil)
 
       assert {:error, %Ecto.Changeset{}} = Social.update_comment(comment, @invalid_attrs)
 

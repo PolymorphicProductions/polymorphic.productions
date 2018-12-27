@@ -1,11 +1,11 @@
-defmodule PolymorphicProductionsWeb.PixController do
+defmodule PolymorphicProductionsWeb.PicController do
   use PolymorphicProductionsWeb, :controller
 
   import PolymorphicProductionsWeb.Authenticate
   plug(:authentication_check when action in [:new, :create])
 
   alias PolymorphicProductions.Social
-  alias PolymorphicProductions.Social.{Pix, Comment}
+  alias PolymorphicProductions.Social.{Pic, Comment}
   alias PolymorphicProductions.Repo
 
   def action(conn, _) do
@@ -18,19 +18,19 @@ defmodule PolymorphicProductionsWeb.PixController do
   end
 
   def new(conn, _params, %{current_user: current_user}) do
-    with :ok <- Bodyguard.permit(Social, :create_pix, current_user, nil),
-         changeset = Social.change_pix(%Pix{}) do
+    with :ok <- Bodyguard.permit(Social, :create_pic, current_user, nil),
+         changeset = Social.change_pic(%Pic{}) do
       render(conn, "new.html", changeset: changeset)
     end
   end
 
-  def create(conn, %{"pix" => pix_params}, %{current_user: current_user}) do
+  def create(conn, %{"pic" => pic_params}, %{current_user: current_user}) do
     with :ok <- Bodyguard.permit(Social, :create, current_user, nil) do
-      case Social.create_pix(pix_params) do
-        {:ok, pix} ->
+      case Social.create_pic(pic_params) do
+        {:ok, pic} ->
           conn
-          |> put_flash(:info, "Pix created successfully.")
-          |> redirect(to: Routes.pix_path(conn, :show, pix))
+          |> put_flash(:info, "Pic created successfully.")
+          |> redirect(to: Routes.pic_path(conn, :show, pic))
 
         {:error, %Ecto.Changeset{} = changeset} ->
           render(conn, "new.html", changeset: changeset)
@@ -41,48 +41,48 @@ defmodule PolymorphicProductionsWeb.PixController do
   def show(conn, %{"id" => id}, _) do
     changeset = Social.change_comment(%Comment{})
 
-    pix =
-      Social.get_pix!(id,
+    pic =
+      Social.get_pic!(id,
         preload: [
           comments: {Comment |> Repo.approved() |> Repo.order_by_oldest(), :user}
         ]
       )
 
-    render(conn, "show.html", pix: pix, changeset: changeset)
+    render(conn, "show.html", pic: pic, changeset: changeset)
   end
 
   def edit(conn, %{"id" => id}, %{current_user: current_user}) do
     with :ok <- Bodyguard.permit(Social, :edit, current_user, nil) do
-      pix = Social.get_pix!(id)
-      changeset = Social.change_pix(pix)
-      render(conn, "edit.html", pix: pix, changeset: changeset)
+      pic = Social.get_pic!(id)
+      changeset = Social.change_pic(pic)
+      render(conn, "edit.html", pic: pic, changeset: changeset)
     end
   end
 
-  def update(conn, %{"id" => id, "pix" => pix_params}, %{current_user: current_user}) do
+  def update(conn, %{"id" => id, "pic" => pic_params}, %{current_user: current_user}) do
     with :ok <- Bodyguard.permit(Social, :update, current_user, nil) do
-      pix = Social.get_pix!(id)
+      pic = Social.get_pic!(id)
 
-      case Social.update_pix(pix, pix_params) do
-        {:ok, pix} ->
+      case Social.update_pic(pic, pic_params) do
+        {:ok, pic} ->
           conn
-          |> put_flash(:info, "Pix updated successfully.")
-          |> redirect(to: Routes.pix_path(conn, :show, pix))
+          |> put_flash(:info, "Pic updated successfully.")
+          |> redirect(to: Routes.pic_path(conn, :show, pic))
 
         {:error, %Ecto.Changeset{} = changeset} ->
-          render(conn, "edit.html", pix: pix, changeset: changeset)
+          render(conn, "edit.html", pic: pic, changeset: changeset)
       end
     end
   end
 
   def delete(conn, %{"id" => id}, %{current_user: current_user}) do
     with :ok <- Bodyguard.permit(Social, :delete, current_user, nil) do
-      pix = Social.get_pix!(id)
-      {:ok, _pix} = Social.delete_pix(pix)
+      pic = Social.get_pic!(id)
+      {:ok, _pic} = Social.delete_pic(pic)
 
       conn
-      |> put_flash(:info, "Pix deleted successfully.")
-      |> redirect(to: Routes.pix_path(conn, :index))
+      |> put_flash(:info, "Pic deleted successfully.")
+      |> redirect(to: Routes.pic_path(conn, :index))
     end
   end
 end

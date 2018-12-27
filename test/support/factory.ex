@@ -19,11 +19,11 @@ defmodule PolymorphicProductions.Factory do
     }
   end
 
-  def pix_factory do
-    %PolymorphicProductions.Social.Pix{
+  def pic_factory do
+    %PolymorphicProductions.Social.Pic{
       asset: "http://placehold.jp/150x150.png",
       asset_preview: "http://placehold.jp/150x150.png",
-      description: "A street photo of ..."
+      description: "A street photo of #PDX #OR"
     }
   end
 

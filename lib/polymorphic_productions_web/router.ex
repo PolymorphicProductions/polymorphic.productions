@@ -25,9 +25,9 @@ defmodule PolymorphicProductionsWeb.Router do
   scope "/", PolymorphicProductionsWeb do
     pipe_through(:browser)
 
-    resources("/snapshots", PixController)
+    resources("/snapshots", PicController)
 
-    resources "/snapshots", PixController, only: [] do
+    resources "/snapshots", PicController, only: [] do
       resources("/comments", CommentController, only: [:show, :create, :delete, :update])
     end
 

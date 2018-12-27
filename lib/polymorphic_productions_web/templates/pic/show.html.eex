@@ -2,37 +2,37 @@
   <div class="container">
     <div class="row justify-content-md-center">
       <div class="col-lg-10">
-        <%= link (img_tag @pix.asset_preview), to: Routes.pix_path(@conn, :show, @pix) %>
+        <%= link (img_tag @pic.asset_preview), to: Routes.pic_path(@conn, :show, @pic) %>
       </div>
     </div>
     <div class="row justify-content-md-center">
       <div class="col-lg-3">
 
         <div class="margin-bottom-20">
-          <span><%= format_date @pix.inserted_at %></span>
+          <span><%= format_date @pic.inserted_at %></span>
         </div>
 
         <%= if @current_user && @current_user.admin do %>
         <div>
-          <%= link "Edit", to: Routes.pix_path(@conn, :edit, @pix) %>
-          <%= link "Delete", to: Routes.pix_path(@conn, :delete, @pix), method: :delete, data: [confirm: "Are you sure?"] %>  
+          <%= link "Edit", to: Routes.pic_path(@conn, :edit, @pic) %>
+          <%= link "Delete", to: Routes.pic_path(@conn, :delete, @pic), method: :delete, data: [confirm: "Are you sure?"] %>  
         </div>
         <% end %>
 
       </div>
       <div class="col-lg-7">
-        <%= @pix.description %>
+        <%= @pic.description %>
       </div>
     </div>
 
-    <%= unless Enum.empty?(@pix.comments) do %>
+    <%= unless Enum.empty?(@pic.comments) do %>
     <!-- Comments section -->
     <div class="section border-top">
       <div class="container">
         <div class="row">
           <div class="col-12 col-sm-10 offset-sm-1 col-md-10">
             <h4 class="margin-bottom-50 text-center">Comments</h4>
-            <%= for comment <- @pix.comments do %>
+            <%= for comment <- @pic.comments do %>
             <!-- Comment box -->
             <div class="comment-box">
               <div class="comment-user-avatar">
@@ -59,7 +59,7 @@
             <%= if @current_user do %>
             <h4 class="margin-bottom-50 text-center">Write a Comment</h4>
             <div class="text-right">
-                <%= form_for @changeset, Routes.pix_comment_path(@conn, :create, @pix), fn f -> %>
+                <%= form_for @changeset, Routes.pic_comment_path(@conn, :create, @pic), fn f -> %>
                 <%= if @changeset.action do %>
                   <div class="alert alert-danger">
                     <p>Oops, something went wrong! Please check the errors below.</p>
@@ -72,7 +72,7 @@
             </div>
             <% else %>
             <h4 class="margin-bottom-50 text-center">                    
-              <%= link "Sign in to write a comment", to: Routes.session_path(@conn, :new, request_path: Routes.pix_path(@conn, :show, @pix)), class: "btn btn-secondary" %>
+              <%= link "Sign in to write a comment", to: Routes.session_path(@conn, :new, request_path: Routes.pic_path(@conn, :show, @pic)), class: "btn btn-secondary" %>
             </h4>
             <% end %>
           </div>
