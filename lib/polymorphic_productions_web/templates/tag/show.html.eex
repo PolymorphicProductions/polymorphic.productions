@@ -1,6 +1,7 @@
+
 <div class="section">
   <div class="container gallery" id="snapshots">
-    <%= for pic <- @pics do %>
+    <%= for pic <- @tag.pics do %>
     <div class="row justify-content-md-center">
       <div class="col-lg-10">
         <%= link (img_tag pic.asset_preview, class: "pic"), to: Routes.pic_path(@conn, :show, pic), class: "pic_link", data: [ width: (pic.asset_preview_width || "1024"),  height: (pic.asset_preview_height || "683"), image: pic.asset_preview ] %>

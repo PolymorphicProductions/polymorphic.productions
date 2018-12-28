@@ -35,15 +35,16 @@ defmodule PolymorphicProductions.MixProject do
   # Type `mix help deps` for examples and options.
   defp deps do
     [
-      {:phoenix, github: "phoenixframework/phoenix", override: true},
-      {:phoenix_pubsub, "~> 1.0"},
-      {:phoenix_ecto, ">= 3.2.0 and < 3.5.0"},
-      {:plug_cowboy, "~> 2.0"},
+      {:phoenix, "~> 1.4.0"},
+      {:phoenix_pubsub, "~> 1.1"},
+      {:phoenix_ecto, "~> 4.0"},
+      {:ecto_sql, "~> 3.0"},
       {:postgrex, ">= 0.0.0"},
       {:phoenix_html, "~> 2.11"},
-      {:phoenix_live_reload, "~> 1.0", only: :dev},
+      {:phoenix_live_reload, "~> 1.2", only: :dev},
       {:gettext, "~> 0.11"},
       {:jason, "~> 1.0"},
+      {:plug_cowboy, "~> 2.0"},
       {:phauxth, "~> 2.0.0"},
       {:bodyguard, "~> 2.2"},
       {:bcrypt_elixir, "~> 1.0"},
@@ -59,7 +60,7 @@ defmodule PolymorphicProductions.MixProject do
       {:uuid, "~> 1.1"},
       {:timex, "~> 3.1"},
       {:sentry, "~> 6.4"},
-      {:kerosene, "~> 0.8.1"},
+      {:kerosene, github: "PolymorphicProductions/kerosene"},
       {:social_parser, "~> 2.0"},
       {:excoveralls, "~> 0.10.2"},
       {:ex_machina, "~> 2.2"}

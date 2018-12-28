@@ -30,4 +30,9 @@ defmodule PolymorphicProductionsWeb.PicView do
 
     relative_str
   end
+
+  def parse_tags(content) do
+    content
+    |> String.replace(~r/#(\w*)/, "<a href='/snapshots/tag/\\1'>#\\1</a>")
+  end
 end

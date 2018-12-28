@@ -10,6 +10,7 @@ defmodule PolymorphicProductions.Social do
 
   alias PolymorphicProductions.Social.Pic
   alias PolymorphicProductions.Social.Comment
+  alias PolymorphicProductions.Social.Tag
 
   @doc """
   Returns the list of pics.
@@ -209,5 +210,42 @@ defmodule PolymorphicProductions.Social do
   """
   def change_comment(%Comment{} = comment) do
     Comment.changeset(comment, %{})
+  end
+
+  @doc """
+  Gets a single tag and all of its pics.
+
+  Raises `Ecto.NoResultsError` if the Tag does not exist.
+
+  ## Examples
+
+      iex> get_tag_by_slug!(foobar)
+      %Tag{ pics: [...] }
+
+      iex> get_comment!(badtag)
+      ** (Ecto.NoResultsError)
+
+  """
+  def get_tag!(tag, params \\ %{}) do
+    down_tag = String.downcase(tag)
+
+    total_count =
+      from(t in "tags",
+        join: pt in "pic_tags",
+        on: pt.tag_id == t.id,
+        where: t.name == ^down_tag,
+        select: count()
+      )
+      |> Repo.one()
+
+    {pics_query, k} =
+      from(p in Pic, order_by: p.inserted_at)
+      |> Repo.paginate(params, total_count: total_count, lazy: true)
+
+    tag =
+      from(t in Tag, where: t.name == ^down_tag, preload: [pics: ^pics_query])
+      |> Repo.one!()
+
+    {tag, k}
   end
 end
