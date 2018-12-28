@@ -239,7 +239,7 @@ defmodule PolymorphicProductions.Social do
       |> Repo.one()
 
     {pics_query, k} =
-      from(p in Pic, order_by: p.inserted_at)
+      from(p in Pic, order_by: [desc: :inserted_at])
       |> Repo.paginate(params, total_count: total_count, lazy: true)
 
     tag =
