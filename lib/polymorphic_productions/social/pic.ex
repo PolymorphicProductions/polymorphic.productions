@@ -101,21 +101,11 @@ defmodule PolymorphicProductions.Social.Pic do
 
   defp upload_attachment(changeset), do: changeset
 
-  defp put_tags_list(
-         %Ecto.Changeset{valid?: true, changes: %{description: description}} = changeset
-       ) do
-    case SocialParser.extract(description, [:hashtags]) do
-      %{hashtags: hashs} ->
-        tag_list =
-          hashs
-          |> Enum.map(fn key -> String.replace(key, "#", "") end)
+  defp put_tags_list(%{valid?: true, changes: %{description: description}} = changeset) do
+    tag_list = Regex.scan(~r/#(\w*)/, description) |> Enum.map(fn [_, tag] -> tag end)
 
-        changeset
-        |> put_change(:tag_list, tag_list)
-
-      _ ->
-        changeset
-    end
+    changeset
+    |> put_change(:tag_list, tag_list)
   end
 
   defp put_tags_list(changeset), do: changeset
