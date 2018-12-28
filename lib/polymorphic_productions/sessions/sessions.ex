@@ -14,14 +14,14 @@ defmodule PolymorphicProductions.Sessions do
   """
   def list_sessions(%User{} = user) do
     sessions = Repo.preload(user, :sessions).sessions
-    Enum.filter(sessions, &(&1.expires_at > DateTime.utc_now()))
+    Enum.filter(sessions, &(&1.expires_at > DateTime.utc_now() |> DateTime.truncate(:second)))
   end
 
   @doc """
   Gets a single user.
   """
   def get_session(id) do
-    now = DateTime.utc_now()
+    now = DateTime.utc_now() |> DateTime.truncate(:second)
     Repo.get(from(s in Session, where: s.expires_at > ^now), id)
   end
 

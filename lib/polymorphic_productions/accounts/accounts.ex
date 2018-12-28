@@ -86,7 +86,7 @@ defmodule PolymorphicProductions.Accounts do
     case get_by(attrs) do
       %PolymorphicProductions.Accounts.User{} = user ->
         user
-        |> User.password_reset_changeset(DateTime.utc_now())
+        |> User.password_reset_changeset(DateTime.utc_now() |> DateTime.truncate(:second))
         |> Repo.update()
 
       _ ->

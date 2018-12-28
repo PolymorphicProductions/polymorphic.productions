@@ -35,11 +35,7 @@ defmodule PolymorphicProductions.SocialTest do
       assert pic.asset_preview ==
                "https://d1sv288qkuffrb.cloudfront.net/polymorphic-productions/photos/preview/user_avatar.jpg"
 
-      assert(
-        pic.description ==
-          "A street photo of #PDX #OR"
-          |> String.replace(~r/#(\S*)/, "<a href='/snapshots/tags/\\1'>#\\1</a>")
-      )
+      assert(pic.description == "A street photo of #PDX #OR")
     end
 
     test "create_pic/1 with invalid data returns error changeset" do

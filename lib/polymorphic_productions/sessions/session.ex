@@ -30,6 +30,7 @@ defmodule PolymorphicProductions.Sessions.Session do
 
   defp exp_datetime(max_age) do
     DateTime.utc_now()
+    |> DateTime.truncate(:second)
     |> DateTime.to_naive()
     |> NaiveDateTime.add(max_age)
     |> DateTime.from_naive("Etc/UTC")
