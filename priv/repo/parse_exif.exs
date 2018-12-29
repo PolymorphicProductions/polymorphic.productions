@@ -19,6 +19,7 @@ defmodule Processor do
   end
 
   def write_row({{:ok, exif}, pic}) do
+    # Uses ecto 
     {:ok, _pic} = Social.update_pic(pic, %{meta: exif})
   end
 
