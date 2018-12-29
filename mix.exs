@@ -22,7 +22,7 @@ defmodule PolymorphicProductions.MixProject do
   def application do
     [
       mod: {PolymorphicProductions.Application, []},
-      extra_applications: [:ex_machina, :sentry, :logger, :runtime_tools]
+      extra_applications: [:inets, :ex_machina, :sentry, :logger, :runtime_tools]
     ]
   end
 
