@@ -63,7 +63,8 @@ defmodule PolymorphicProductions.MixProject do
       {:kerosene, github: "PolymorphicProductions/kerosene"},
       {:social_parser, "~> 2.0"},
       {:excoveralls, "~> 0.10.2"},
-      {:ex_machina, "~> 2.2"}
+      {:ex_machina, "~> 2.2"},
+      {:exexif, "~> 0.0.5"}
     ]
   end
 

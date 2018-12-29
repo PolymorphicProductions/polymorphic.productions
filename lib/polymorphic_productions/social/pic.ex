@@ -16,6 +16,7 @@ defmodule PolymorphicProductions.Social.Pic do
     field(:asset_preview, :string)
     field(:asset_preview_width, :integer)
     field(:asset_preview_height, :integer)
+    field(:meta, :map)
 
     field(:description, :string)
     field(:photo, :any, virtual: true)
@@ -29,14 +30,13 @@ defmodule PolymorphicProductions.Social.Pic do
   @doc false
   def changeset(pic, attrs) do
     pic
-    |> cast(attrs, [:description, :photo])
+    |> cast(attrs, [:meta, :description, :photo])
     |> validate_attachment()
     |> upload_attachment()
     |> validate_required([:description, :asset])
     |> put_tags_list()
     |> parse_tags_assoc()
-
-    # |> parse_description()
+    |> put_meta()
   end
 
   defp validate_attachment(
@@ -129,4 +129,24 @@ defmodule PolymorphicProductions.Social.Pic do
   # end
 
   # defp parse_description(changeset), do: changeset
+
+  defp put_meta(
+         %Ecto.Changeset{
+           changes: %{photo: %Plug.Upload{filename: filename, path: image_path}}
+         } = changeset
+       ) do
+    {:ok, buffer} = File.open(image_path, &IO.binread(&1, 1000))
+
+    case Exexif.exif_from_jpeg_buffer(buffer) do
+      {:ok, exif} ->
+        changeset |> put_change(:meta, exif)
+
+      _ ->
+        changeset
+    end
+  end
+
+  defp put_meta(cs) do
+    cs
+  end
 end

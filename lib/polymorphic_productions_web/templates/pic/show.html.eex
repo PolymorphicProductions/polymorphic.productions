@@ -2,7 +2,7 @@
   <div class="container">
     <div class="row justify-content-md-center">
       <div class="col-lg-10">
-        <%= link (img_tag @pic.asset_preview), to: Routes.pic_path(@conn, :show, @pic) %>
+        <%= link (img_tag @pic.asset_preview <> "?asdf=asdf", id: "snapshot"), to: Routes.pic_path(@conn, :show, @pic) %>
       </div>
     </div>
     <div class="row justify-content-md-center">
