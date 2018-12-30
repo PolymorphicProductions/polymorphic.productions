@@ -135,13 +135,18 @@ defmodule PolymorphicProductions.Social.Pic do
            changes: %{photo: %Plug.Upload{filename: filename, path: image_path}}
          } = changeset
        ) do
-    {:ok, buffer} = File.open(image_path, &IO.binread(&1, 1000))
+    try do
+      {:ok, buffer} = File.open(image_path, &IO.binread(&1, 1000))
 
-    case Exexif.exif_from_jpeg_buffer(buffer) do
-      {:ok, exif} ->
-        changeset |> put_change(:meta, exif)
+      case Exexif.exif_from_jpeg_buffer(buffer) do
+        {:ok, exif} ->
+          changeset |> put_change(:meta, exif)
 
-      _ ->
+        _ ->
+          changeset
+      end
+    rescue
+      e ->
         changeset
     end
   end
