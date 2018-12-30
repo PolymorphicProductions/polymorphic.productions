@@ -1,9 +1,8 @@
-import $ from "jquery";
-// import { jarallax, jarallaxElement, jarallaxVideo } from "jarallax";
+import "owl.carousel/dist/assets/owl.carousel.css";
+import "owl.carousel";
 
-window.jQuery = $;
-window.$ = $;
-
+import "webpack-jquery-ui";
+import "webpack-jquery-ui/css";
 /*===============================================
     Preloaders
   ===============================================*/
@@ -443,7 +442,6 @@ $(window).on("scroll", function() {
   }
 });
 
-//
 // Animate button //
 //
 scrollTopBtn.on("click", function() {
@@ -474,83 +472,83 @@ scrollTopBtn.on("click", function() {
 // /*===============================================
 //     Owl Carousel Sliders
 //   ===============================================*/
-// $(".owl-carousel").each(function() {
-//   var $carousel = $(this);
+$(".owl-carousel").each(function() {
+  var $carousel = $(this);
 
-//   var $defaults = {
-//     rewind: true,
-//     navText: [
-//       "<i class='ti-angle-left'></i>",
-//       "<i class='ti-angle-right'></i>"
-//     ],
-//     autoHeight: true,
-//     autoplayTimeout: 4000,
-//     autoplayHoverPause: true
-//   };
+  var $defaults = {
+    rewind: true,
+    navText: [
+      "<i class='ti-angle-left'></i>",
+      "<i class='ti-angle-right'></i>"
+    ],
+    autoHeight: true,
+    autoplayTimeout: 4000,
+    autoplayHoverPause: true
+  };
 
-//   var $options = {
-//     items: $carousel.data("owl-items"),
-//     margin: $carousel.data("owl-margin"),
-//     loop: $carousel.data("owl-loop"),
-//     center: $carousel.data("owl-center"),
-//     mouseDrag: $carousel.data("owl-mouseDrag"),
-//     touchDrag: $carousel.data("owl-touchDrag"),
-//     pullDrag: $carousel.data("owl-pullDrag"),
-//     freeDrag: $carousel.data("owl-freeDrag"),
-//     stagePadding: $carousel.data("owl-stagePadding"),
-//     autoWidth: $carousel.data("owl-autoWidth"),
-//     startPosition: $carousel.data("owl-startPosition"),
-//     URLhashListener: $carousel.data("owl-URLhashListener"),
-//     nav: $carousel.data("owl-nav"),
-//     rewind: $carousel.data("owl-rewind"),
-//     navElement: $carousel.data("owl-navElement"),
-//     slideBy: $carousel.data("owl-slideBy"),
-//     dots: $carousel.data("owl-dots"),
-//     dotsEach: $carousel.data("owl-dotsEach"),
-//     autoplay: $carousel.data("owl-autoplay"),
-//     autoplayTimeout: $carousel.data("owl-autoplayTimeout"),
-//     smartSpeed: $carousel.data("owl-smartSpeed"),
-//     fluidSpeed: $carousel.data("owl-fluidSpeed"),
-//     autoplaySpeed: $carousel.data("owl-autoplaySpeed"),
-//     navSpeed: $carousel.data("owl-navSpeed"),
-//     dotsSpeed: $carousel.data("owl-dotsSpeed"),
-//     dragEndSpeed: $carousel.data("owl-dragEndSpeed"),
-//     callback: $carousel.data("owl-callback"),
-//     video: $carousel.data("owl-video"),
-//     videoHeight: $carousel.data("owl-videoHeight"),
-//     videoWidth: $carousel.data("owl-videoWidth"),
-//     itemElement: $carousel.data("owl-itemElement"),
-//     stageElement: $carousel.data("owl-stageElement"),
-//     navContainer: $carousel.data("owl-navContainer"),
-//     dotsContainer: $carousel.data("owl-dotsContainer")
-//   };
+  var $options = {
+    items: $carousel.data("owl-items"),
+    margin: $carousel.data("owl-margin"),
+    loop: $carousel.data("owl-loop"),
+    center: $carousel.data("owl-center"),
+    mouseDrag: $carousel.data("owl-mouseDrag"),
+    touchDrag: $carousel.data("owl-touchDrag"),
+    pullDrag: $carousel.data("owl-pullDrag"),
+    freeDrag: $carousel.data("owl-freeDrag"),
+    stagePadding: $carousel.data("owl-stagePadding"),
+    autoWidth: $carousel.data("owl-autoWidth"),
+    startPosition: $carousel.data("owl-startPosition"),
+    URLhashListener: $carousel.data("owl-URLhashListener"),
+    nav: $carousel.data("owl-nav"),
+    rewind: $carousel.data("owl-rewind"),
+    navElement: $carousel.data("owl-navElement"),
+    slideBy: $carousel.data("owl-slideBy"),
+    dots: $carousel.data("owl-dots"),
+    dotsEach: $carousel.data("owl-dotsEach"),
+    autoplay: $carousel.data("owl-autoplay"),
+    autoplayTimeout: $carousel.data("owl-autoplayTimeout"),
+    smartSpeed: $carousel.data("owl-smartSpeed"),
+    fluidSpeed: $carousel.data("owl-fluidSpeed"),
+    autoplaySpeed: $carousel.data("owl-autoplaySpeed"),
+    navSpeed: $carousel.data("owl-navSpeed"),
+    dotsSpeed: $carousel.data("owl-dotsSpeed"),
+    dragEndSpeed: $carousel.data("owl-dragEndSpeed"),
+    callback: $carousel.data("owl-callback"),
+    video: $carousel.data("owl-video"),
+    videoHeight: $carousel.data("owl-videoHeight"),
+    videoWidth: $carousel.data("owl-videoWidth"),
+    itemElement: $carousel.data("owl-itemElement"),
+    stageElement: $carousel.data("owl-stageElement"),
+    navContainer: $carousel.data("owl-navContainer"),
+    dotsContainer: $carousel.data("owl-dotsContainer")
+  };
 
-//   var $responsive = {
-//     responsive: {
-//       0: {
-//         items: $carousel.data("owl-xs")
-//       },
-//       // breakpoint from 576px+
-//       576: {
-//         items: $carousel.data("owl-sm")
-//       },
-//       // breakpoint from 768px+
-//       768: {
-//         items: $carousel.data("owl-md")
-//       },
-//       // breakpoint from 992px+
-//       992: {
-//         items: $carousel.data("owl-lg")
-//       },
-//       // breakpoint from 1200px+
-//       1200: {
-//         items: $carousel.data("owl-xl")
-//       }
-//     }
-//   };
+  var $responsive = {
+    responsive: {
+      0: {
+        items: $carousel.data("owl-xs")
+      },
+      // breakpoint from 576px+
+      576: {
+        items: $carousel.data("owl-sm")
+      },
+      // breakpoint from 768px+
+      768: {
+        items: $carousel.data("owl-md")
+      },
+      // breakpoint from 992px+
+      992: {
+        items: $carousel.data("owl-lg")
+      },
+      // breakpoint from 1200px+
+      1200: {
+        items: $carousel.data("owl-xl")
+      }
+    }
+  };
 
-//   $carousel.owlCarousel($.extend($defaults, $options, $responsive));
-// });
+  $carousel.owlCarousel($.extend($defaults, $options, $responsive));
+});
 
 // //
 // // Home Portfolio Carousel navigation //
@@ -663,12 +661,15 @@ scrollTopBtn.on("click", function() {
 /*===============================================
     Parallax
   ===============================================*/
-// $(".parallax").jarallax({
-//   speed: 0.2
-// });
+import { jarallax, jarallaxElement, jarallaxVideo } from "jarallax";
 
-// jarallax(document.querySelectorAll('.parallax'), {
-//   speed: 0.2
+jarallax(document.querySelectorAll(".parallax"), {
+  speed: 0.4
+});
+
+// Does not work :(
+// jarallaxVideo(document.querySelectorAll(".jarallax"), {
+//   videoSrc: "https://www.youtube.com/watch?v=ab0TSkLe-E0"
 // });
 
 /*===============================================

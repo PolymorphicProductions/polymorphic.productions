@@ -4,6 +4,7 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 const WebpackMd5Hash = require("webpack-md5-hash");
 const CleanWebpackPlugin = require("clean-webpack-plugin");
+const webpack = require("webpack");
 
 module.exports = (env, options) => ({
   entry: {
@@ -53,13 +54,23 @@ module.exports = (env, options) => ({
         use: {
           loader: "file-loader",
           options: {
-            name: "fonts/[name].[ext]"
+            name(file) {
+              return "[name]_[hash].[ext]";
+            },
+            outputPath: "../fonts/"
           }
         }
       }
     ]
   },
   plugins: [
+    new webpack.ProvidePlugin({
+      $: "jquery",
+      jQuery: "jquery",
+      jquery: "jquery",
+      "window.jQuery": "jquery",
+      "window.$": "jquery"
+    }),
     new CleanWebpackPlugin("../priv/static", {
       verbose: true,
       allowExternal: true

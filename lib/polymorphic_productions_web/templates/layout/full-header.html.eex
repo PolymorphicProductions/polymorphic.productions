@@ -28,6 +28,10 @@
 
 <body data-preloader="1">
 
+  <div id="scrolltotop" class="scrolltotop">
+    <a class="button-circle button-circle-sm button-circle-dark" href="#"><i class="icon icon-arrow-up"></i></a>
+  </div>
+
   <%= render "header.html", conn: @conn, current_user: @current_user, view_module: @view_module, view_template: @view_template  %>
   
   <%= render @view_module, @view_template, assigns %>

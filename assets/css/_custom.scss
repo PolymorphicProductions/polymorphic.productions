@@ -6,6 +6,14 @@
 //   max-height: 609px;
 // }
 
+body {
+  scroll-behavior: smooth;
+}
+
+.jarallax {
+  min-height: 600px;
+}
+
 // Overrides
 
 .display-4 {

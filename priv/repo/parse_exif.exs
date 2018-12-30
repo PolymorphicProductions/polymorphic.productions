@@ -9,18 +9,30 @@ alias PolymorphicProductions.Repo
 
 defmodule Processor do
   def fetch_image(%{asset: asset} = row) do
-    charlist = asset |> URI.encode() |> to_charlist
+    charlist = asset |> URI.encode() |> to_charlist |> IO.inspect()
 
     {:ok, resp} =
-      :httpc.request(:get, {charlist, [{'Range', 'bytes=0-4000'}]}, [], body_format: :binary)
+      :httpc.request(:get, {charlist, [{'Range', 'bytes=0-6000'}]}, [], body_format: :binary)
 
     {_status, _headers, body} = resp
-    {Exexif.exif_from_jpeg_buffer(body), row}
+
+    {body, row}
   end
 
-  def write_row({{:ok, exif}, pic}) do
+  def write_row({body, row}) do
     # Uses ecto 
-    {:ok, _pic} = Social.update_pic(pic, %{meta: exif})
+    try do
+      case Exexif.exif_from_jpeg_buffer(body) do
+        {:ok, exif} ->
+          {:ok, _pic} = PolymorphicProductions.Social.update_pic(row, %{meta: exif})
+
+        _ ->
+          nil
+      end
+    rescue
+      e ->
+        nil
+    end
   end
 
   def write_row(_) do

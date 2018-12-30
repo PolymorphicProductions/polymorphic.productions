@@ -17,7 +17,6 @@ import "bootstrap";
 // import "imagesloaded";
 //import "isotope.pkgd";
 // import "magnific-popup";
-//import "owl-carousel";
 
 // Import local files
 //

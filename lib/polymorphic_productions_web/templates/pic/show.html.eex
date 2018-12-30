@@ -9,7 +9,7 @@
       <div class="col-lg-3">
 
         <div class="margin-bottom-20">
-          <span><%= format_date @pic.inserted_at %></span>
+          <i class="far fa-comment"></i> <%= @pic.comments |> Enum.count %> <i class="far fa-clock"></i><span> <%= format_date @pic.inserted_at %></span><br />
         </div>
 
         <%= if @current_user && @current_user.admin do %>
