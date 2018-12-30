@@ -1,5 +1,5 @@
 <!-- Home section -->
-<div class="section-fullscreen parallax"  style="background-image: url(<%= Routes.static_path(@conn, "/images/home.jpg") %>)">
+<div class="section-fullscreen bg-image parallax"  style="background-image: url(<%= Routes.static_path(@conn, "/images/home.jpg") %>)">
   <div class="bg-black-05">
     <div class="container">
       <div class="position-middle">
