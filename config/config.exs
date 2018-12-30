@@ -38,7 +38,6 @@ config :logger, :console,
 
 # Use Jason for JSON parsing in Phoenix and Ecto
 config :phoenix, :json_library, Jason
-config :ecto, :json_library, Jason
 
 config :ex_aws,
   s3: [

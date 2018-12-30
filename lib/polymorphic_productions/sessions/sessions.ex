@@ -43,10 +43,8 @@ defmodule PolymorphicProductions.Sessions do
   Deletes all a user's sessions.
   """
   def delete_user_sessions(%User{} = user) do
-    from(
-      s in Session,
-      where: s.user_id == ^user.id
-    )
+    user
+    |> get_session_for_user
     |> Repo.delete_all()
   end
 
@@ -55,5 +53,9 @@ defmodule PolymorphicProductions.Sessions do
   """
   def change_session(%Session{} = session) do
     Session.changeset(session, %{})
+  end
+
+  defp get_session_for_user(%User{id: id} = user) do
+    from(s in Session, where: s.user_id == ^id)
   end
 end

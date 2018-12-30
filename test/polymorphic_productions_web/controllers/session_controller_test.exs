@@ -58,7 +58,7 @@ defmodule PolymorphicProductionsWeb.SessionControllerTest do
       assert redirected_to(conn) == Routes.session_path(conn, :new)
     end
 
-    test "redirects to previously requested resource", %{conn: conn, user: user} do
+    test "redirects to previously requested resource", %{conn: conn} do
       conn = get(conn, Routes.user_path(conn, :show))
       assert redirected_to(conn) == Routes.session_path(conn, :new)
       conn = post(conn, Routes.session_path(conn, :create), session: @create_attrs)

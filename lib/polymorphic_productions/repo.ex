@@ -1,4 +1,6 @@
 defmodule PolymorphicProductions.Repo do
+  alias PolymorphicProductions.Sessions.Session
+
   use Ecto.Repo,
     otp_app: :polymorphic_productions,
     adapter: Ecto.Adapters.Postgres

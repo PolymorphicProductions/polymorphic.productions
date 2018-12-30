@@ -38,13 +38,15 @@ defmodule PolymorphicProductionsWeb.AuthCase do
   def gen_key(email), do: Token.sign(%{"email" => email})
 
   def add_user_confirmed(email, name) do
-    add_user(email, name)
+    email
+    |> add_user(name)
     |> change(%{confirmed_at: now()})
     |> Repo.update!()
   end
 
   def add_reset_user(email, name) do
-    add_user(email, name)
+    email
+    |> add_user(name)
     |> change(%{confirmed_at: now()})
     |> change(%{reset_sent_at: now()})
     |> Repo.update!()

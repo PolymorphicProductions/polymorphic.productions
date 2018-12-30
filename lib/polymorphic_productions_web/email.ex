@@ -53,8 +53,9 @@ defmodule PolymorphicProductionsWeb.Email do
   @doc """
   An email with a confirmation link in it.
   """
-  def confirm_request(conn, user, key) do
-    prep_mail(user.email)
+  def confirm_request(conn, %{email: email} = user, key) do
+    email
+    |> prep_mail()
     |> subject("Confirm your account | Polymorphic Productions")
     # |> text_body("Confirm your email here #{Routes.confirm_path(conn, :index, key: key)}")
     |> put_html_layout({LayoutView, "email.html"})
@@ -66,7 +67,8 @@ defmodule PolymorphicProductionsWeb.Email do
   end
 
   def reset_request(conn, address, key) do
-    prep_mail(address)
+    address
+    |> prep_mail()
     |> subject("Reset your password")
     |> put_html_layout({LayoutView, "email.html"})
     |> text_body(
@@ -83,7 +85,8 @@ defmodule PolymorphicProductionsWeb.Email do
   An email acknowledging that the account has been successfully confirmed.
   """
   def confirm_success(address) do
-    prep_mail(address)
+    address
+    |> prep_mail()
     |> put_html_layout({LayoutView, "email.html"})
     |> subject("Confirmed account")
     |> text_body("Your account has been confirmed.")
@@ -95,7 +98,8 @@ defmodule PolymorphicProductionsWeb.Email do
   An email acknowledging that the password has been successfully reset.
   """
   def reset_success(address) do
-    prep_mail(address)
+    address
+    |> prep_mail()
     |> put_html_layout({LayoutView, "email.html"})
     |> subject("Password reset")
     |> text_body("Your password has been reset.")

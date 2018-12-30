@@ -69,10 +69,9 @@ defmodule PolymorphicProductions.Social.Tagging do
         # new_tag = %Snippets.Tag{name: name}
         new_tag = struct(model, name: name)
 
-        tag =
-          Enum.find(existing_tags, new_tag, fn existing_tag ->
-            existing_tag.name == name
-          end)
+        Enum.find(existing_tags, new_tag, fn existing_tag ->
+          existing_tag.name == name
+        end)
       end)
 
     tag_changeset = Enum.map(tags, &Ecto.Changeset.change/1)

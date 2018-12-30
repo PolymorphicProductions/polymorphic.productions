@@ -56,7 +56,7 @@ defmodule PolymorphicProductionsWeb.UserControllerTest do
   describe "authed user" do
     setup [:log_user_in, :create_rando_user]
 
-    test "renders form for editing current user", %{conn: conn, user: user} do
+    test "renders form for editing current user", %{conn: conn} do
       conn = get(conn, Routes.user_path(conn, :edit))
       assert html_response(conn, 200) =~ "Edit User"
     end

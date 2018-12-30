@@ -64,7 +64,8 @@ defmodule PolymorphicProductions.MixProject do
       {:social_parser, "~> 2.0"},
       {:excoveralls, "~> 0.10.2"},
       {:ex_machina, "~> 2.2"},
-      {:exexif, "~> 0.0.5"}
+      {:exexif, "~> 0.0.5"},
+      {:credo, "~> 1.0.0", only: [:dev, :test], runtime: false}
     ]
   end
 
@@ -78,7 +79,7 @@ defmodule PolymorphicProductions.MixProject do
     [
       "ecto.setup": ["ecto.create", "ecto.migrate", "run priv/repo/seeds.exs"],
       "ecto.reset": ["ecto.drop", "ecto.setup"],
-      test: ["ecto.create --quiet", "ecto.migrate", "test"]
+      test: ["ecto.create --quiet", "ecto.migrate", "coveralls", "credo --all"]
     ]
   end
 end

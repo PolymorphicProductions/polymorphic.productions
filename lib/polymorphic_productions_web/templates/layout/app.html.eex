@@ -38,8 +38,7 @@
     <div class="container">
       <div class="row justify-content-md-center">
         <div class="col-lg-12">
-          <%#= render PolymorphicProductionsWeb.LayoutView, "flash.html", conn: @conn #TODO: Finish flash partial %>
-
+          <%#= render PolymorphicProductionsWeb.LayoutView, "flash.html", conn: @conn # TODO: Finish flash partial %>
           <%= render @view_module, @view_template, assigns %>
         </div>
       </div>
@@ -49,9 +48,6 @@
   <%= render "footer.html", conn: @conn %>
 
   <script src="<%= Routes.static_path(@conn, "/js/app.js") %>"></script>
-  <script src="https://unpkg.com/jarallax@1.10/dist/jarallax.min.js"></script>
-  <script src="https://unpkg.com/jarallax@1.10/dist/jarallax-video.min.js"></script>
- 
 
 </body>
 </html>
