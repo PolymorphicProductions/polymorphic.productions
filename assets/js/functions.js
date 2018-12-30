@@ -661,11 +661,6 @@ $(".owl-carousel").each(function() {
 /*===============================================
     Parallax
   ===============================================*/
-import { jarallax, jarallaxElement, jarallaxVideo } from "jarallax";
-
-jarallax(document.querySelectorAll(".parallax"), {
-  speed: 0.4
-});
 
 // Does not work :(
 // jarallaxVideo(document.querySelectorAll(".jarallax"), {
