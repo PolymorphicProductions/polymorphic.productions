@@ -22,7 +22,7 @@ defmodule PolymorphicProductions.MixProject do
   def application do
     [
       mod: {PolymorphicProductions.Application, []},
-      extra_applications: [:inets, :ex_machina, :sentry, :logger, :runtime_tools]
+      extra_applications: [:sitemap, :inets, :ex_machina, :sentry, :logger, :runtime_tools]
     ]
   end
 
@@ -65,7 +65,8 @@ defmodule PolymorphicProductions.MixProject do
       {:excoveralls, "~> 0.10.2"},
       {:ex_machina, "~> 2.2"},
       {:exexif, "~> 0.0.5"},
-      {:credo, "~> 1.0.0", only: [:dev, :test], runtime: false}
+      {:credo, "~> 1.0.0", only: [:dev, :test], runtime: false},
+      {:sitemap, "~> 1.1"}
     ]
   end
 
