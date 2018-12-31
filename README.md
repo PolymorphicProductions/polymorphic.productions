@@ -1,5 +1,5 @@
 # Polymorphic Productions
-
+[![Maintainability](https://api.codeclimate.com/v1/badges/c8d65a2ee58ddc7e3882/maintainability)](https://codeclimate.com/github/PolymorphicProductions/polymorphic.productions/maintainability)
 [![Coverage Status](https://coveralls.io/repos/github/PolymorphicProductions/polymorphic.productions/badge.svg?branch=master)](https://coveralls.io/github/PolymorphicProductions/polymorphic.productions?branch=master) [![CircleCI](https://circleci.com/gh/PolymorphicProductions/polymorphic.productions.svg?style=svg)](https://circleci.com/gh/PolymorphicProductions/polymorphic.productions)
 
 This repo is the source file for [`https://polymorphic.productions`](https://polymorphic.productions)
