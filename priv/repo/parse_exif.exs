@@ -9,7 +9,7 @@ alias PolymorphicProductions.Repo
 
 defmodule Processor do
   def fetch_image(%{asset: asset} = row) do
-    charlist = asset |> URI.encode() |> to_charlist |> IO.inspect()
+    charlist = asset |> URI.encode() |> to_charlist
 
     {:ok, resp} =
       :httpc.request(:get, {charlist, [{'Range', 'bytes=0-6000'}]}, [], body_format: :binary)

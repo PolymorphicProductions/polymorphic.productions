@@ -46,75 +46,32 @@ defmodule PolymorphicProductionsWeb.UserControllerTest do
       conn = put(conn, Routes.user_path(conn, :update))
       assert redirected_to(conn) == Routes.session_path(conn, :new)
     end
-
-    # test "redirects guest to login when visiting User delete", %{conn: conn} do
-    #   conn = delete(conn, Routes.user_path(conn, :delete, 1))
-    #   assert redirected_to(conn) == Routes.session_path(conn, :new)
-    # end
   end
 
   describe "authed user" do
-    setup [:log_user_in, :create_rando_user]
+    setup [:log_user_in]
 
     test "renders form for editing current user", %{conn: conn} do
       conn = get(conn, Routes.user_path(conn, :edit))
       assert html_response(conn, 200) =~ "Edit User"
     end
 
-    @tag skip: "Does this even need testing now?"
-    test "does not renders form for editing different user", %{
-      conn: conn,
-      user: _user,
-      rando: rando
-    } do
-      conn = get(conn, Routes.user_path(conn, :edit, rando))
-      redirect_path = Routes.page_path(conn, :index)
-      assert redirect_path == redirected_to(conn, 302)
-
-      conn = get(recycle(conn), redirect_path)
-      assert html_response(conn, 200) =~ "You are not authorized to view this page"
+    test "updates current user when data is valid", %{conn: conn} do
+      conn = put(conn, Routes.user_path(conn, :update), %{"user" => %{name: "foobar"}})
+      assert Routes.user_path(conn, :show) == redirected_to(conn, 302)
+      conn = get(recycle(conn), Routes.user_path(conn, :show))
+      assert html_response(conn, 200) =~ "User Name: foobar"
     end
 
-    @tag skip: "TODO"
-    test "updates chosen user when data is valid", %{conn: _conn} do
+    test "does not update current user and renders errors when data is invalid", %{conn: conn} do
+      conn = put(conn, Routes.user_path(conn, :update), user: %{email: nil})
+      assert html_response(conn, 200) =~ "Edit User"
     end
 
-    @tag skip: "TODO"
-    test "does not update chosen user and renders errors when data is invalid", %{conn: _conn} do
-    end
-
-    @tag skip: "TODO"
-    test "show current user's page", %{conn: _conn} do
-    end
-
-    @tag skip: "TODO"
-    test "deletes current user", %{conn: _conn} do
-    end
-
-    @tag skip: "TODO"
-    test "cannot delete other user", %{conn: _conn} do
-    end
-  end
-
-  describe "authed admin" do
-    @tag skip: "TODO"
-    test "renders form for editing any user", %{conn: _conn} do
-    end
-
-    @tag skip: "TODO"
-    test "updates any user when data is valid", %{conn: _conn} do
-    end
-
-    @tag skip: "TODO"
-    test "does not update any user and renders errors when data is invalid", %{conn: _conn} do
-    end
-
-    @tag skip: "TODO"
-    test "show any user's page", %{conn: _conn} do
-    end
-
-    @tag skip: "TODO"
-    test "deletes any user", %{conn: _conn} do
+    test "show current user's page", %{conn: conn, user: user} do
+      conn = get(conn, Routes.user_path(conn, :show))
+      assert html_response(conn, 200) =~ "User Account Setting"
+      assert html_response(conn, 200) =~ user.name
     end
   end
 end
