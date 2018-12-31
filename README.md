@@ -15,6 +15,17 @@ To start your Phoenix server:
 - Install Node.js dependencies with `cd assets && yarn install`
 - Start Phoenix endpoint with `mix phx.server`
 
+Note: local development requires some secrets to run fully.
+```
+config :polymorphic_productions, PolymorphicProductionsWeb.Mailer,
+  api_key: "MAIL_GUN_KEY",
+  domain: "MAIL_GUN_DOMAIN"
+
+config :ex_aws,
+  access_key_id: "IMA key",
+  secret_access_key: "IMA Secret"
+```
+
 Now you can visit [`https://localhost:4001`](https://localhost:4001) from your browser.
 
 ## Deployments
