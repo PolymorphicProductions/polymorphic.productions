@@ -13,8 +13,8 @@ defmodule PolymorphicProductionsWeb.Endpoint do
   plug(Plug.Static,
     at: "/",
     from: :polymorphic_productions,
-    gzip: false,
-    only: ~w(css fonts images js favicon.ico robots.txt resume.pdf)
+    gzip: true,
+    only: ~w(css fonts images js favicon.ico robots.txt resume.pdf sitemaps)
   )
 
   # Code reloading can be explicitly enabled under the
