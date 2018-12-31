@@ -25,8 +25,8 @@ config :polymorphic_productions, PolymorphicProductionsWeb.Mailer,
   domain: "MAIL_GUN_DOMAIN"
 
 config :ex_aws,
-  access_key_id: "IMA key",
-  secret_access_key: "IMA Secret"
+  access_key_id: "IAM key",
+  secret_access_key: "IAM Secret"
 ```
 
 Now you can visit [`https://localhost:4001`](https://localhost:4001) from your browser.
