@@ -56,7 +56,7 @@ defmodule PolymorphicProductionsWeb.Admin.UserController do
 
       conn
       |> put_flash(:info, "User deleted successfully.")
-      |> redirect(to: Routes.session_path(conn, :new))
+      |> redirect(to: Routes.admin_user_path(conn, :index))
     end
   end
 end
