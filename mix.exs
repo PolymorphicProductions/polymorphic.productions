@@ -59,7 +59,7 @@ defmodule PolymorphicProductions.MixProject do
       {:sweet_xml, "~> 0.6"},
       {:uuid, "~> 1.1"},
       {:timex, "~> 3.1"},
-      {:sentry, "~> 6.4"},
+      {:sentry, "~> 7.0"},
       {:kerosene, github: "PolymorphicProductions/kerosene"},
       {:social_parser, "~> 2.0"},
       {:excoveralls, "~> 0.10.2"},
