@@ -4,7 +4,8 @@ defmodule PolymorphicProductionsWeb.Sitemap do
 
   use Sitemap,
     host: "http://#{Application.get_env(:polymorphic_productions, Endpoint)[:url][:host]}",
-    files_path: "priv/static/sitemaps/",
+    files_path:
+      "lib/polymorphic_productions-#{Application.spec(:polymorphic_productions, :vsn)}/priv/static/sitemaps/",
     public_path: "sitemaps/"
 
   def generate do
