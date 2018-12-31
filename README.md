@@ -18,10 +18,10 @@ To start your Phoenix server:
 Now you can visit [`https://localhost:4001`](https://localhost:4001) from your browser.
 
 ## Deployments
-- Build release with `edeliver build release [--revision=<git-revision>|--tag=<git-tag>] [--branch=<git-branch>] [Options]`
-- Deploy with `mix edeliver deploy release|upgrade [[to] staging|production] [--version=<release-version>] [Options]`
-- Migrate with `mix edeliver migrate [staging|production] [up|down] [--version=<migration-version>]`
-- Restart with `mix edeliver start|stop|restart|ping|version [staging|production] [Options]`
+- Build release with `edeliver build release`
+- Deploy with `mix edeliver deploy release|upgrade [[to] staging|production]`
+- Migrate with `mix edeliver migrate [staging|production] [up|down]`
+- Restart with `mix edeliver start|stop|restart|ping|version [staging|production]`
 
 ## Learn more
 - Build with 🍆by [`Josh Chernoff`](https://polymorphic.productions/contact)
