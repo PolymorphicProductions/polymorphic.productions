@@ -23,12 +23,6 @@ defmodule PolymorphicProductionsWeb.AuthCase do
     {:ok, %{conn: conn, user: user, rando: rando}}
   end
 
-  def add_admin(email) do
-    user = %{email: email, password: "reallyHard2gue$$", admin: true}
-    {:ok, user} = Accounts.create_user(user)
-    user
-  end
-
   def add_user(email, name) do
     user = %{email: email, password: "reallyHard2gue$$", name: name}
     {:ok, user} = Accounts.create_user(user)
