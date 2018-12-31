@@ -35,7 +35,7 @@ Now you can visit [`https://localhost:4001`](https://localhost:4001) from your b
 - Restart with `mix edeliver start|stop|restart|ping|version [staging|production]`
 
 ## Learn more
-- Build with 🍆by [`Josh Chernoff`](https://polymorphic.productions/contact)
+- Build with 🍆 by [`Josh Chernoff`](https://polymorphic.productions/contact)
 - Official website: http://www.phoenixframework.org/
 - Guides: http://phoenixframework.org/docs/overview
 - Docs: https://hexdocs.pm/phoenix
