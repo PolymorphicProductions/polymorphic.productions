@@ -1,10 +1,7 @@
 defmodule PolymorphicProductionsWeb.Admin.UserControllerTest do
   use PolymorphicProductionsWeb.ConnCase
 
-  import PolymorphicProductions.Factory
   import PolymorphicProductionsWeb.AuthCase
-
-  @create_attrs params_for(:user)
 
   setup %{conn: conn} do
     conn = conn |> bypass_through(PolymorphicProductionsWeb.Router, [:browser]) |> get("/")

@@ -23,7 +23,7 @@ defmodule PolymorphicProductionsWeb.UserControllerTest do
       assert redirect_path == redirected_to(conn, 302)
 
       conn = get(recycle(conn), redirect_path)
-      assert html_response(conn, 200) =~ "User created successfully."
+      assert html_response(conn, 200) =~ "Please look for email confirmation to complete signup"
     end
 
     test "renders errors when data is invalid", %{conn: conn} do
