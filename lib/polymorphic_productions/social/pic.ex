@@ -17,6 +17,7 @@ defmodule PolymorphicProductions.Social.Pic do
     field(:asset_preview_width, :integer)
     field(:asset_preview_height, :integer)
     field(:meta, :map)
+    field(:comment_count, :integer)
 
     field(:description, :string)
     field(:photo, :any, virtual: true)

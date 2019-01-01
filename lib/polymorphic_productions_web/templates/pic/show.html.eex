@@ -2,14 +2,14 @@
   <div class="container">
     <div class="row justify-content-md-center">
       <div class="col-lg-10">
-        <%= link (img_tag @pic.asset_preview <> "?asdf=asdf", id: "snapshot"), to: Routes.pic_path(@conn, :show, @pic) %>
+        <%= link (img_tag @pic.asset_preview, id: "snapshot"), to: Routes.pic_path(@conn, :show, @pic) %>
       </div>
     </div>
     <div class="row justify-content-md-center">
       <div class="col-lg-3">
 
         <div class="margin-bottom-20">
-          <i class="far fa-comment"></i> <%= @pic.comments |> Enum.count %> <i class="far fa-clock"></i><span> <%= format_date @pic.inserted_at %></span><br />
+          <i class="far fa-comment"></i> <%= @pic.comment_count %> <i class="far fa-clock"></i><span> <%= format_date @pic.inserted_at %></span><br />
         </div>
 
         <%= if @current_user && @current_user.admin do %>

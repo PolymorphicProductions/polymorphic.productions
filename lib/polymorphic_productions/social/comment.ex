@@ -1,6 +1,8 @@
 defmodule PolymorphicProductions.Social.Comment do
   use Ecto.Schema
   import Ecto.Changeset
+  import Ecto.Query
+
   alias PolymorphicProductions.Social.Pic
   alias PolymorphicProductions.Accounts.User
 
@@ -21,6 +23,7 @@ defmodule PolymorphicProductions.Social.Comment do
     |> put_pic(attrs)
     |> put_author(attrs)
     |> put_approved(attrs)
+    |> increment_comment_count(attrs)
   end
 
   defp put_author(changeset, %{"author" => author}), do: put_assoc(changeset, :user, author)
@@ -31,4 +34,18 @@ defmodule PolymorphicProductions.Social.Comment do
 
   defp put_approved(changeset, %{"author" => _author}), do: put_change(changeset, :approved, true)
   defp put_approved(changeset, _), do: changeset
+
+  defp increment_comment_count(changeset, %{"pic" => pic}) do
+    changeset
+    |> prepare_changes(fn changeset ->
+      if %{data: %{id: id}} = get_change(changeset, :pic) do
+        query = from(p in Pic, where: p.id == ^id)
+        changeset.repo.update_all(query, inc: [comment_count: 1])
+      end
+
+      changeset
+    end)
+  end
+
+  defp increment_comment_count(changeset, _), do: changeset
 end

@@ -11,13 +11,7 @@
         <div class="row">
           <div class="col-lg-3">
             <div class="margin-bottom-20">
-              <span><%= format_date pic.inserted_at %></span>
-            </div>
-            <div>
-
-              <%#= link "Edit", to: Routes.pic_path(@conn, :edit, pic) %>
-              <%#= link "Delete", to: Routes.pic_path(@conn, :delete, pic), method: :delete, data: [confirm: "Are you sure?"] %>  
-           
+              <i class="far fa-comment"></i> <%= pic.comment_count %> <i class="far fa-clock"></i><span> <%= format_date pic.inserted_at %></span><br />
             </div>
           </div>
           

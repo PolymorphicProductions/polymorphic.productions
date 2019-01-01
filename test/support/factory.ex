@@ -23,7 +23,8 @@ defmodule PolymorphicProductions.Factory do
     %PolymorphicProductions.Social.Pic{
       asset: "http://placehold.jp/150x150.png",
       asset_preview: "http://placehold.jp/150x150.png",
-      description: "A street photo of #PDX #OR"
+      description: "A street photo of #PDX #OR",
+      comment_count: 0
     }
   end
 
