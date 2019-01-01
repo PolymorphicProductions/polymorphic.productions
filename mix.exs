@@ -4,7 +4,7 @@ defmodule PolymorphicProductions.MixProject do
   def project do
     [
       app: :polymorphic_productions,
-      version: "0.2.4",
+      version: "1.0.0",
       elixir: "~> 1.5",
       elixirc_paths: elixirc_paths(Mix.env()),
       compilers: [:phoenix, :gettext] ++ Mix.compilers(),

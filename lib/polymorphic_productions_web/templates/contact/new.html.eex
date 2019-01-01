@@ -40,13 +40,14 @@
     </div>
   </div>
 </div>
-
+<a name="form"></a>
 
 <!-- Contact Form section -->
 <div class="section no-padding-top">
   <div class="container">
+    <h3>Contact Form</h3>
     <div class="contact-form">
-      <%= form_for @changeset, Routes.contact_path(@conn, :create), [as: :contact], fn f -> %>
+      <%= form_for @changeset, Routes.contact_path(@conn, :create)<> "#form", [as: :contact], fn f -> %>
       <%= if f.errors != [] do %>
       <div class="alert alert-danger">
         <p>Please check the errors below:</p>

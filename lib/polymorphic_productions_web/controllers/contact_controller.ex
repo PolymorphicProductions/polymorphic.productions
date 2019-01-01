@@ -21,7 +21,7 @@ defmodule PolymorphicProductionsWeb.ContactController do
 
         conn
         |> put_flash(:info, "Your messages was successfully sent.")
-        |> redirect(to: Routes.page_path(conn, :index))
+        |> redirect(to: Routes.page_path(conn, :index) <> "#form")
 
       {:error, %Ecto.Changeset{} = changeset} ->
         render(conn, "new.html",
