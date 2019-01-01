@@ -33,7 +33,7 @@ defmodule PolymorphicProductionsWeb.UserController do
         Email.confirm_request(conn, user, key)
 
         conn
-        |> put_flash(:info, "User created successfully.")
+        |> put_flash(:info, "Please look for email confirmation to complete signup")
         |> redirect(to: Routes.session_path(conn, :new))
 
       {:error, %Ecto.Changeset{} = changeset} ->

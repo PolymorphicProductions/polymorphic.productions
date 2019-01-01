@@ -9,7 +9,11 @@
           <div
             class="col-12 col-sm-8 offset-sm-2 col-md-6 offset-md-3 col-lg-4 offset-lg-4"
           >
+
             <h4 class="font-weight-light margin-bottom-30">Registration</h4>
+            
+            <%= get_flash(@conn) |> Map.values |> List.to_string |> (fn string -> "<h3> #{string}</h3>" end).() |> raw %>
+
             <%= form_for @changeset, Routes.user_path(@conn, :create), fn f -> %> 
 
               <%= if @changeset.action do %>

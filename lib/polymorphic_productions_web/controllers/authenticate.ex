@@ -14,7 +14,7 @@ defmodule PolymorphicProductionsWeb.Authenticate do
   def authentication_check(%Plug.Conn{assigns: %{current_user: nil}} = conn, _opts) do
     conn
     |> put_session(:request_path, current_path(conn))
-    |> put_flash(:error, "🤦‍♂️ You need to log in to view this page 👮‍♂️")
+    |> put_flash(:error, "log in to view this page")
     |> redirect(to: Routes.session_path(conn, :new))
     |> halt()
   end

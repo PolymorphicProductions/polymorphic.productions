@@ -18,7 +18,7 @@ defmodule PolymorphicProductionsWeb.PasswordResetController do
     end
 
     conn
-    |> put_flash(:info, "Check your inbox for instructions on how to reset your password")
+    |> put_flash(:info, "Check your inbox for instructions on how to reset your password ✌️")
     |> redirect(to: Routes.page_path(conn, :index))
   end
 
