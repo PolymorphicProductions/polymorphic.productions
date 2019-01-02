@@ -4,7 +4,7 @@ defmodule PolymorphicProductions.MixProject do
   def project do
     [
       app: :polymorphic_productions,
-      version: "1.0.0",
+      version: "1.0.1",
       elixir: "~> 1.5",
       elixirc_paths: elixirc_paths(Mix.env()),
       compilers: [:phoenix, :gettext] ++ Mix.compilers(),
@@ -66,7 +66,8 @@ defmodule PolymorphicProductions.MixProject do
       {:ex_machina, "~> 2.2"},
       {:exexif, "~> 0.0.5"},
       {:credo, "~> 1.0.0", only: [:dev, :test], runtime: false},
-      {:sitemap, "~> 1.1"}
+      {:sitemap, "~> 1.1"},
+      {:slugify, "~> 1.1"}
     ]
   end
 

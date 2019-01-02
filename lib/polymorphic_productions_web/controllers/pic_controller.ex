@@ -2,7 +2,7 @@ defmodule PolymorphicProductionsWeb.PicController do
   use PolymorphicProductionsWeb, :controller
 
   import PolymorphicProductionsWeb.Authenticate
-  plug(:authentication_check when action in [:new, :create])
+  plug(:authentication_check when action in [:new, :create, :edit, :update, :delete])
 
   alias PolymorphicProductions.Social
   alias PolymorphicProductions.Social.{Pic, Comment}

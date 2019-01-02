@@ -135,3 +135,11 @@ body {
     text-transform: capitalize;
   }
 }
+
+form.comment {
+  input,
+  textarea {
+    background: white;
+    box-shadow: 0px 2px 8px #e2e2e2;
+  }
+}

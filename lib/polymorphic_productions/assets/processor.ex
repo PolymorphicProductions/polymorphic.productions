@@ -10,4 +10,14 @@ defmodule PolymorphicProductions.Assets.Processor do
     |> save()
     |> verbose
   end
+
+  def resize_image(path, resize_command) do
+    path
+    |> open()
+    |> verbose
+    |> resize(resize_command)
+    |> verbose
+    |> save()
+    |> verbose
+  end
 end

@@ -1,0 +1,113 @@
+<!-- Home section -->
+<div class="section-fullscreen bg-image parallax"  style="background-image: url(<%= @post.large_image %>)">
+  <div class="bg-black-05">
+    <div class="container">
+      <div class="position-middle">
+        <div class="row justify-content-md-center">
+          <div class="col-12 col-lg-12 text-center">
+            <h1 class="display-4 font-weight-bold"><%= @post.title %></h1>        
+          </div>
+        </div>
+      </div>
+      <!-- scrolldown button -->
+      <div class="position-bottom icon-lg  text-center">
+        <a class="scrolldown" href="#body">
+          <i class="icon icon-arrow-down"style="font-size: 26px;"></i>
+        </a>
+      </div>
+    </div><!-- end container -->
+  </div>
+</div>
+
+<div class="section" id="body">
+  <div class="container">
+    <div class="row">
+      <div class="col-12 col-sm-10 offset-sm-1 col-md-8 offset-md-2">
+        <%= @post.body %>
+      </div>
+    </div><!-- end row -->
+  </div><!-- end container -->
+</div>
+
+<!---
+<div class="section bg-grey-lighter">
+  <div class="container">
+    <div class="row">
+      <div class="col-12 col-sm-10 offset-sm-1 col-md-8 offset-md-2">
+        <div class="row margin-top-50">
+          <div class="col-6">
+            <h6 class="heading-uppercase">Tags</h6>
+            <ul class="list-inline">
+              <li class="list-inline-item"><a href="#">Clothing</a></li>
+              <li class="list-inline-item"><a href="#">Lifestyle</a></li>
+              <li class="list-inline-item"><a href="#">Travel</a></li>
+            </ul>
+          </div>
+          <div class="col-6 text-right">
+            <h6 class="heading-uppercase">Share On</h6>
+            <ul class="list-horizontal-unstyled">
+              <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
+              <li><a href="#"><i class="fab fa-twitter"></i></a></li>
+              <li><a href="#"><i class="fab fa-google-plus-g"></i></a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>c
+</div> -->
+
+<%= unless Enum.empty?(@post.comments) do %>
+<!-- Comments section -->
+<div class="section border-top">
+  <div class="container">
+    <div class="row">
+      <div class="col-12 col-sm-10 offset-sm-1 col-md-10">
+        <h4 class="margin-bottom-50 text-center">Comments</h4>
+        <%= for comment <- @post.comments do %>
+        <!-- Comment box -->
+        <div class="comment-box">
+          <div class="comment-user-avatar">
+            <i class="fa fa-user"></i>
+          </div>
+          <div class="comment-content">
+            <span class="comment-time"><%= time_ago comment.inserted_at %></span>
+            <h6 class="font-weight-normal"><%= comment.user.name %></h6>
+            <p><%= comment.body %></p>
+          </div>
+        </div><!-- end Comment box -->
+        <% end %>
+      </div>
+    </div><!-- end row -->
+  </div><!-- end container -->
+</div><!-- end Comments section -->
+<% end %>
+
+<!-- Write Comment section -->
+<div class="section bg-grey">
+  <div class="container">
+    <div class="row">
+      <div class="col-12 col-sm-10 offset-sm-1 col-md-8 offset-md-2">
+        <%= if @current_user do %>
+        <h4 class="margin-bottom-50 text-center">Write a Comment</h4>
+        <div class="text-right">
+            <%= form_for @changeset, Routes.post_comment_path(@conn, :create, @post), [class: "comment"], fn f -> %>
+            <%= if @changeset.action do %>
+              <div class="alert alert-danger">
+                <p>Oops, something went wrong! Please check the errors below.</p>
+              </div>
+            <% end %>
+            <%= textarea f, :body, placeholder: "Message"%>
+            <%= error_tag f, :body %>
+            <%= submit "Submit Comment", class: "button button-lg button-dark" %>
+          <% end %>
+        </div>
+        <% else %>
+        <h4 class="margin-bottom-50 text-center">                    
+          <%= link "Sign in to write a comment", to: Routes.session_path(@conn, :new, request_path: Routes.post_path(@conn, :show, @post)), class: "btn btn-secondary" %>
+        </h4>
+        <% end %>
+      </div>
+    </div><!-- end row -->
+  </div><!-- end container -->
+</div><!-- end Write Comment section -->

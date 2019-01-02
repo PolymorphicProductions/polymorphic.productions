@@ -1,0 +1,34 @@
+<%= form_for @changeset, @action, [multipart: true], fn f -> %>
+  <%= if @changeset.action do %>
+    <div class="alert alert-danger">
+      <p>Oops, something went wrong! Please check the errors below.</p>
+    </div>
+  <% end %>
+
+  <%= label f, :title %>
+  <%= text_input f, :title %>
+  <%= error_tag f, :title %>
+  <%= error_tag f, :slug %>
+
+  <%= label f, :excerpt %>
+  <%= textarea f, :excerpt %>
+  <%= error_tag f, :excerpt %>
+
+  <%= label f, :body %>
+  <%= textarea f, :body, id: "post-body" %>
+  <%= error_tag f, :body %>
+
+  <%= label f, :published_at %>
+  <%= date_select f, :published_at %>
+  <%= error_tag f, :published_at %>
+
+  <div class="form-group">
+    <%= label f, :image %>
+    <%= file_input f, :photo %>
+    <%= error_tag f, :asset %>
+  </div>
+
+  <div>
+    <%= submit "Save" %>
+  </div>
+<% end %>

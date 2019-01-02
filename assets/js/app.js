@@ -28,3 +28,17 @@ import { photoswipe_init } from "./photoswipe_init";
 if (document.getElementsByClassName("gallery").length) {
   photoswipe_init(".gallery");
 }
+
+// Works but only with divs. Lacks Mark down.
+// import Quill from "quill";
+// var container = document.getElementById("body");
+
+// var options = {
+//   theme: "snow"
+// };
+
+// var editor = new Quill(container, options);
+import * as SimpleMDE from "simplemde";
+const simplemde = new SimpleMDE({
+  element: document.getElementById("post-body")
+});

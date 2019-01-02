@@ -34,4 +34,22 @@ defmodule PolymorphicProductionsWeb.CommentController do
         render(conn, "new.html", changeset: changeset)
     end
   end
+
+  def create(conn, %{"post_slug" => post_slug, "comment" => comment_params}, %{
+        current_user: current_user
+      }) do
+    post = Social.get_post!(post_slug)
+
+    case comment_params
+         |> Map.merge(%{"author" => current_user, "post" => post})
+         |> Social.create_comment() do
+      {:ok, _comment} ->
+        conn
+        |> put_flash(:info, "Comment submitted.")
+        |> redirect(to: Routes.post_path(conn, :show, post) <> "#comments")
+
+      {:error, %Ecto.Changeset{} = changeset} ->
+        render(conn, "new.html", changeset: changeset)
+    end
+  end
 end

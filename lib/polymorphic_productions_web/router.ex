@@ -29,11 +29,15 @@ defmodule PolymorphicProductionsWeb.Router do
 
     resources("/snapshots", PicController)
 
-    resources "/snapshots", PicController, only: [] do
+    resources "/snapshots", PicController do
       resources("/comments", CommentController, only: [:show, :create, :delete, :update])
     end
 
     get("/snapshots/tag/:tag", TagController, :show)
+
+    resources "/posts", PostController, param: "slug" do
+      resources("/comments", CommentController, only: [:show, :create, :delete, :update])
+    end
 
     get("/signup", UserController, :new)
     post("/signup", UserController, :create)

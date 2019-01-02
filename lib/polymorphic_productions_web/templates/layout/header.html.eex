@@ -12,36 +12,29 @@
       </a>
 
       <ul class="nav dropdown-dark">
-
-        <!-- <li class="nav-item nav-dropdown">
+        <%# <li class="nav-item nav-dropdown">
           <a class="nav-link" href="#">Services</a>
-              <ul class="dropdown-menu">
-            <li><a href="#">Development</a></li>
-            <li><a href="#">Photography</a></li>
-            <li><a href="#">Videography</a></li>
-            <li><a href="#">DevOps</a></li>
+            <ul class="dropdown-menu">
+              <li><a href="#">Development</a></li>
+              <li><a href="#">Design</a></li>
+              <li><a href="#">Photography</a></li>
+              <li><a href="#">Videography</a></li>
           </ul>
-        </li> -->
+        </li> %>
 
-         <!-- <li class="nav-item">
-          <a class="nav-link" href="<%#= Routes.pic_path @conn, :index %>">Blog</a>
-        </li> -->
-        <li class="nav-item">
-          <a class="nav-link" href="<%= Routes.pic_path @conn, :index %>">Snapshots</a>
+        <li class="nav-item nav-dropdown">
+          <a class="nav-link" href="#">Social</a>
+              <ul class="dropdown-menu">
+            <li><a href="<%= Routes.post_path @conn, :index %>">Posts</a></li>
+            <li><a href="<%= Routes.pic_path @conn, :index %>">Snapshots</a></li>
+          </ul>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="<%= Routes.page_path @conn, :about %>">About</a>
-        </li>
-         <li class="nav-item">
-          <a class="nav-link" href="<%= Routes.contact_path @conn, :new %>">Contact</a>
-        </li>
+
+        <li class="nav-item"><a class="nav-link" href="<%= Routes.contact_path @conn, :new %>">Contact</a></li>
+        <li class="nav-item"><a class="nav-link" href="<%= Routes.page_path @conn, :about %>">About</a></li>
 
         <%= if @current_user do %>
-          <%= if @current_user.admin do %>
-            <li class="nav-item"><a class="nav-link" href="<%= Routes.admin_user_path @conn, :index %>">Users</a></li>
-          <% end %>
-
-          <li class="nav-item nav-dropdown">
+        <li class="nav-item nav-dropdown">
           <a class="nav-link" href="#"><%= @current_user.name%></a>
               <ul class="dropdown-menu">
             <li><%= link "Account", to: Routes.user_path(@conn, :show) %></li>
