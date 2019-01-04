@@ -16,6 +16,7 @@ defmodule PolymorphicProductions.Social.Post do
     field(:body, :string)
     field(:excerpt, :string)
     field(:published_at, :date)
+    # field(:published_at_local, :string)
     field(:slug, :string)
     field(:title, :string)
     field(:photo, :any, virtual: true)
@@ -44,7 +45,17 @@ defmodule PolymorphicProductions.Social.Post do
       :image,
       :large_image,
       :med_image
+      # :published_at_local
     ])
+    # |> validate_format(
+    #   :published_at_local,
+    #   ~r/^\d{1,2}\/\d{1,2}\/\d{4}$/
+    # )
+    |> validate_length(:excerpt, max: 255)
+    # |> validate_published_at()
+    # |> put_published_at()
+    |> put_slug()
+    |> put_parsed_body()
     |> unique_constraint(:slug, name: :posts_slug_index)
   end
 
@@ -128,4 +139,64 @@ defmodule PolymorphicProductions.Social.Post do
   end
 
   defp put_slug(changeset), do: changeset
+
+  # defp validate_published_at(
+  #        %Ecto.Changeset{
+  #          valid?: true,
+  #          changes: %{published_at_local: published_at_local}
+  #        } = cs
+  #      ) do
+  #   case Timex.parse(published_at_local, "%m/%d/%Y", :strftime) do
+  #     {:ok, _} ->
+  #       cs
+
+  #     {:error, _} ->
+  #       cs
+  #       |> add_error(:published_at_local, "not a valid date")
+  #   end
+  # end
+
+  # defp validate_published_at(cs), do: cs
+
+  # defp put_published_at(
+  #        %Ecto.Changeset{
+  #          valid?: true,
+  #          changes: %{published_at_local: published_at_local}
+  #        } = cs
+  #      ) do
+  #   case Timex.parse(published_at_local, "%m/%d/%Y", :strftime) do
+  #     {:ok, date} ->
+  #       cs
+  #       |> put_change(:published_at, date |> published_at)
+
+  #     {:error, _} ->
+  #       cs
+  #       |> add_error(:published_at_local, "not a valid date")
+  #   end
+
+  #   case
+
+  #   published_at_local
+  #   |> Timex.parse!("%m/%d/%Y", :strftime)
+  #   |> Timex.to_date()
+
+  #   cs
+  #   |> put_change(:published_at, published_at)
+  # end
+
+  # defp put_published_at(cs), do: cs
+
+  defp put_slug(cs), do: cs
+
+  defp put_parsed_body(%Ecto.Changeset{valid?: true, changes: %{body: body}} = cs) do
+    case Earmark.as_html(body) do
+      {:ok, html_doc, _} ->
+        put_change(cs, :body_parsed, html_doc)
+
+      {:error, _, error_messages} ->
+        add_error(cs, :body, error_messages)
+    end
+  end
+
+  defp put_parsed_body(cs), do: cs
 end

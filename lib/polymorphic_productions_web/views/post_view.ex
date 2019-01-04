@@ -35,4 +35,14 @@ defmodule PolymorphicProductionsWeb.PostView do
     content
     |> String.replace(~r/#(\w*)/, "<a href='/snapshots/tag/\\1'>#\\1</a>")
   end
+
+  def parse_markdown(text) do
+    case Earmark.as_html(text) do
+      {:ok, html_doc, []} ->
+        html_doc
+
+      {:error, html_doc, error_messages} ->
+        error_messages
+    end
+  end
 end

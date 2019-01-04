@@ -67,7 +67,8 @@ defmodule PolymorphicProductions.MixProject do
       {:exexif, "~> 0.0.5"},
       {:credo, "~> 1.0.0", only: [:dev, :test], runtime: false},
       {:sitemap, "~> 1.1"},
-      {:slugify, "~> 1.1"}
+      {:slugify, "~> 1.1"},
+      {:earmark, "~> 1.3"}
     ]
   end
 
