@@ -15,7 +15,9 @@
               </div>
               <div class="blog-post-content">
                 <div class="blog-post-title">
-                  <%# <h6 class="heading-uppercase"><a href="">Lifestyle</a></h6> %>
+                  <ul class="list-horizontal-unstyled">
+                    <%= parse_tags(@conn, post.tags) %>
+                  </ul>
                   <h5><a href="<%= Routes.post_path(@conn, :show, post) %>"><%= post.title %></a></h5>
                   <span><%= post.published_at |> format_date %></span>
                 </div>

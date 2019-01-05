@@ -279,7 +279,7 @@ defmodule PolymorphicProductions.Social do
   """
   def list_posts(params) do
     Post
-    |> from(order_by: [desc: :inserted_at])
+    |> from(order_by: [desc: :inserted_at], preload: [:tags])
     |> Repo.paginate(params)
   end
 

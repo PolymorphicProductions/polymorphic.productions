@@ -37,19 +37,18 @@
         <div class="row margin-top-50">
           <div class="col-6">
             <h6 class="heading-uppercase">Tags</h6>
-            <ul class="list-inline">
-              <% # TODO: move into view helper and replace Enum.join with Enum.intersperse or with https://hexdocs.pm/ex_cldr_lists/Cldr.List.html#intersperse/3 or %>
-              <%= @post.tags |> Enum.map(fn tag -> link(tag.name, to: Routes.post_tag_path(@conn, :show_post, tag.name)) |> safe_to_string end) |> IO.inspect |> Enum.join(", ") |> raw %>
+            <ul class="list-horizontal-unstyled">
+              <%= parse_tags(@conn, @post.tags) %>
             </ul>
           </div>
-          <div class="col-6 text-right">
+          <%# <div class="col-6 text-right">
             <h6 class="heading-uppercase">Share On</h6>
             <ul class="list-horizontal-unstyled">
               <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
               <li><a href="#"><i class="fab fa-twitter"></i></a></li>
               <li><a href="#"><i class="fab fa-google-plus-g"></i></a></li>
             </ul>
-          </div>
+          </div> %>
         </div>
       </div>
     </div>

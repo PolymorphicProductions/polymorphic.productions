@@ -31,11 +31,6 @@ defmodule PolymorphicProductionsWeb.PostView do
     relative_str
   end
 
-  def parse_tags(content) do
-    content
-    |> String.replace(~r/#(\w*)/, "<a href='/snapshots/tag/\\1'>#\\1</a>")
-  end
-
   def parse_markdown(text) do
     case Earmark.as_html(text) do
       {:ok, html_doc, []} ->
@@ -44,5 +39,12 @@ defmodule PolymorphicProductionsWeb.PostView do
       {:error, html_doc, error_messages} ->
         error_messages
     end
+  end
+
+  def parse_tags(conn, tags) do
+    tags
+    |> Enum.map(fn tag ->
+      content_tag(:li, link(tag.name, to: Routes.post_tag_path(conn, :show_post, tag.name)))
+    end)
   end
 end
