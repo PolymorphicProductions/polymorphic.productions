@@ -8,9 +8,7 @@ defmodule PolymorphicProductions.Social do
   import Ecto.Query, warn: false
   alias PolymorphicProductions.Repo
 
-  alias PolymorphicProductions.Social.Pic
-  alias PolymorphicProductions.Social.Comment
-  alias PolymorphicProductions.Social.Tag
+  alias PolymorphicProductions.Social.{Pic, Comment, Tag, Post}
 
   @doc """
   Returns the list of pics.
@@ -249,7 +247,26 @@ defmodule PolymorphicProductions.Social do
     {tag, k}
   end
 
-  alias PolymorphicProductions.Social.Post
+  def get_post_tag!(tag, params \\ %{}) do
+    total_count =
+      from(t in "tags",
+        join: pt in "post_tags",
+        on: pt.tag_id == t.id,
+        where: t.name == ^tag,
+        select: count()
+      )
+      |> Repo.one()
+
+    {posts_query, k} =
+      from(p in Post, order_by: [desc: :inserted_at])
+      |> Repo.paginate(params, total_count: total_count, lazy: true)
+
+    tag =
+      from(t in Tag, where: t.name == ^tag, preload: [posts: ^posts_query])
+      |> Repo.one!()
+
+    {tag, k}
+  end
 
   @doc """
   Returns the list of posts.

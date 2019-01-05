@@ -27,13 +27,15 @@ defmodule PolymorphicProductionsWeb.Router do
   scope "/", PolymorphicProductionsWeb do
     pipe_through(:browser)
 
+    get("/snapshots/tag/:tag", TagController, :show_pic, as: :pic_tag)
+
     resources("/snapshots", PicController)
 
     resources "/snapshots", PicController do
       resources("/comments", CommentController, only: [:show, :create, :delete, :update])
     end
 
-    get("/snapshots/tag/:tag", TagController, :show)
+    get("/posts/tag/:tag", TagController, :show_post, as: :post_tag)
 
     resources "/posts", PostController, param: "slug" do
       resources("/comments", CommentController, only: [:show, :create, :delete, :update])

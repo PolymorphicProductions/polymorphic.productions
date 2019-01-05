@@ -1,0 +1,37 @@
+
+    <!-- Blog section  -->
+    <div class="section">
+      <div class="container">
+        <div class="row">
+          <div class="col-12 col-sm-10 offset-sm-1 col-md-8 offset-md-2">
+
+             <%= for post <- @tag.posts do %>
+            <!-- Blog Post box -->
+            <div class="blog-post-box">
+              <div class="blog-post-img">
+                <a href="<%= Routes.post_path(@conn, :show, post) %>">
+                  <img src="<%= post.med_image %>" alt="">
+                </a>
+              </div>
+              <div class="blog-post-content">
+                <div class="blog-post-title">
+                  <%# <h6 class="heading-uppercase"><a href="">Lifestyle</a></h6> %>
+                  <h5><a href="<%= Routes.post_path(@conn, :show, post) %>"><%= post.title %></a></h5>
+                  <span><%= post.published_at |> format_date %></span>
+                </div>
+                <p class="text-center"><%= post.excerpt %></p>
+                <a class="text-btn" href="<%= Routes.post_path(@conn, :show, post) %>">Read More</a>
+              </div>
+            </div>
+            <% end %>
+
+            <!-- Pagination -->
+            <div>
+              <%= paginate @conn, @kerosene, theme: :bootstrap4, next_label: ">>", previous_label: "<<", class: "justify-content-center  margin-top-70" %>
+            </div>
+          
+          </div>
+        </div><!-- end row -->
+      </div><!-- end container -->
+    </div>
+    <!-- end Blog section -->

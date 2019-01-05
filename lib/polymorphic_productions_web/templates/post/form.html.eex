@@ -22,11 +22,13 @@
   <%= date_select f, :published_at %>
   <%= error_tag f, :published_at %>
 
-  <div class="form-group">
-    <%= label f, :image %>
-    <%= file_input f, :photo %>
-    <%= error_tag f, :asset %>
-  </div>
+  <%= label f, :image %>
+  <%= file_input f, :photo %>
+  <%= error_tag f, :asset %>
+
+  <%= label f, :tags %>
+  <%= text_input f, :tags_string %>
+  <%= error_tag f, :tags_string %>
 
   <div>
     <%= submit "Save" %>

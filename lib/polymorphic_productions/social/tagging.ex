@@ -5,7 +5,7 @@ defmodule PolymorphicProductions.Social.Tagging do
   alias PolymorphicProductions.Repo
 
   @doc """
-  Tags a pic.
+  Tags a thing.
 
   ## Model
 

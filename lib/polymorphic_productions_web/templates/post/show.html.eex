@@ -29,7 +29,7 @@
   </div><!-- end container -->
 </div>
 
-<!---
+
 <div class="section bg-grey-lighter">
   <div class="container">
     <div class="row">
@@ -38,9 +38,8 @@
           <div class="col-6">
             <h6 class="heading-uppercase">Tags</h6>
             <ul class="list-inline">
-              <li class="list-inline-item"><a href="#">Clothing</a></li>
-              <li class="list-inline-item"><a href="#">Lifestyle</a></li>
-              <li class="list-inline-item"><a href="#">Travel</a></li>
+              <% # TODO: move into view helper and replace Enum.join with Enum.intersperse or with https://hexdocs.pm/ex_cldr_lists/Cldr.List.html#intersperse/3 or %>
+              <%= @post.tags |> Enum.map(fn tag -> link(tag.name, to: Routes.post_tag_path(@conn, :show_post, tag.name)) |> safe_to_string end) |> IO.inspect |> Enum.join(", ") |> raw %>
             </ul>
           </div>
           <div class="col-6 text-right">
@@ -55,7 +54,7 @@
       </div>
     </div>
   </div>c
-</div> -->
+</div>
 
 <%= unless Enum.empty?(@post.comments) do %>
 <!-- Comments section -->

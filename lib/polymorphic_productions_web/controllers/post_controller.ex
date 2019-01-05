@@ -44,6 +44,7 @@ defmodule PolymorphicProductionsWeb.PostController do
     post =
       Social.get_post!(slug,
         preload: [
+          :tags,
           comments: {Comment |> Repo.approved() |> Repo.order_by_oldest(), :user}
         ]
       )
@@ -59,7 +60,7 @@ defmodule PolymorphicProductionsWeb.PostController do
 
   def edit(conn, %{"slug" => slug}, %{current_user: current_user}) do
     with :ok <- Bodyguard.permit(Social, :edit, current_user, nil) do
-      post = Social.get_post!(slug)
+      post = Social.get_post!(slug, preload: [:tags])
       changeset = Social.change_post(post)
       render(conn, "edit.html", post: post, changeset: changeset)
     end
@@ -67,7 +68,7 @@ defmodule PolymorphicProductionsWeb.PostController do
 
   def update(conn, %{"slug" => slug, "post" => post_params}, %{current_user: current_user}) do
     with :ok <- Bodyguard.permit(Social, :update, current_user, nil) do
-      post = Social.get_post!(slug)
+      post = Social.get_post!(slug, preload: [:tags])
 
       case Social.update_post(post, post_params) do
         {:ok, post} ->
@@ -83,7 +84,7 @@ defmodule PolymorphicProductionsWeb.PostController do
 
   def delete(conn, %{"slug" => slug}, %{current_user: current_user}) do
     with :ok <- Bodyguard.permit(Social, :delete, current_user, nil) do
-      post = Social.get_post!(slug)
+      post = Social.get_post!(slug, preload: [:tags])
       {:ok, _post} = Social.delete_post(post)
 
       conn

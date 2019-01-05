@@ -1,7 +1,9 @@
 defmodule PolymorphicProductions.Social.Post do
   use Ecto.Schema
   import Ecto.Changeset
+  alias PolymorphicProductions.Social.{Tag, Tagging}
 
+  # Image sizes for posts
   # 1920x1200
   # 1100x734
   # 550x367
@@ -25,6 +27,8 @@ defmodule PolymorphicProductions.Social.Post do
     field(:med_image, :string)
     field(:comment_count, :integer)
     has_many(:comments, PolymorphicProductions.Social.Comment)
+    many_to_many(:tags, Tag, join_through: "post_tags", on_replace: :delete)
+    field(:tags_string)
 
     timestamps()
   end
@@ -32,7 +36,7 @@ defmodule PolymorphicProductions.Social.Post do
   @doc false
   def changeset(post, attrs) do
     post
-    |> cast(attrs, [:title, :slug, :excerpt, :body, :published_at, :photo])
+    |> cast(attrs, [:title, :slug, :excerpt, :body, :published_at, :photo, :tags_string])
     |> validate_attachment()
     |> upload_attachment()
     |> put_slug()
@@ -56,6 +60,8 @@ defmodule PolymorphicProductions.Social.Post do
     # |> put_published_at()
     |> put_slug()
     |> put_parsed_body()
+    |> parse_tags_list()
+    |> parse_tags_assoc()
     |> unique_constraint(:slug, name: :posts_slug_index)
   end
 
@@ -199,4 +205,24 @@ defmodule PolymorphicProductions.Social.Post do
   end
 
   defp put_parsed_body(cs), do: cs
+
+  defp parse_tags_list(%{valid?: true, changes: %{tags_string: tags_string}} = changeset) do
+    tag_list = tags_string |> String.split(", ") |> Enum.map(fn tag -> tag |> Slug.slugify() end)
+    slugified_tags_string = tag_list |> Enum.join(", ")
+
+    changeset
+    |> put_change(:tags_string, slugified_tags_string)
+    |> put_change(:tag_list, tag_list)
+  end
+
+  defp parse_tags_list(changeset), do: changeset
+
+  defp parse_tags_assoc(
+         %Ecto.Changeset{valid?: true, changes: %{tag_list: tags_list}} = changeset
+       ) do
+    changeset
+    |> Tagging.changeset(PolymorphicProductions.Social.Tag, :tags, :tag_list)
+  end
+
+  defp parse_tags_assoc(changeset), do: changeset
 end
