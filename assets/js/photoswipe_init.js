@@ -15,6 +15,11 @@ export function photoswipe_init(gallerySelector) {
   Array.prototype.forEach.call(links, (link, index) => {
     link.onclick = e => {
       e.preventDefault();
+      console.debug(link.getAttribute("href"));
+
+      let shareUrl = _shareButtonData => {
+        return link.getAttribute("href");
+      };
 
       var $pswp = $(".pswp")[0],
         options = {
@@ -22,7 +27,10 @@ export function photoswipe_init(gallerySelector) {
           showHideOpacity: true,
           index: index,
           loop: false,
-          escKey: true
+          escKey: true,
+          getPageURLForShare: function(shareButtonData) {
+            return "http://polymorphic.productions" + link.getAttribute("href");
+          }
         };
 
       // Initialize PhotoSwipe

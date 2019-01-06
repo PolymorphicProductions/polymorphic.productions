@@ -24,7 +24,7 @@
         <%= raw @pic.description |> parse_tags %>
       </div>
     </div>
-
+    <a name="comments"></a>
     <%= unless Enum.empty?(@pic.comments) do %>
     <!-- Comments section -->
     <div class="section border-top">
