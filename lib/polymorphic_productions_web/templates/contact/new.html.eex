@@ -17,13 +17,13 @@
   <div class="container text-center">
     <div class="row">
       <div class="col-12 col-sm-6 col-md-4 icon-3xl">
-        <i class="fas fa-thumbtack"></i>
+        <i class="icon icon-location-pin"></i>
         <h6 class="heading-uppercase margin-top-20">Location</h6>
         <p>Portland OR, 97202</p>
       </div>
 
       <div class="col-12 col-sm-6 col-md-4 icon-3xl">
-        <i class="fas fa-envelope""></i>
+        <i class="icon icon-email"></i>
         <h6 class="heading-uppercase margin-top-20">Email</h6>
         <p>
           <a href="mailto:jchernoff@polymorphic.productions">
@@ -33,7 +33,7 @@
       </div>
 
       <div class="col-12 col-sm-6 col-md-4 icon-3xl">
-        <i class="fas fa-phone""></i>
+        <i class="icon icon-mobile"></i>
         <h6 class="heading-uppercase margin-top-20">Phone</h6>
         <p>1-(971) 533-7446</p>
       </div>

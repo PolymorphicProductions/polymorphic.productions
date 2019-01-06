@@ -22,7 +22,6 @@
                   <span><%= post.published_at |> format_date %></span>
                 </div>
                 <p class="text-center"><%= post.excerpt %></p>
-                <a class="text-btn" href="<%= Routes.post_path(@conn, :show, post) %>">Read More</a>
               </div>
             </div>
             <% end %>
