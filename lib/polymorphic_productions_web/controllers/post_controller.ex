@@ -42,12 +42,7 @@ defmodule PolymorphicProductionsWeb.PostController do
     changeset = Social.change_comment(%Comment{})
 
     post =
-      Social.get_post!(slug,
-        preload: [
-          :tags,
-          comments: {Comment |> Repo.approved() |> Repo.order_by_oldest(), :user}
-        ]
-      )
+      Social.get_post!(slug, preload: [Social.tags_preload(), Social.approved_comments_preload()])
 
     conn
     |> assign(:nav_class, "navbar navbar-absolute navbar-fixed")
@@ -60,7 +55,7 @@ defmodule PolymorphicProductionsWeb.PostController do
 
   def edit(conn, %{"slug" => slug}, %{current_user: current_user}) do
     with :ok <- Bodyguard.permit(Social, :edit, current_user, nil) do
-      post = Social.get_post!(slug, preload: [:tags])
+      post = Social.get_post!(slug, preload: [Social.tags_preload()])
       changeset = Social.change_post(post)
       render(conn, "edit.html", post: post, changeset: changeset)
     end

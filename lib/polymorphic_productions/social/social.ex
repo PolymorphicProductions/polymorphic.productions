@@ -210,6 +210,14 @@ defmodule PolymorphicProductions.Social do
     Comment.changeset(comment, %{})
   end
 
+  def tags_preload do
+    :tags
+  end
+
+  def approved_comments_preload do
+    {:comments, {Comment |> Repo.approved() |> Repo.order_by_oldest(), :user}}
+  end
+
   @doc """
   Gets a single tag and all of its pics.
 
@@ -297,9 +305,9 @@ defmodule PolymorphicProductions.Social do
       ** (Ecto.NoResultsError)
 
   """
-  @get_post_defaults %{preload: []}
+
   def get_post!(slug, options \\ []) do
-    %{preload: preload} = Enum.into(options, @get_post_defaults)
+    preload = Keyword.get(options, :preload, [])
 
     Post
     |> Repo.by_slug(slug)
