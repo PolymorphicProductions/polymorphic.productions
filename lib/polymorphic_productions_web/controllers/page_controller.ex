@@ -1,10 +1,18 @@
 defmodule PolymorphicProductionsWeb.PageController do
   use PolymorphicProductionsWeb, :controller
 
+  alias PolymorphicProductions.Social
+
   def index(conn, _params) do
+    # latest_posts = Social.list_posts(limit: 2)
+    {latest_pics, _} = Social.list_pics()
+
     conn
     |> assign(:nav_class, "navbar navbar-absolute navbar-fixed")
-    |> render("index.html", layout: {PolymorphicProductionsWeb.LayoutView, "full-header.html"})
+    |> render("index.html",
+      layout: {PolymorphicProductionsWeb.LayoutView, "full-header.html"},
+      latest_pics: latest_pics
+    )
   end
 
   def about(conn, _params) do
