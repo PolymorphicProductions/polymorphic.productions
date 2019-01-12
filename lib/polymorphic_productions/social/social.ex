@@ -39,14 +39,12 @@ defmodule PolymorphicProductions.Social do
       ** (Ecto.NoResultsError)
 
   """
-  @get_pic_defaults %{preload: []}
-  def get_pic!(id, options \\ []) do
-    %{preload: preload} = Enum.into(options, @get_pic_defaults)
+  def get_pic!(uuid, options \\ []) do
+    preload = Keyword.get(options, :preload, [])
 
-    from(p in Pic,
-      where: p.id == ^id,
-      preload: ^preload
-    )
+    Pic
+    |> Repo.by_uuid(uuid)
+    |> from(preload: ^preload)
     |> Repo.one!()
   end
 

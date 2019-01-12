@@ -23,4 +23,11 @@ defmodule PolymorphicProductions.Repo do
       where: q.slug == ^slug
     )
   end
+
+  def by_uuid(query, uuid) do
+    from(
+      q in query,
+      where: q.id == ^uuid
+    )
+  end
 end

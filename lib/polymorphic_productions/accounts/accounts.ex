@@ -1,9 +1,9 @@
 defmodule PolymorphicProductions.Accounts do
-  defdelegate authorize(action, user, params), to: PolymorphicProductions.Accounts.Policy
-
   @moduledoc """
   The Accounts context.
   """
+
+  defdelegate authorize(action, user, params), to: PolymorphicProductions.Accounts.Policy
 
   import Ecto.Query, warn: false
 
@@ -11,24 +11,61 @@ defmodule PolymorphicProductions.Accounts do
 
   @doc """
   Returns the list of users.
+
+  ## Examples
+
+      iex> list_users()
+      [%User{}, ...]
+
   """
   def list_users do
     Repo.all(User)
   end
 
   @doc """
-  Gets a user based on the params.
-
+  Gets a single user by their session.
   This is used by Phauxth to get user information.
+
+  returns nil if no user is found
+
+  ## Examples
+
+      iex> get_by(%{"session_id" => 1})
+      %User{}
+
+      iex> get_by(%{"session_id" => 0})
+      nil
   """
   def get_by(%{"session_id" => session_id}) do
-    with %Session{user_id: user_id} <- Sessions.get_session(session_id),
-         do: get_user(user_id)
+    with %Session{user_id: user_id} <- Sessions.get_session(session_id), do: get_user(user_id)
   end
 
-  def get_by(%{"email" => email}) do
-    Repo.get_by(User, email: email)
-  end
+  @doc """
+  Gets a single user by their email.
+  returns nil if no user is found
+
+  ## Examples
+
+      iex> get_by(%{"email" => "some_valid_email@foo.bar"})
+      %User{}
+
+      iex> get_by(%{"email" => "bad_email@foo.bar"})
+      nil
+  """
+  def get_by(%{"email" => email}) when is_bitstring(email), do: Repo.get_by(User, email: email)
+
+  @doc """
+  Gets a single user by their id.
+  returns nil if no user is found
+
+  ## Examples
+
+      iex> get_by(%{"user_id" => 1})
+      %User{}
+
+      iex> get_by(%{"user_id" => 0})
+      nil
+  """
 
   def get_by(%{"user_id" => user_id}), do: Repo.get(User, user_id)
 
@@ -36,9 +73,32 @@ defmodule PolymorphicProductions.Accounts do
   Gets a single user.
 
   Raises `Ecto.NoResultsError` if the User does not exist.
+
+  ## Examples
+
+      iex> get_user!(123)
+      %User{}
+
+      iex> get_user!(456)
+      ** (Ecto.NoResultsError)
+
+  """
+  def get_user!(id), do: Repo.get!(User, id)
+
+  @doc """
+  Gets a single user.
+
+  return nil if no user is found
+  ## Examples
+
+      iex> get_user(123)
+      %User{}
+
+      iex> get_user!(456)
+      nil
+
   """
   def get_user(id), do: Repo.get(User, id)
-  def get_user!(id), do: Repo.get!(User, id)
 
   @doc """
   Creates a user.
