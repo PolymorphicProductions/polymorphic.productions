@@ -15,7 +15,7 @@ import "bootstrap";
 // import "easing";
 // import "retinajs";
 // import "imagesloaded";
-//import "isotope.pkgd";
+
 // import "magnific-popup";
 
 // Import local files

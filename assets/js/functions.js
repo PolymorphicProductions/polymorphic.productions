@@ -566,9 +566,9 @@ $(".owl-carousel").each(function() {
 /*===============================================
     Blog Masonry
   ===============================================*/
-// $(".blog-masonry").masonry({
-//   itemSelector: ".blog-post-box"
-// });
+
+import Isotope from "isotope-layout";
+var iso = new Isotope(".blog-masonry", { itemSelector: ".blog-post-box" });
 
 /*===============================================
     Magnific Popup

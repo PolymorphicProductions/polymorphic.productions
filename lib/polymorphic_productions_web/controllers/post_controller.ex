@@ -14,7 +14,14 @@ defmodule PolymorphicProductionsWeb.PostController do
 
   def index(conn, params, _) do
     {posts, kerosene} = Social.list_posts(params)
-    render(conn, "index.html", posts: posts, kerosene: kerosene)
+
+    conn
+    |> assign(:nav_class, "navbar navbar-absolute navbar-fixed")
+    |> render("index.html",
+      layout: {PolymorphicProductionsWeb.LayoutView, "full-header.html"},
+      posts: posts,
+      kerosene: kerosene
+    )
   end
 
   def new(conn, _params, %{current_user: current_user}) do

@@ -33,6 +33,15 @@ body {
   }
 }
 
+.page-title-md .container,
+.page-title-md .container-fluid {
+  padding: 80px 20px;
+  h1 {
+    font-family: "Abril Fatface", cursive;
+    font-weight: normal !important;
+  }
+}
+
 .timeline-content {
   min-height: 450px;
 }
