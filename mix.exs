@@ -68,7 +68,8 @@ defmodule PolymorphicProductions.MixProject do
       {:credo, "~> 1.0.0", only: [:dev, :test], runtime: false},
       {:sitemap, "~> 1.1"},
       {:slugify, "~> 1.1"},
-      {:earmark, "~> 1.3"}
+      {:earmark, "~> 1.3"},
+      {:web_push_encryption, "~> 0.2.1"}
     ]
   end
 

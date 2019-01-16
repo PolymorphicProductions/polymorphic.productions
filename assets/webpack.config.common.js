@@ -8,10 +8,13 @@ const webpack = require("webpack");
 
 module.exports = (env, options) => ({
   entry: {
-    "./js/app.js": ["./js/app.js"].concat(glob.sync("./vendor/**/*.js"))
+    app: ["./js/app.js"].concat(glob.sync("./vendor/**/*.js"))
+    // "./js/app.js": ["./js/app.js"].concat(glob.sync("./vendor/**/*.js"))
   },
+  // entry: path.resolve(__dirname, "js/index.js"),
   output: {
-    filename: "app.js",
+    //filename: "app.js",
+    filename: "[name].js",
     path: path.resolve(__dirname, "../priv/static/js")
   },
   module: {
@@ -68,6 +71,11 @@ module.exports = (env, options) => ({
       }
     ]
   },
+  optimization: {
+    splitChunks: {
+      chunks: "all"
+    }
+  },
   plugins: [
     new webpack.ProvidePlugin({
       $: "jquery",
@@ -81,7 +89,11 @@ module.exports = (env, options) => ({
       allowExternal: true
     }),
     new MiniCssExtractPlugin({ filename: "../css/app.css" }),
-    new CopyWebpackPlugin([{ from: "static/", to: "../" }]),
+    new CopyWebpackPlugin([
+      { from: "static/", to: "../" },
+      { from: "js/sw.js", to: "../js/" }
+    ]),
+
     new WebpackMd5Hash()
   ]
 });

@@ -415,7 +415,7 @@ $(window).on("scroll", function() {
     Smooth Scrollin on links
   ===============================================*/
 var htmlBody = $("html,body");
-var ssBtn = $(".scrolldown-btn, .scrolldown, .navbar a");
+var ssBtn = $(".scrolldown-btn, .scrolldown");
 
 ssBtn.on("click", function(e) {
   htmlBody.animate(
@@ -567,8 +567,8 @@ $(".owl-carousel").each(function() {
     Blog Masonry
   ===============================================*/
 
-import Isotope from "isotope-layout";
-var iso = new Isotope(".blog-masonry", { itemSelector: ".blog-post-box" });
+// import Isotope from "isotope-layout";
+// var iso = new Isotope(".blog-masonry", { itemSelector: ".blog-post-box" });
 
 /*===============================================
     Magnific Popup

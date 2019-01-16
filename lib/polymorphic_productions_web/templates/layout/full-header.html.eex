@@ -17,6 +17,8 @@
 
   <title>Polymorphic Productions</title>
   <link rel="stylesheet" href="<%= Routes.static_path(@conn, "/css/app.css") %>"/>
+  <link rel="stylesheet" href="<%= Routes.static_path(@conn, "/css/vendors~app.app.css") %>"/>
+
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.2/css/all.css" integrity="sha384-/rXc/GQVaYpyDdyxK+ecHPVYJSN9bmVFBvjA/9eOB+pb3F2w2N6fc5qB9Ew5yIns"
     crossorigin="anonymous">
   <%= render_existing @view_module, "social." <> @view_template, assigns %>
@@ -38,7 +40,39 @@
 
   <%= render "footer.html", conn: @conn %>
 
+
+<!-- Modal -->
+<div class="modal fade" id="notify-modal" tabindex="-1" role="dialog" aria-labelledby="notify-modal-Label" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Notification Settings</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body text-center">
+        <i class="notify-icon far fa-bell"></i>
+        <h3>Get Notified</h3>
+        <p>
+          <span class="notification-notes">Enable to get periodic notifications</span><br />
+          <span class="small">* Average not more than 3 per month</span>
+
+        </p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="js-push-btn-toggle btn btn-success"> <i class="far fa-bell"></i> Enable Notifications</button>
+      </div>
+    </div>
+  </div>
+</div>
+
   <script src="<%= Routes.static_path(@conn, "/js/app.js") %>"></script>
+  <script src="<%= Routes.static_path(@conn, "/js/vendors~app.js") %>"></script>
+
+
+
+
 
 </body>
 

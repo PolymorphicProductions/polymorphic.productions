@@ -1,0 +1,4 @@
+alias PolymorphicProductions.Accounts
+alias PolymorphicProductions.Assets
+alias PolymorphicProductions.Messages
+alias PolymorphicProductions.Repo

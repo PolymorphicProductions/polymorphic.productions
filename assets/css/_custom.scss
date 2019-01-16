@@ -158,3 +158,62 @@ form.comment {
     padding-bottom: 20px;
   }
 }
+
+.bell {
+  &:hover {
+    animation: bellshake 0.5s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+    backface-visibility: hidden;
+    transform-origin: top right;
+  }
+}
+.fa-bell-slash {
+  position: relative;
+  left: 3px;
+}
+
+@keyframes bellshake {
+  0% {
+    transform: rotate(0);
+  }
+  15% {
+    transform: rotate(5deg);
+  }
+  30% {
+    transform: rotate(-5deg);
+  }
+  45% {
+    transform: rotate(4deg);
+  }
+  60% {
+    transform: rotate(-4deg);
+  }
+  75% {
+    transform: rotate(2deg);
+  }
+  85% {
+    transform: rotate(-2deg);
+  }
+  92% {
+    transform: rotate(1deg);
+  }
+  100% {
+    transform: rotate(0);
+  }
+}
+
+.modal-body h3 {
+  font-family: "Abril Fatface", cursive;
+  font-weight: normal !important;
+  font-size: 50px;
+  color: #d4d4d4;
+}
+.notify-icon {
+  font-size: 200px;
+  background-color: #d2d2d2;
+  color: transparent;
+  text-shadow: 0px 6px 20px rgb(253, 253, 253);
+  -webkit-background-clip: text;
+  -moz-background-clip: text;
+  background-clip: text;
+  padding: 30px;
+}
