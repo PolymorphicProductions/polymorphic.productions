@@ -107,7 +107,7 @@ function updateSubscriptionOnServer(subscription) {
   // TODO: Send subscription to application server
   if (subscription) {
     console.debug(JSON.stringify(subscription));
-    postPushSubscription(`https://localhost:4001/api/push_subscribers/`, {
+    postPushSubscription(`/api/push_subscribers/`, {
       subscription: subscription
     })
       .then(data => console.log(JSON.stringify(data))) // JSON-string from `response.json()` call
