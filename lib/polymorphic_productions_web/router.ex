@@ -25,12 +25,19 @@ defmodule PolymorphicProductionsWeb.Router do
   end
 
   pipeline :api do
+    if Mix.env() == :dev do
+      # If using Phoenix
+      plug(CORSPlug, origin: "https://localhost:4001")
+    end
+
+    plug(CORSPlug, origin: "https://polymorphic.productions")
     plug(:accepts, ["json"])
     plug(:fetch_session)
   end
 
   scope "/api", PolymorphicProductionsWeb do
     pipe_through(:api)
+    options("/push_subscribers", PushSubscriberController, :options)
     resources("/push_subscribers", PushSubscriberController, only: [:create, :delete])
   end
 
