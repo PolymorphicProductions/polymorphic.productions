@@ -88,8 +88,9 @@ module.exports = (env, options) => ({
       verbose: true,
       allowExternal: true
     }),
-    new MiniCssExtractPlugin({ filename: "../css/app.css" }),
-    new MiniCssExtractPlugin({ filename: "../css/vendors~app.app.css" }),
+    new MiniCssExtractPlugin({
+      filename: "../css/[name].css"
+    }),
     new CopyWebpackPlugin([
       { from: "static/", to: "../" },
       { from: "js/sw.js", to: "../js/" }
