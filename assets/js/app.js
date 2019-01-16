@@ -213,7 +213,7 @@ function initializeUI() {
 
 if ("serviceWorker" in navigator && "PushManager" in window) {
   navigator.serviceWorker
-    .register("js/sw.js")
+    .register("js/sw.js?v=1")
     .then(function(swReg) {
       console.log("Service Worker is registered", swReg);
       swRegistration = swReg;
