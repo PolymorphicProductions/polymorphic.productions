@@ -44,7 +44,7 @@
         </li>
         <% else %>
         <li class="nav-item nav-dropdown">
-          <a class="nav-link" href="#">Acount</a>
+          <a class="nav-link" href="#">Account</a>
             <ul class="dropdown-menu">
             <li><%= link "Login", to: Routes.session_path(@conn, :new) %></li>
             <li><%= link "Signup", to: Routes.user_path(@conn, :new) %></li>
