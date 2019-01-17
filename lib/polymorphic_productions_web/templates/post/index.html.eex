@@ -1,3 +1,11 @@
+    <div class="bg-image parallax" style="background-image: url( <%= Routes.static_path(@conn, "/images/login3.jpg")%> )">
+      <div class="page-title-md bg-black-05 text-center">
+        <div class="container">
+          <h1 class="font-weight-light">The Blog</h1>
+          <p>The lines in between</p>    
+        </div><!-- end container -->
+      </div>
+    </div>
 
     <!-- Blog section  -->
     <div class="section">
