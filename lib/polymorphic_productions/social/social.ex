@@ -287,7 +287,7 @@ defmodule PolymorphicProductions.Social do
   """
   def list_posts(params, user) do
     Post
-    |> from(order_by: [desc: :inserted_at], preload: [:tags])
+    |> from(preload: [:tags])
     # <-- defers to MyApp.Blog.Post.scope/3
     |> Bodyguard.scope(user)
     |> Repo.order_by_published_at()
