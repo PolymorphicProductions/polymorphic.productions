@@ -10,6 +10,8 @@ defmodule PolymorphicProductions.Social do
 
   alias PolymorphicProductions.Social.{Pic, Comment, Tag, Post}
 
+  alias PolymorphicProductions.Accounts.User
+
   @doc """
   Returns the list of pics.
 
@@ -283,9 +285,12 @@ defmodule PolymorphicProductions.Social do
       [%Post{}, ...]
 
   """
-  def list_posts(params) do
+  def list_posts(params, user) do
     Post
     |> from(order_by: [desc: :inserted_at], preload: [:tags])
+    # <-- defers to MyApp.Blog.Post.scope/3
+    |> Bodyguard.scope(user)
+    |> Repo.order_by_published_at()
     |> Repo.paginate(params)
   end
 
@@ -304,12 +309,13 @@ defmodule PolymorphicProductions.Social do
 
   """
 
-  def get_post!(slug, options \\ []) do
+  def get_post!(slug, current_user, options \\ []) do
     preload = Keyword.get(options, :preload, [])
 
     Post
     |> Repo.by_slug(slug)
     |> from(preload: ^preload)
+    |> Bodyguard.scope(current_user)
     |> Repo.one!()
   end
 

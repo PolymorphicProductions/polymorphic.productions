@@ -1,7 +1,13 @@
 defmodule PolymorphicProductions.Social.Post do
   use Ecto.Schema
   import Ecto.Changeset
+  import Ecto.Query, only: [from: 2]
+
+  @behaviour Bodyguard.Schema
+
   alias PolymorphicProductions.Social.{Tag, Tagging}
+  alias PolymorphicProductions.Accounts.User
+  alias PolymorphicProductions.Repo
 
   # Image sizes for posts
   # 1920x1200
@@ -14,11 +20,20 @@ defmodule PolymorphicProductions.Social.Post do
   @processor Application.fetch_env!(:polymorphic_productions, :asset_processor)
   @uploader Application.fetch_env!(:polymorphic_productions, :asset_uploader)
 
+  def scope(query, %User{admin: true}, _) do
+    query
+  end
+
+  def scope(query, _, _) do
+    query
+    |> Repo.where_published()
+  end
+
   schema "posts" do
     field(:body, :string)
     field(:excerpt, :string)
     field(:published_at, :date)
-    # field(:published_at_local, :string)
+    field(:published_at_local, :string)
     field(:slug, :string)
     field(:title, :string)
     field(:photo, :any, virtual: true)
@@ -26,6 +41,8 @@ defmodule PolymorphicProductions.Social.Post do
     field(:large_image, :string)
     field(:med_image, :string)
     field(:comment_count, :integer)
+    field(:draft, :boolean, default: true)
+
     has_many(:comments, PolymorphicProductions.Social.Comment)
     many_to_many(:tags, Tag, join_through: "post_tags", on_replace: :delete)
     field(:tags_string)
@@ -36,7 +53,16 @@ defmodule PolymorphicProductions.Social.Post do
   @doc false
   def changeset(post, attrs) do
     post
-    |> cast(attrs, [:title, :slug, :excerpt, :body, :published_at, :photo, :tags_string])
+    |> cast(attrs, [
+      :title,
+      :slug,
+      :excerpt,
+      :body,
+      :published_at_local,
+      :photo,
+      :tags_string,
+      :draft
+    ])
     |> validate_attachment()
     |> upload_attachment()
     |> put_slug()
@@ -45,19 +71,19 @@ defmodule PolymorphicProductions.Social.Post do
       :slug,
       :excerpt,
       :body,
-      :published_at,
+      :published_at_local,
       :image,
       :large_image,
-      :med_image
-      # :published_at_local
+      :med_image,
+      :draft
     ])
-    # |> validate_format(
-    #   :published_at_local,
-    #   ~r/^\d{1,2}\/\d{1,2}\/\d{4}$/
-    # )
+    |> validate_format(
+      :published_at_local,
+      ~r/^\d{1,2}\/\d{1,2}\/\d{4}$/
+    )
     |> validate_length(:excerpt, max: 255)
-    # |> validate_published_at()
-    # |> put_published_at()
+    |> validate_published_at()
+    |> put_published_at()
     |> put_slug()
     |> put_parsed_body()
     |> parse_tags_list()
@@ -146,51 +172,40 @@ defmodule PolymorphicProductions.Social.Post do
 
   defp put_slug(changeset), do: changeset
 
-  # defp validate_published_at(
-  #        %Ecto.Changeset{
-  #          valid?: true,
-  #          changes: %{published_at_local: published_at_local}
-  #        } = cs
-  #      ) do
-  #   case Timex.parse(published_at_local, "%m/%d/%Y", :strftime) do
-  #     {:ok, _} ->
-  #       cs
+  defp validate_published_at(
+         %Ecto.Changeset{
+           valid?: true,
+           changes: %{published_at_local: published_at_local}
+         } = cs
+       ) do
+    case Timex.parse(published_at_local, "%m/%d/%Y", :strftime) do
+      {:ok, _} ->
+        cs
 
-  #     {:error, _} ->
-  #       cs
-  #       |> add_error(:published_at_local, "not a valid date")
-  #   end
-  # end
+      {:error, _} ->
+        cs
+        |> add_error(:published_at_local, "not a valid date")
+    end
+  end
 
-  # defp validate_published_at(cs), do: cs
+  defp validate_published_at(cs), do: cs
 
-  # defp put_published_at(
-  #        %Ecto.Changeset{
-  #          valid?: true,
-  #          changes: %{published_at_local: published_at_local}
-  #        } = cs
-  #      ) do
-  #   case Timex.parse(published_at_local, "%m/%d/%Y", :strftime) do
-  #     {:ok, date} ->
-  #       cs
-  #       |> put_change(:published_at, date |> published_at)
+  defp put_published_at(
+         %Ecto.Changeset{
+           valid?: true,
+           changes: %{published_at_local: published_at_local}
+         } = cs
+       ) do
+    published_at =
+      published_at_local
+      |> Timex.parse!("%m/%d/%Y", :strftime)
+      |> Timex.to_date()
 
-  #     {:error, _} ->
-  #       cs
-  #       |> add_error(:published_at_local, "not a valid date")
-  #   end
+    cs
+    |> put_change(:published_at, published_at)
+  end
 
-  #   case
-
-  #   published_at_local
-  #   |> Timex.parse!("%m/%d/%Y", :strftime)
-  #   |> Timex.to_date()
-
-  #   cs
-  #   |> put_change(:published_at, published_at)
-  # end
-
-  # defp put_published_at(cs), do: cs
+  defp put_published_at(cs), do: cs
 
   defp put_slug(cs), do: cs
 

@@ -18,9 +18,9 @@
   <%= textarea f, :body, id: "post-body" %>
   <%= error_tag f, :body %>
 
-  <%= label f, :published_at %>
-  <%= date_select f, :published_at %>
-  <%= error_tag f, :published_at %>
+  <%= label f, :published_at_local %>
+  <%= text_input f, :published_at_local, placeholder: "mm/dd/yyyy" %>
+  <%= error_tag f, :published_at_local %>
 
   <%= label f, :image %>
   <%= file_input f, :photo %>
@@ -30,6 +30,12 @@
   <%= text_input f, :tags_string %>
   <%= error_tag f, :tags_string %>
 
+  <div class="form-group">
+    <%= label f, :draft, class: "control-label" %>
+    <%= checkbox f, :draft, class: "checkbox" %>
+    <%= error_tag f, :draft %>
+  </div>
+  
   <div>
     <%= submit "Save" %>
   </div>

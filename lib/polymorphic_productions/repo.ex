@@ -30,4 +30,19 @@ defmodule PolymorphicProductions.Repo do
       where: q.id == ^uuid
     )
   end
+
+  def where_published(query) do
+    from(
+      q in query,
+      where: q.published_at <= ^Timex.today(),
+      where: q.draft == false
+    )
+  end
+
+  def order_by_published_at(query) do
+    from(
+      q in query,
+      order_by: [desc: :published_at]
+    )
+  end
 end

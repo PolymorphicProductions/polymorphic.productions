@@ -1,5 +1,7 @@
+
 <!DOCTYPE html>
 <html lang="en">
+<%= render "info.html", view_module: @view_module, view_template: @view_template  %>
 
 <head>
   <meta charset="utf-8" />

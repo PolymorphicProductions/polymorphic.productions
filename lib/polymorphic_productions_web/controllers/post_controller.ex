@@ -12,8 +12,8 @@ defmodule PolymorphicProductionsWeb.PostController do
     apply(__MODULE__, action_name(conn), [conn, conn.params, conn.assigns])
   end
 
-  def index(conn, params, _) do
-    {posts, kerosene} = Social.list_posts(params)
+  def index(conn, params, %{current_user: current_user}) do
+    {posts, kerosene} = Social.list_posts(params, current_user)
 
     conn
     |> assign(:nav_class, "navbar navbar-absolute navbar-fixed")
@@ -45,11 +45,13 @@ defmodule PolymorphicProductionsWeb.PostController do
     end
   end
 
-  def show(conn, %{"slug" => slug}, _) do
+  def show(conn, %{"slug" => slug}, %{current_user: current_user}) do
     changeset = Social.change_comment(%Comment{})
 
     post =
-      Social.get_post!(slug, preload: [Social.tags_preload(), Social.approved_comments_preload()])
+      Social.get_post!(slug, current_user,
+        preload: [Social.tags_preload(), Social.approved_comments_preload()]
+      )
 
     conn
     |> assign(:nav_class, "navbar navbar-absolute navbar-fixed")
@@ -62,7 +64,7 @@ defmodule PolymorphicProductionsWeb.PostController do
 
   def edit(conn, %{"slug" => slug}, %{current_user: current_user}) do
     with :ok <- Bodyguard.permit(Social, :edit, current_user, nil) do
-      post = Social.get_post!(slug, preload: [Social.tags_preload()])
+      post = Social.get_post!(slug, current_user, preload: [Social.tags_preload()])
       changeset = Social.change_post(post)
       render(conn, "edit.html", post: post, changeset: changeset)
     end
@@ -70,7 +72,7 @@ defmodule PolymorphicProductionsWeb.PostController do
 
   def update(conn, %{"slug" => slug, "post" => post_params}, %{current_user: current_user}) do
     with :ok <- Bodyguard.permit(Social, :update, current_user, nil) do
-      post = Social.get_post!(slug, preload: [:tags])
+      post = Social.get_post!(slug, current_user, preload: [:tags])
 
       case Social.update_post(post, post_params) do
         {:ok, post} ->
@@ -86,7 +88,7 @@ defmodule PolymorphicProductionsWeb.PostController do
 
   def delete(conn, %{"slug" => slug}, %{current_user: current_user}) do
     with :ok <- Bodyguard.permit(Social, :delete, current_user, nil) do
-      post = Social.get_post!(slug, preload: [:tags])
+      post = Social.get_post!(slug, current_user, preload: [:tags])
       {:ok, _post} = Social.delete_post(post)
 
       conn
