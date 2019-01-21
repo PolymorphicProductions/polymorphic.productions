@@ -2,6 +2,8 @@
   <%= hidden_input f, :source  %>
   <%= hidden_input f, :email  %>
   <%= hidden_input f, :client_ip  %>
+  <%= hidden_input f, :amount, value: 200 %>
+  <%= hidden_input f, :description, value: "foo bar"%>
 
   <article>
     <%= if @changeset.action do %>
@@ -11,7 +13,7 @@
     <% end %>
 
     <label class="amount">
-      <span>Amount: $5.00</span>
+      <span>Amount: $2.00</span>
     </label>
   </article>
 
@@ -31,7 +33,7 @@ var handler = StripeCheckout.configure({
     form.elements["charge_source"].value = token.id
     form.elements["charge_email"].value = token.email
     form.elements["charge_client_ip"].value = token.client_ip
-    //form.submit();
+    form.submit();
     // TODO: Update form 
     // Submit form  
   }

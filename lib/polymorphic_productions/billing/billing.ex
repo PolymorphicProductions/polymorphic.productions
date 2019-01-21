@@ -66,10 +66,17 @@ defmodule PolymorphicProductions.Billing do
   # --- log and notify payment
   # --- TODO: Design how to abstract from different types of things that someone will pay for. 
   # --- IE unlocking a post vs paying an invoice vs unlocking digital goods. 
+  def create_charge(_, attrs \\ %{})
 
-  def create_charge(%User{} = current_user, attrs \\ %{}) do
-    case Stripe.Charge.create(stripe_charge_attr(attrs)) do
+  def create_charge(%User{} = current_user, attrs) do
+    stripe_attrs = attrs |> stripe_charge_attr
+
+    case Stripe.Charge.create(stripe_attrs) |> IO.inspect() do
       {:ok, charge} ->
+        charge_attrs =
+          attrs
+          |> Map.merge("user", current_user)
+
         %Charge{}
         |> Charge.changeset(attrs)
         |> Repo.insert()
@@ -79,9 +86,27 @@ defmodule PolymorphicProductions.Billing do
     end
   end
 
+  def create_charge(_, attrs) do
+    stripe_attrs = attrs |> stripe_charge_attr
+
+    case Stripe.Charge.create(stripe_attrs) |> IO.inspect() do
+      {:ok, charge} ->
+        %Charge{}
+        |> Charge.changeset(attrs)
+        |> Repo.insert()
+        |> IO.inspect()
+
+      _ ->
+        {:error, "strip processing error"}
+    end
+  end
+
   defp stripe_charge_attr(attrs) do
     %{
-      "currency" => "usd"
+      "currency" => "usd",
+      "metadata" => %{
+        "post_id" => "xxxx"
+      }
     }
     |> Map.merge(Map.take(attrs, ["source", "amount", "description"]))
   end

@@ -4,9 +4,9 @@ defmodule PolymorphicProductions.Billing.Charge do
   alias PolymorphicProductions.Account.User
 
   schema "charges" do
-    field(:strip_id, :string)
+    field(:stripe_id, :string)
 
-    # belongs_to(:user, User)
+    belongs_to(:user, User)
 
     timestamps()
   end
@@ -14,7 +14,10 @@ defmodule PolymorphicProductions.Billing.Charge do
   @doc false
   def changeset(charge, attrs) do
     charge
-    |> cast(attrs, [:strip_id])
-    |> validate_required([:strip_id])
+    |> cast(attrs, [:stripe_id])
+    |> validate_required([:stripe_id])
   end
+
+  defp put_user(changeset, %{"user" => user}), do: put_assoc(changeset, :user, user)
+  defp put_user(changeset, _), do: changeset
 end

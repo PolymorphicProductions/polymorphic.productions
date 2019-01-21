@@ -3,8 +3,8 @@ defmodule PolymorphicProductions.Repo.Migrations.CreateCharges do
 
   def change do
     create table(:charges) do
-      add(:strip_id, :string)
-      # add(:user, references(:users, on_delete: :nothing))
+      add(:stripe_id, :string)
+      add(:user, references(:users, on_delete: :nothing))
 
       timestamps()
     end
