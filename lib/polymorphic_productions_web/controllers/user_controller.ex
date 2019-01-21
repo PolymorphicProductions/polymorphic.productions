@@ -57,7 +57,7 @@ defmodule PolymorphicProductionsWeb.UserController do
 
   def update(conn, %{"user" => user_params}, %{current_user: current_user}) do
     case Accounts.update_user(current_user, user_params) do
-      {:ok, user} ->
+      {:ok, _user} ->
         conn
         |> put_flash(:info, "User updated successfully.")
         |> redirect(to: Routes.user_path(conn, :show))

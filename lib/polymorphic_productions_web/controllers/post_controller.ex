@@ -6,7 +6,6 @@ defmodule PolymorphicProductionsWeb.PostController do
 
   alias PolymorphicProductions.Social
   alias PolymorphicProductions.Social.{Post, Comment}
-  alias PolymorphicProductions.Repo
 
   def action(conn, _) do
     apply(__MODULE__, action_name(conn), [conn, conn.params, conn.assigns])

@@ -10,8 +10,6 @@ defmodule PolymorphicProductions.Social do
 
   alias PolymorphicProductions.Social.{Pic, Comment, Tag, Post}
 
-  alias PolymorphicProductions.Accounts.User
-
   @doc """
   Returns the list of pics.
 
@@ -23,7 +21,7 @@ defmodule PolymorphicProductions.Social do
   """
   def list_pics(params \\ %{}) do
     Pic
-    |> from(order_by: [desc: :inserted_at])
+    |> Repo.order_by_inserted_at(:desc)
     |> Repo.paginate(params)
   end
 
@@ -215,7 +213,12 @@ defmodule PolymorphicProductions.Social do
   end
 
   def approved_comments_preload do
-    {:comments, {Comment |> Repo.approved() |> Repo.order_by_oldest(), :user}}
+    comments_query =
+      Comment
+      |> Repo.approved()
+      |> Repo.order_by_inserted_at()
+
+    {:comments, {comments_query, :user}}
   end
 
   @doc """
@@ -245,7 +248,8 @@ defmodule PolymorphicProductions.Social do
       |> Repo.one()
 
     {pics_query, k} =
-      from(p in Pic, order_by: [desc: :inserted_at])
+      Pic
+      |> Repo.order_by_inserted_at(:desc)
       |> Repo.paginate(params, total_count: total_count, lazy: true)
 
     tag =
@@ -266,7 +270,8 @@ defmodule PolymorphicProductions.Social do
       |> Repo.one()
 
     {posts_query, k} =
-      from(p in Post, order_by: [desc: :inserted_at])
+      Post
+      |> Repo.order_by_published_at(:desc)
       |> Repo.paginate(params, total_count: total_count, lazy: true)
 
     tag =

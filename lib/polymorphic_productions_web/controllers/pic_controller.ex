@@ -45,7 +45,7 @@ defmodule PolymorphicProductionsWeb.PicController do
       Social.get_pic!(id,
         preload: [
           :tags,
-          comments: {Comment |> Repo.approved() |> Repo.order_by_oldest(), :user}
+          comments: {Comment |> Repo.approved() |> Repo.order_by_inserted_at(), :user}
         ]
       )
 

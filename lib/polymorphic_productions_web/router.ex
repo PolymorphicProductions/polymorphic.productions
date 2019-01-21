@@ -78,6 +78,8 @@ defmodule PolymorphicProductionsWeb.Router do
     get("/password_resets/edit", PasswordResetController, :edit)
     put("/password_resets/update", PasswordResetController, :update)
 
+    resources("/charges", ChargeController)
+
     get("/contact", ContactController, :new)
     post("/contact", ContactController, :create)
 

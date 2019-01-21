@@ -1,0 +1,57 @@
+<%= form_for @changeset, @action, [as: :charge, id: "charge-form"], fn f -> %>
+  <%= hidden_input f, :source  %>
+  <%= hidden_input f, :email  %>
+  <%= hidden_input f, :client_ip  %>
+
+  <article>
+    <%= if @changeset.action do %>
+      <div class="alert alert-danger">
+        <p>Oops, something went wrong! Please check the errors below.</p>
+      </div>
+    <% end %>
+
+    <label class="amount">
+      <span>Amount: $5.00</span>
+    </label>
+  </article>
+
+<script src="https://checkout.stripe.com/checkout.js"></script>
+
+<button class="btn btn-primary" id="customButton">Purchase</button>
+
+<script>
+var handler = StripeCheckout.configure({
+  key: '<%= Application.fetch_env!(:polymorphic_productions, :stripe_publish_key) %>',
+  image: '<%= Routes.static_path(@conn, "/images/icon.png") %>',
+  locale: 'auto',
+  token: function(token) {
+    console.log("token ---")
+    console.log(token)
+    const form = document.forms["charge-form"]
+    form.elements["charge_source"].value = token.id
+    form.elements["charge_email"].value = token.email
+    form.elements["charge_client_ip"].value = token.client_ip
+    //form.submit();
+    // TODO: Update form 
+    // Submit form  
+  }
+});
+
+document.getElementById('customButton').addEventListener('click', function(e) {
+  // Open Checkout with further options:
+  handler.open({
+    name: 'Polymorphic Productions',
+    description: 'Foo bar',
+    amount: 2000,
+    zipCode: true,
+    email: "<%= (@current_user || %{email: nil}).email %>"
+  });
+  e.preventDefault();
+});
+
+// Close Checkout on page navigation:
+window.addEventListener('popstate', function() {
+  handler.close();
+});
+</script>
+<% end %>

@@ -55,7 +55,7 @@ defmodule PolymorphicProductions.MixProject do
       {:mogrify, "~> 0.6.1"},
       {:ex_aws, "~> 2.0"},
       {:ex_aws_s3, "~> 2.0"},
-      {:hackney, "~> 1.9"},
+      {:hackney, "~> 1.9", override: true},
       {:sweet_xml, "~> 0.6"},
       {:uuid, "~> 1.1"},
       {:timex, "~> 3.1"},
@@ -70,7 +70,8 @@ defmodule PolymorphicProductions.MixProject do
       {:slugify, "~> 1.1"},
       {:earmark, "~> 1.3"},
       {:web_push_encryption, "~> 0.2.1"},
-      {:cors_plug, "~> 1.5"}
+      {:cors_plug, "~> 1.5"},
+      {:stripity_stripe, "~> 2.0.0"}
     ]
   end
 

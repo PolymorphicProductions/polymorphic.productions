@@ -1,6 +1,4 @@
 defmodule PolymorphicProductions.Repo do
-  alias PolymorphicProductions.Sessions.Session
-
   use Ecto.Repo,
     otp_app: :polymorphic_productions,
     adapter: Ecto.Adapters.Postgres
@@ -9,40 +7,25 @@ defmodule PolymorphicProductions.Repo do
 
   use Kerosene, per_page: 10
 
-  def approved(query) do
-    from(q in query, where: q.approved == true)
+  def order_by_inserted_at(query, direction \\ :asc) when direction in [:asc, :desc] do
+    from(q in query, order_by: [{^direction, :inserted_at}])
   end
 
-  def order_by_oldest(query) do
-    from(q in query, order_by: [asc: q.inserted_at])
+  def order_by_published_at(query, direction \\ :asc) when direction in [:asc, :desc] do
+    from(q in query, order_by: [{^direction, :published_at}])
   end
 
-  def by_slug(query, slug) do
-    from(
-      q in query,
-      where: q.slug == ^slug
-    )
-  end
+  def by_slug(query, slug), do: from(q in query, where: q.slug == ^slug)
 
-  def by_uuid(query, uuid) do
-    from(
-      q in query,
-      where: q.id == ^uuid
-    )
-  end
+  def by_uuid(query, uuid), do: from(q in query, where: q.id == ^uuid)
 
-  def where_published(query) do
-    from(
-      q in query,
-      where: q.published_at <= ^Timex.today(),
-      where: q.draft == false
-    )
-  end
+  def published(query), do: from(q in query, where: q.published_at <= ^Timex.today())
 
-  def order_by_published_at(query) do
-    from(
-      q in query,
-      order_by: [desc: :published_at]
-    )
-  end
+  def approved(query), do: from(q in query, where: q.approved == true)
+
+  def not_approved(query), do: from(q in query, where: q.approved == false)
+
+  def draft(query), do: from(q in query, where: q.draft == true)
+
+  def not_draft(query), do: from(q in query, where: q.draft == false)
 end

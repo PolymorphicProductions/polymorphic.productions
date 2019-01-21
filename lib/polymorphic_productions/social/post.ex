@@ -1,7 +1,6 @@
 defmodule PolymorphicProductions.Social.Post do
   use Ecto.Schema
   import Ecto.Changeset
-  import Ecto.Query, only: [from: 2]
 
   @behaviour Bodyguard.Schema
 
@@ -24,9 +23,13 @@ defmodule PolymorphicProductions.Social.Post do
     query
   end
 
+  @doc """
+    Scopes a query when calling 
+  """
   def scope(query, _, _) do
     query
-    |> Repo.where_published()
+    |> Repo.published()
+    |> Repo.not_draft()
   end
 
   schema "posts" do
@@ -207,8 +210,6 @@ defmodule PolymorphicProductions.Social.Post do
 
   defp put_published_at(cs), do: cs
 
-  defp put_slug(cs), do: cs
-
   defp put_parsed_body(%Ecto.Changeset{valid?: true, changes: %{body: body}} = cs) do
     case Earmark.as_html(body) do
       {:ok, html_doc, _} ->
@@ -233,7 +234,7 @@ defmodule PolymorphicProductions.Social.Post do
   defp parse_tags_list(changeset), do: changeset
 
   defp parse_tags_assoc(
-         %Ecto.Changeset{valid?: true, changes: %{tag_list: tags_list}} = changeset
+         %Ecto.Changeset{valid?: true, changes: %{tag_list: _tags_list}} = changeset
        ) do
     changeset
     |> Tagging.changeset(PolymorphicProductions.Social.Tag, :tags, :tag_list)

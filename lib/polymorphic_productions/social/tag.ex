@@ -1,5 +1,4 @@
 defmodule PolymorphicProductions.Social.Tag do
-  import Ecto.Query
   use Ecto.Schema
 
   schema "tags" do

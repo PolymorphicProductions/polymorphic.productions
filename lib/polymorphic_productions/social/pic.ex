@@ -133,7 +133,7 @@ defmodule PolymorphicProductions.Social.Pic do
 
   defp put_meta(
          %Ecto.Changeset{
-           changes: %{photo: %Plug.Upload{filename: filename, path: image_path}}
+           changes: %{photo: %Plug.Upload{filename: _filename, path: image_path}}
          } = changeset
        ) do
     try do
@@ -147,7 +147,7 @@ defmodule PolymorphicProductions.Social.Pic do
           changeset
       end
     rescue
-      e ->
+      _e ->
         changeset
     end
   end

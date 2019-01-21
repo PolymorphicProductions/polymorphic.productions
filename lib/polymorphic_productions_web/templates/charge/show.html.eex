@@ -1,0 +1,13 @@
+<h1>Show Charge</h1>
+
+<ul>
+
+  <li>
+    <strong>Strip:</strong>
+    <%= @charge.strip_id %>
+  </li>
+
+</ul>
+
+<span><%= link "Edit", to: Routes.charge_path(@conn, :edit, @charge) %></span>
+<span><%= link "Back", to: Routes.charge_path(@conn, :index) %></span>

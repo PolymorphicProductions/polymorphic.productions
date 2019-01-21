@@ -43,7 +43,7 @@ defmodule PolymorphicProductions.Social.Comment do
   defp put_approved(changeset, %{"author" => _author}), do: put_change(changeset, :approved, true)
   defp put_approved(changeset, _), do: changeset
 
-  defp increment_comment_count(changeset, %{"pic" => pic}) do
+  defp increment_comment_count(changeset, %{"pic" => _pic}) do
     changeset
     |> prepare_changes(fn changeset ->
       if %{data: %{id: id}} = get_change(changeset, :pic) do
@@ -55,7 +55,7 @@ defmodule PolymorphicProductions.Social.Comment do
     end)
   end
 
-  defp increment_comment_count(changeset, %{"post" => post}) do
+  defp increment_comment_count(changeset, %{"post" => _post}) do
     changeset
     |> prepare_changes(fn changeset ->
       if %{data: %{slug: slug}} = get_change(changeset, :post) do

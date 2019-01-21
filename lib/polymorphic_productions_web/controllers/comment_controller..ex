@@ -38,7 +38,7 @@ defmodule PolymorphicProductionsWeb.CommentController do
   def create(conn, %{"post_slug" => post_slug, "comment" => comment_params}, %{
         current_user: current_user
       }) do
-    post = Social.get_post!(post_slug)
+    post = Social.get_post!(post_slug, current_user)
 
     case comment_params
          |> Map.merge(%{"author" => current_user, "post" => post})
