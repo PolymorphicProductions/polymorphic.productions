@@ -1,0 +1,11 @@
+version: "3"
+services:
+  db:
+    image: "postgres:11"
+    container_name: "polymorphic_productions_data"
+    ports:
+      - "5433:5432"
+    volumes:
+      - polymorphic_productions_data:/var/lib/postgresql/data
+volumes:
+  polymorphic_productions_data:

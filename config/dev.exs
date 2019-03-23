@@ -72,6 +72,7 @@ config :polymorphic_productions, PolymorphicProductions.Repo,
   password: "postgres",
   database: "polymorphic_productions_dev",
   hostname: "localhost",
+  port: 5433,
   pool_size: 10
 
 config :kerosene, :html, theme: :foundation
