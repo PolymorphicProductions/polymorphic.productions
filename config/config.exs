@@ -51,6 +51,10 @@ config :ex_aws,
 
 config :kerosene, :html, theme: :foundation
 
+config :mime, :types, %{
+  "application/json" => ["json"]
+}
+
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
 import_config "#{Mix.env()}.exs"

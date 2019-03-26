@@ -25,12 +25,11 @@ defmodule PolymorphicProductionsWeb.Router do
   end
 
   pipeline :api do
-    if Mix.env() == :dev do
-      # If using Phoenix
-      plug(CORSPlug, origin: "https://localhost:4001")
+    case Mix.env() do
+      :dev -> plug(CORSPlug, origin: "https://localhost:4001")
+      ____ -> plug(CORSPlug, origin: "https://polymorphic.productions")
     end
 
-    plug(CORSPlug, origin: "https://polymorphic.productions")
     plug(:accepts, ["json"])
     plug(:fetch_session)
   end
@@ -43,6 +42,8 @@ defmodule PolymorphicProductionsWeb.Router do
 
   scope "/", PolymorphicProductionsWeb do
     pipe_through(:browser)
+
+    resources("push_subscribers", PushSubscriberController, only: [:index, :new, :show])
 
     get("/snapshots/tag/:tag", TagController, :show_pic, as: :pic_tag)
 

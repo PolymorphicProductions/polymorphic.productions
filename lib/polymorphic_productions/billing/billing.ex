@@ -66,7 +66,7 @@ defmodule PolymorphicProductions.Billing do
   # --- log and notify payment
   # --- TODO: Design how to abstract from different types of things that someone will pay for. 
   # --- IE unlocking a post vs paying an invoice vs unlocking digital goods. 
-  def create_charge(_, attrs \\ %{})
+  # def create_charge(_, attrs \\ %{})
 
   def create_charge(%User{} = current_user, attrs) do
     stripe_attrs = attrs |> stripe_charge_attr
