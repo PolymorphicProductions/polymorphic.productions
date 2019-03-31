@@ -79,7 +79,7 @@
 <!-- Clients section -->
 <div class="section bg-grey">
   <div class="container">
-    <h5>Latest Pics</h5>
+    <h5>Latest Pics - <span class="sub"><%= link "View all", to: (Routes.pic_path @conn, :index) %></span></h5> 
     <div class="owl-carousel" data-owl-dots="false" data-owl-margin="30" data-owl-autoplay="true" data-owl-xs="1" data-owl-sm="2" data-owl-md="3" data-owl-lg="4" data-owl-xl="6">
       <%= for pic <- @latest_pics do %>
       <!-- Client box 1 -->
