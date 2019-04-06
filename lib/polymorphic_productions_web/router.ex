@@ -35,12 +35,6 @@ defmodule PolymorphicProductionsWeb.Router do
     plug(:fetch_session)
   end
 
-  scope "/api", PolymorphicProductionsWeb do
-    pipe_through(:api)
-    options("/push_subscribers", PushSubscriberController, :options)
-    resources("/push_subscribers", PushSubscriberController, only: [:create, :delete])
-  end
-
   scope "/", PolymorphicProductionsWeb do
     pipe_through(:browser)
 

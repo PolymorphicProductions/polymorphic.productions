@@ -1,8 +1,6 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <%= render "info.html", view_module: @view_module, view_template: @view_template  %>
-
 <head>
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -31,51 +29,14 @@
 </head>
 
 <body data-preloader="1">
-
   <div id="scrolltotop" class="scrolltotop">
     <a class="button-circle button-circle-sm button-circle-dark" href="#"><i class="icon icon-arrow-up"></i></a>
   </div>
-
   <%= render "header.html", conn: @conn, current_user: @current_user, view_module: @view_module, view_template: @view_template  %>
-  
   <%= render @view_module, @view_template, assigns %>
-
   <%= render "footer.html", conn: @conn %>
-
-
-<!-- Modal -->
-<div class="modal fade" id="notify-modal" tabindex="-1" role="dialog" aria-labelledby="notify-modal-Label" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Notification Settings</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body text-center">
-        <i class="notify-icon far fa-bell"></i>
-        <h3>Get Notified</h3>
-        <p>
-          <span class="notification-notes">Enable to get periodic notifications</span><br />
-          <span class="small">* Average not more than 3 per month</span>
-
-        </p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="js-push-btn-toggle btn btn-success"> <i class="far fa-bell"></i> Enable Notifications</button>
-      </div>
-    </div>
-  </div>
-</div>
 
   <script src="<%= Routes.static_path(@conn, "/js/app.js") %>"></script>
   <script src="<%= Routes.static_path(@conn, "/js/vendors~app.js") %>"></script>
-
-
-
-
-
 </body>
-
 </html>

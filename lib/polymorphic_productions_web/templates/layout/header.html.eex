@@ -21,7 +21,6 @@
               <li><a href="#">Videography</a></li>
           </ul>
         </li> %>
-        <li class="nav-item"><a data-toggle="modal" data-target="#notify-modal" class="js-push-btn nav-link bell" href="#"><i class="sw"></i></a></li>
         <li class="nav-item"><a class="nav-link" href="<%= Routes.post_path @conn, :index %>">Posts</a></li>
         <li class="nav-item"><a class="nav-link" href="<%= Routes.pic_path @conn, :index %>">Snapshots</a></li>
 
