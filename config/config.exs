@@ -10,7 +10,8 @@ config :polymorphic_productions,
   ecto_repos: [PolymorphicProductions.Repo],
   render_tracking: false,
   asset_uploader: PolymorphicProductions.Assets.Uploader,
-  asset_processor: PolymorphicProductions.Assets.Processor
+  asset_processor: PolymorphicProductions.Assets.Processor,
+  cors_origin: "https://localhost:4001"
 
 # Configures the endpoint
 config :polymorphic_productions, PolymorphicProductionsWeb.Endpoint,

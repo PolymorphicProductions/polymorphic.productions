@@ -55,7 +55,7 @@ defmodule PolymorphicProductions.Sessions do
     Session.changeset(session, %{})
   end
 
-  defp get_session_for_user(%User{id: id} = user) do
+  defp get_session_for_user(%User{id: id} = _user) do
     from(s in Session, where: s.user_id == ^id)
   end
 end

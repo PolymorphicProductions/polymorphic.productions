@@ -1,5 +1,8 @@
 use Mix.Config
 
+config :polymorphic_productions,
+  cors_origin: "https://polymorphic.productions"
+
 # For production, don't forget to configure the url host
 # to something meaningful, Phoenix uses this information
 # when generating URLs.
@@ -96,4 +99,5 @@ config :polymorphic_productions, render_tracking: true
 
 # Finally import the config/prod.secret.exs which should be versioned
 # separately.
+
 import_config "prod.secret.exs"

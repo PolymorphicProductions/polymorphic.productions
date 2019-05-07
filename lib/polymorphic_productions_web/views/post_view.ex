@@ -36,7 +36,7 @@ defmodule PolymorphicProductionsWeb.PostView do
       {:ok, html_doc, []} ->
         html_doc
 
-      {:error, html_doc, error_messages} ->
+      {:error, _html_doc, error_messages} ->
         error_messages
     end
   end

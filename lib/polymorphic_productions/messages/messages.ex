@@ -1,6 +1,5 @@
 defmodule PolymorphicProductions.Messages do
   alias PolymorphicProductions.Messages.Contact
-  alias PolymorphicProductions.Repo
 
   @doc """
   Creates a contact message and sends it.

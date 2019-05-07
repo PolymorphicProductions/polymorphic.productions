@@ -25,12 +25,7 @@ defmodule PolymorphicProductionsWeb.Router do
   end
 
   pipeline :api do
-    if Mix.env() == :dev do
-      # If using Phoenix
-      plug(CORSPlug, origin: "https://localhost:4001")
-    end
-
-    plug(CORSPlug, origin: "https://polymorphic.productions")
+    plug(CORSPlug, origin: Application.get_env(:polymorphic_productions, :cors_origin))
     plug(:accepts, ["json"])
     plug(:fetch_session)
   end

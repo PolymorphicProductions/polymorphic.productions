@@ -10,8 +10,6 @@ defmodule PolymorphicProductions.Social do
 
   alias PolymorphicProductions.Social.{Pic, Comment, Tag, Post}
 
-  alias PolymorphicProductions.Accounts.User
-
   @doc """
   Returns the list of pics.
 
