@@ -15,6 +15,7 @@ config :polymorphic_productions, PolymorphicProductions.Repo,
   password: "postgres",
   database: "polymorphic_productions_test",
   hostname: "localhost",
+  port: 5433,
   pool: Ecto.Adapters.SQL.Sandbox
 
 # Comeonin password hashing test config
