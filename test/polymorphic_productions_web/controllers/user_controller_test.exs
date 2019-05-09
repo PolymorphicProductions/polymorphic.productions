@@ -2,7 +2,6 @@ defmodule PolymorphicProductionsWeb.UserControllerTest do
   use PolymorphicProductionsWeb.ConnCase
 
   import PolymorphicProductions.Factory
-  import PolymorphicProductionsWeb.AuthCase
   # alias PolymorphicProductions.Accounts
   @create_attrs params_for(:user)
 
@@ -31,26 +30,9 @@ defmodule PolymorphicProductionsWeb.UserControllerTest do
       assert html_response(conn, 200) =~ "Registration"
       assert html_response(conn, 200) =~ "Please check the errors below."
     end
-
-    test "redirects guest to login when visiting User show", %{conn: conn} do
-      conn = get(conn, Routes.user_path(conn, :show))
-      assert redirected_to(conn) == Routes.session_path(conn, :new)
-    end
-
-    test "redirects guest to login when visiting User edit", %{conn: conn} do
-      conn = get(conn, Routes.user_path(conn, :edit))
-      assert redirected_to(conn) == Routes.session_path(conn, :new)
-    end
-
-    test "redirects guest to login when visiting User update", %{conn: conn} do
-      conn = put(conn, Routes.user_path(conn, :update))
-      assert redirected_to(conn) == Routes.session_path(conn, :new)
-    end
   end
 
   describe "authed user" do
-    setup [:log_user_in]
-
     test "renders form for editing current user", %{conn: conn} do
       conn = get(conn, Routes.user_path(conn, :edit))
       assert html_response(conn, 200) =~ "Edit User"

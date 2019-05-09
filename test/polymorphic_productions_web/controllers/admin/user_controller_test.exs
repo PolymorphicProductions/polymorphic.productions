@@ -1,16 +1,12 @@
 defmodule PolymorphicProductionsWeb.Admin.UserControllerTest do
   use PolymorphicProductionsWeb.ConnCase
 
-  import PolymorphicProductionsWeb.AuthCase
-
   setup %{conn: conn} do
     conn = conn |> bypass_through(PolymorphicProductionsWeb.Router, [:browser]) |> get("/")
     {:ok, %{conn: conn}}
   end
 
   describe "authed admin" do
-    setup [:log_admin_in, :create_rando_user]
-
     test "renders a list of users", %{conn: conn} do
       conn = get(conn, Routes.admin_user_path(conn, :index))
       assert html_response(conn, 200) =~ "Listing Users"

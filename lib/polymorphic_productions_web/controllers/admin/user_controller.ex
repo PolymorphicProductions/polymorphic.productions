@@ -1,9 +1,6 @@
 defmodule PolymorphicProductionsWeb.Admin.UserController do
   use PolymorphicProductionsWeb, :controller
 
-  import PolymorphicProductionsWeb.Authenticate
-  plug(:authentication_check)
-
   alias PolymorphicProductions.{Accounts}
 
   def action(conn, _) do

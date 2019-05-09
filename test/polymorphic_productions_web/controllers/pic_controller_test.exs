@@ -1,8 +1,6 @@
 defmodule PolymorphicProductionsWeb.PicControllerTest do
   use PolymorphicProductionsWeb.ConnCase
 
-  import PolymorphicProductionsWeb.AuthCase
-
   alias PolymorphicProductions.Social
 
   @create_attrs %{
@@ -31,8 +29,6 @@ defmodule PolymorphicProductionsWeb.PicControllerTest do
   end
 
   describe "new pic" do
-    setup [:log_admin_in]
-
     test "renders form", %{conn: conn} do
       conn = get(conn, Routes.pic_path(conn, :new))
       assert html_response(conn, 200) =~ "New Pic"
@@ -40,8 +36,6 @@ defmodule PolymorphicProductionsWeb.PicControllerTest do
   end
 
   describe "create pic" do
-    setup [:log_admin_in]
-
     test "redirects to show when data is valid", %{conn: conn} do
       conn = post(conn, Routes.pic_path(conn, :create), pic: @create_attrs)
 
@@ -59,7 +53,7 @@ defmodule PolymorphicProductionsWeb.PicControllerTest do
   end
 
   describe "edit pic" do
-    setup [:create_pic, :log_admin_in]
+    setup [:create_pic]
 
     test "renders form for editing chosen pic", %{conn: conn, pic: pic} do
       conn = get(conn, Routes.pic_path(conn, :edit, pic))
@@ -68,7 +62,7 @@ defmodule PolymorphicProductionsWeb.PicControllerTest do
   end
 
   describe "update pic" do
-    setup [:create_pic, :log_admin_in]
+    setup [:create_pic]
 
     test "redirects when data is valid", %{conn: conn, pic: pic} do
       conn = put(conn, Routes.pic_path(conn, :update, pic), pic: @update_attrs)
@@ -85,7 +79,7 @@ defmodule PolymorphicProductionsWeb.PicControllerTest do
   end
 
   describe "delete pic" do
-    setup [:create_pic, :log_admin_in]
+    setup [:create_pic]
 
     test "deletes chosen pic", %{conn: conn, pic: pic} do
       conn = delete(conn, Routes.pic_path(conn, :delete, pic))

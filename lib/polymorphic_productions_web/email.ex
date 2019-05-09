@@ -2,11 +2,6 @@ defmodule PolymorphicProductionsWeb.Email do
   @moduledoc """
   A module for sending emails to the user.
 
-  This module provides functions to be used with the Phauxth authentication
-  library when confirming users or handling password resets. It uses
-  Bamboo, with the Mandrill adapter, to email users. For tests, it uses
-  a test adapter, which is configured in the config/test.exs file.
-
   If you want to use a different email adapter, or another email
   library, read the instructions below.
 
@@ -47,62 +42,6 @@ defmodule PolymorphicProductionsWeb.Email do
     |> assign(:conn, conn)
     |> subject(subject)
     |> render("contact.html")
-    |> Mailer.deliver_now()
-  end
-
-  @doc """
-  An email with a confirmation link in it.
-  """
-  def confirm_request(conn, %{email: email} = user, key) do
-    email
-    |> prep_mail()
-    |> subject("Confirm your account | Polymorphic Productions")
-    # |> text_body("Confirm your email here #{Routes.confirm_path(conn, :index, key: key)}")
-    |> put_html_layout({LayoutView, "email.html"})
-    |> assign(:user, user)
-    |> assign(:key, key)
-    |> assign(:conn, conn)
-    |> render("invite.html")
-    |> Mailer.deliver_later()
-  end
-
-  def reset_request(conn, address, key) do
-    address
-    |> prep_mail()
-    |> subject("Reset your password")
-    |> put_html_layout({LayoutView, "email.html"})
-    |> text_body(
-      "Reset your password at https://polymorphic.productions/password_resets/edit?key=#{key}"
-    )
-    |> assign(:address, address)
-    |> assign(:key, key)
-    |> assign(:conn, conn)
-    |> render("pass_reset.html")
-    |> Mailer.deliver_later()
-  end
-
-  @doc """
-  An email acknowledging that the account has been successfully confirmed.
-  """
-  def confirm_success(address) do
-    address
-    |> prep_mail()
-    |> put_html_layout({LayoutView, "email.html"})
-    |> subject("Confirmed account")
-    |> text_body("Your account has been confirmed.")
-    |> render("confirm_success.html")
-    |> Mailer.deliver_now()
-  end
-
-  @doc """
-  An email acknowledging that the password has been successfully reset.
-  """
-  def reset_success(address) do
-    address
-    |> prep_mail()
-    |> put_html_layout({LayoutView, "email.html"})
-    |> subject("Password reset")
-    |> text_body("Your password has been reset.")
     |> Mailer.deliver_now()
   end
 

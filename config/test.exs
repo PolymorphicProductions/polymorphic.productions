@@ -23,7 +23,6 @@ config :argon2_elixir, t_cost: 2, m_cost: 8
 
 config :phoenix, :plug_init_mode, :runtime
 
-config :phauxth, log_level: :error
 # config :pbkdf2_elixir, rounds: 1
 
 # Mailer test configuration

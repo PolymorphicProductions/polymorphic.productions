@@ -20,15 +20,6 @@ config :polymorphic_productions, PolymorphicProductionsWeb.Endpoint,
   render_errors: [view: PolymorphicProductionsWeb.ErrorView, accepts: ~w(html json)],
   pubsub: [name: PolymorphicProductions.PubSub, adapter: Phoenix.PubSub.PG2]
 
-# Phauxth authentication configuration
-# config :phauxth,
-#   token_salt: "5W3bQee3",
-#   endpoint: PolymorphicProductionsWeb.Endpoint
-
-config :phauxth,
-  user_context: PolymorphicProductions.Accounts,
-  token_module: PolymorphicProductionsWeb.Auth.Token
-
 # Mailer configuration
 config :polymorphic_productions, PolymorphicProductionsWeb.Mailer, adapter: Bamboo.LocalAdapter
 

@@ -3,8 +3,6 @@ defmodule PolymorphicProductions.Accounts.User do
 
   import Ecto.Changeset
 
-  alias PolymorphicProductions.Sessions.Session
-
   schema "users" do
     field(:name, :string)
     field(:email, :string)
@@ -13,7 +11,6 @@ defmodule PolymorphicProductions.Accounts.User do
     field(:confirmed_at, :utc_datetime)
     field(:reset_sent_at, :utc_datetime)
     field(:admin, :boolean)
-    has_many(:sessions, Session, on_delete: :delete_all)
     timestamps()
   end
 

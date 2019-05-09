@@ -25,19 +25,4 @@ defmodule PolymorphicProductionsWeb.PageControllerTest do
     conn = get(conn, "/contact")
     assert html_response(conn, 200) =~ "Contact Me"
   end
-
-  test "GET /sessions/new", %{conn: conn} do
-    conn = get(conn, "/sessions/new")
-    assert html_response(conn, 200) =~ "Enter your login"
-  end
-
-  test "GET /password_resets/new", %{conn: conn} do
-    conn = get(conn, "/password_resets/new")
-    assert html_response(conn, 200) =~ "Recover your Account"
-  end
-
-  test "GET /signup", %{conn: conn} do
-    conn = get(conn, "signup")
-    assert html_response(conn, 200) =~ "Registration"
-  end
 end

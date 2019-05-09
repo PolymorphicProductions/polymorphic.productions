@@ -45,7 +45,6 @@ defmodule PolymorphicProductions.MixProject do
       {:gettext, "~> 0.11"},
       {:jason, "~> 1.0"},
       {:plug_cowboy, "~> 2.0"},
-      {:phauxth, "~> 2.0.0"},
       {:bodyguard, "~> 2.2"},
       {:bcrypt_elixir, "~> 1.0"},
       {:bamboo, "~> 1.1"},

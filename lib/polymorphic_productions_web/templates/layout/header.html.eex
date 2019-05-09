@@ -31,16 +31,14 @@
         <li class="nav-item nav-dropdown">
           <a class="nav-link" href="#"><%= @current_user.name%></a>
               <ul class="dropdown-menu">
-            <li><%= link "Account", to: Routes.user_path(@conn, :show) %></li>
-            <li>><%= link "Logout", to: Routes.session_path(@conn, :delete, current_session(@conn)), method: :delete %></li>
+
           </ul>
         </li>
         <% else %>
         <li class="nav-item nav-dropdown">
           <a class="nav-link" href="#">Account</a>
             <ul class="dropdown-menu">
-            <li><%= link "Login", to: Routes.session_path(@conn, :new) %></li>
-            <li><%= link "Signup", to: Routes.user_path(@conn, :new) %></li>
+            
           </ul>
         </li>
         <% end %>

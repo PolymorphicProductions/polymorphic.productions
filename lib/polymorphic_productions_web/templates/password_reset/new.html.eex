@@ -19,8 +19,7 @@
             <% end %>
             <div class="margin-top-30">
                <ul class="list-unstyled">
-                <li><%= link "Login", to: Routes.session_path(@conn, :new) %></li>
-                <li><%= link "Create Account", to: Routes.user_path(@conn, :new) %></li>
+                
               </ul>
             </div>
           </div>

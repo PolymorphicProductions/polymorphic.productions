@@ -1,9 +1,6 @@
 defmodule PolymorphicProductionsWeb.CommentController do
   use PolymorphicProductionsWeb, :controller
 
-  import PolymorphicProductionsWeb.Authenticate
-  plug(:authentication_check when action in [:create])
-
   alias PolymorphicProductions.Social
 
   def action(conn, _) do

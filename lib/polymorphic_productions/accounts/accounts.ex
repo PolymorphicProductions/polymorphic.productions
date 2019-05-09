@@ -5,9 +5,9 @@ defmodule PolymorphicProductions.Accounts do
 
   defdelegate authorize(action, user, params), to: PolymorphicProductions.Accounts.Policy
 
-  import Ecto.Query, warn: false
+  alias PolymorphicProductions.Accounts.User
 
-  alias PolymorphicProductions.{Accounts.User, Repo, Sessions, Sessions.Session}
+  import Ecto.Query, warn: false
 
   @doc """
   Returns the list of users.
@@ -20,24 +20,6 @@ defmodule PolymorphicProductions.Accounts do
   """
   def list_users do
     Repo.all(User)
-  end
-
-  @doc """
-  Gets a single user by their session.
-  This is used by Phauxth to get user information.
-
-  returns nil if no user is found
-
-  ## Examples
-
-      iex> get_by(%{"session_id" => 1})
-      %User{}
-
-      iex> get_by(%{"session_id" => 0})
-      nil
-  """
-  def get_by(%{"session_id" => session_id}) do
-    with %Session{user_id: user_id} <- Sessions.get_session(session_id), do: get_user(user_id)
   end
 
   @doc """
@@ -152,17 +134,5 @@ defmodule PolymorphicProductions.Accounts do
       _ ->
         {:error, "no user found"}
     end
-  end
-
-  @doc """
-  Updates a user's password.
-  """
-  def update_password(%User{} = user, attrs) do
-    Sessions.delete_user_sessions(user)
-
-    user
-    |> User.create_changeset(attrs)
-    |> User.password_reset_changeset(nil)
-    |> Repo.update()
   end
 end
