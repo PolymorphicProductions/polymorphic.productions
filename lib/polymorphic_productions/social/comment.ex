@@ -36,7 +36,7 @@ defmodule PolymorphicProductions.Social.Comment do
   defp put_pic(changeset, _), do: changeset
 
   defp put_post(changeset, %{"post" => post}),
-    do: put_assoc(changeset, :post, post) |> IO.inspect()
+    do: put_assoc(changeset, :post, post)
 
   defp put_post(changeset, _), do: changeset
 

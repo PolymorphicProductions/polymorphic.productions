@@ -12,7 +12,7 @@ defmodule PolymorphicProductions.AccountsTest do
 
   test "list_users/1 returns all users" do
     # user = insert(:user, password: nil)
-    Accounts.list_users() |> IO.inspect()
+    Accounts.list_users()
     # assert Accounts.list_users() == [user]
   end
 
