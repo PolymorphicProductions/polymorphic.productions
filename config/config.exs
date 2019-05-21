@@ -43,6 +43,12 @@ config :ex_aws,
 
 config :kerosene, :html, theme: :foundation
 
+config :polymorphic_productions, :pow,
+  user: PolymorphicProductions.Accounts.User,
+  repo: PolymorphicProductions.Repo,
+  web_module: PolymorphicProductionsWeb,
+  extensions: [PowResetPassword, PowEmailConfirmation]
+
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
 import_config "#{Mix.env()}.exs"

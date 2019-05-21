@@ -46,5 +46,7 @@ defmodule PolymorphicProductionsWeb.Endpoint do
     signing_salt: "jz7umupw"
   )
 
+  plug(Pow.Plug.Session, otp_app: :polymorphic_productions)
+
   plug(PolymorphicProductionsWeb.Router)
 end

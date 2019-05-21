@@ -68,7 +68,8 @@ defmodule PolymorphicProductions.MixProject do
       {:sitemap, "~> 1.1"},
       {:slugify, "~> 1.1"},
       {:earmark, "~> 1.3"},
-      {:cors_plug, "~> 1.5"}
+      {:cors_plug, "~> 1.5"},
+      {:pow, "~> 1.0.7"}
     ]
   end
 

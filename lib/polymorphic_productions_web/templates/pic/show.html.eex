@@ -71,7 +71,8 @@
               <% end %>
             </div>
             <% else %>
-            <h4 class="margin-bottom-50 text-center">                    
+            <h4 class="margin-bottom-50 text-center">  
+              <%= link "Sign in to write a comment", to: Routes.pow_session_path(@conn, :new, request_path: Routes.pic_path(@conn, :show, @pic)), class: "btn btn-secondary" %>                  
             </h4>
             <% end %>
           </div>

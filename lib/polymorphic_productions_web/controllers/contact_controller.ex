@@ -3,6 +3,7 @@ defmodule PolymorphicProductionsWeb.ContactController do
   alias PolymorphicProductions.{Messages, Messages.Contact}
   alias PolymorphicProductionsWeb.Email
 
+  @spec new(Plug.Conn.t(), any()) :: Plug.Conn.t()
   def new(conn, _) do
     changeset = Messages.change_contact(%Contact{})
 
@@ -14,6 +15,7 @@ defmodule PolymorphicProductionsWeb.ContactController do
     )
   end
 
+  @spec create(Plug.Conn.t(), map()) :: Plug.Conn.t()
   def create(conn, %{"contact" => contact_params}) do
     case Messages.create_contact(contact_params) do
       {:ok, contact} ->

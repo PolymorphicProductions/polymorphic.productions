@@ -1,4 +1,4 @@
-defmodule PolymorphicProductions.Repo.Migrations.CreateUsers do
+defmodule PolymorphicProductions.Repo.Migrations.CreateUsersOld do
   use Ecto.Migration
 
   def change do

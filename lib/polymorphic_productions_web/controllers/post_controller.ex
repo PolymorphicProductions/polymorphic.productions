@@ -8,6 +8,7 @@ defmodule PolymorphicProductionsWeb.PostController do
     apply(__MODULE__, action_name(conn), [conn, conn.params, conn.assigns])
   end
 
+  @spec index(Plug.Conn.t(), map(), %{current_user: any()}) :: Plug.Conn.t()
   def index(conn, params, %{current_user: current_user}) do
     {posts, kerosene} = Social.list_posts(params, current_user)
 
@@ -20,13 +21,15 @@ defmodule PolymorphicProductionsWeb.PostController do
     )
   end
 
+  @spec new(Plug.Conn.t(), any(), %{current_user: any()}) :: Plug.Conn.t()
   def new(conn, _params, %{current_user: current_user}) do
-    with :ok <- Bodyguard.permit(Social, :create_post, current_user, nil),
+    with :ok <- Bodyguard.permit(Social, :create_post, current_user, nil) |> IO.inspect(),
          changeset = Social.change_post(%Post{}) do
       render(conn, "new.html", changeset: changeset)
     end
   end
 
+  @spec create(Plug.Conn.t(), map(), %{current_user: any()}) :: Plug.Conn.t()
   def create(conn, %{"post" => post_params}, %{current_user: current_user}) do
     with :ok <- Bodyguard.permit(Social, :create, current_user, nil) do
       case Social.create_post(post_params) do

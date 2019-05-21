@@ -1,4 +1,6 @@
 alias PolymorphicProductions.Accounts
+alias PolymorphicProductions.{Accounts.User}
+
 alias PolymorphicProductions.Assets
 alias PolymorphicProductions.Messages
 alias PolymorphicProductions.Repo

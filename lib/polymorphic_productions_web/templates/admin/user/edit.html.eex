@@ -25,6 +25,6 @@
 <% end %>
 
 <span>
-  <%= link "Update password", to: Routes.password_reset_path(@conn, :new) %></span><br>
+  <%#= link "Update password", to: Routes.password_reset_path(@conn, :new) %></span><br>
 <span>
   <%= link "Back", to: Routes.admin_user_path(@conn, :index) %></span>

@@ -7,6 +7,7 @@ defmodule PolymorphicProductionsWeb.CommentController do
     apply(__MODULE__, action_name(conn), [conn, conn.params, conn.assigns])
   end
 
+  @spec show(Plug.Conn.t(), map(), any()) :: Plug.Conn.t()
   def show(conn, %{"id" => id}, _) do
     %{pic: pic} = Social.get_comment!(id)
 
@@ -14,6 +15,7 @@ defmodule PolymorphicProductionsWeb.CommentController do
     |> redirect(to: Routes.pic_path(conn, :show, pic) <> "##{id}")
   end
 
+  @spec create(Plug.Conn.t(), map(), %{current_user: any()}) :: Plug.Conn.t()
   def create(conn, %{"pic_id" => pic_id, "comment" => comment_params}, %{
         current_user: current_user
       }) do

@@ -18,7 +18,8 @@ defmodule PolymorphicProductions.Social.Post do
   @processor Application.fetch_env!(:polymorphic_productions, :asset_processor)
   @uploader Application.fetch_env!(:polymorphic_productions, :asset_uploader)
 
-  def scope(query, %User{admin: true}, _) do
+  # TODO: fix scope
+  def scope(query, %User{}, _) do
     query
   end
 
