@@ -47,7 +47,9 @@ config :polymorphic_productions, :pow,
   user: PolymorphicProductions.Accounts.User,
   repo: PolymorphicProductions.Repo,
   web_module: PolymorphicProductionsWeb,
-  extensions: [PowResetPassword, PowEmailConfirmation]
+  extensions: [PowResetPassword, PowEmailConfirmation],
+  mailer_backend: PolymorphicProductionsWeb.PowMailer,
+  web_mailer_module: PolymorphicProductionsWeb.Mailer
 
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.

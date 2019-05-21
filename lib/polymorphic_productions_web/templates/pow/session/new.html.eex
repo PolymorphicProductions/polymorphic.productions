@@ -45,6 +45,8 @@
               <ul class="list-unstyled">
                 <li><%#= link "Forgot password", to: Routes.password_reset_path(@conn, :new) %></li>
                 <li><%= link "Create Account", to: Routes.pow_registration_path(@conn, :new) %></li>
+                <li><%= link("Reset password", to: Routes.pow_reset_password_reset_password_path(@conn, :new)) %></li>
+
               </ul>
             </div>
           </div>

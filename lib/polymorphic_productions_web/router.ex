@@ -1,6 +1,7 @@
 defmodule PolymorphicProductionsWeb.Router do
   use PolymorphicProductionsWeb, :router
   use Pow.Phoenix.Router
+  use Pow.Extension.Phoenix.Router, otp_app: :polymorphic_productions
 
   if Mix.env() != :test do
     use Plug.ErrorHandler
