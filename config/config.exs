@@ -48,8 +48,9 @@ config :polymorphic_productions, :pow,
   repo: PolymorphicProductions.Repo,
   web_module: PolymorphicProductionsWeb,
   extensions: [PowResetPassword, PowEmailConfirmation],
+  controller_callbacks: Pow.Extension.Phoenix.ControllerCallbacks,
   mailer_backend: PolymorphicProductionsWeb.PowMailer,
-  web_mailer_module: PolymorphicProductionsWeb.Mailer
+  web_mailer_module: PolymorphicProductionsWeb
 
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
