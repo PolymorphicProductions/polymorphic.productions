@@ -1,4 +1,5 @@
 defmodule PolymorphicProductionsWeb.PowMailer do
+  use Pow.Phoenix.Mailer
   require Logger
 
   @impl true
