@@ -31,10 +31,10 @@ pre_erlang_clean_compile() {
     # installing npm dependencies
     npm install $SILENCE || error "npm"
 
-    npm run deploy $SILENCE || error "npm"
+    #npm run deploy $SILENCE || error "npm"
 
     # building webpack
-    # ./node_modules/.bin/webpack --config webpack.config.production.js $SILENCE || error "webpack"
+    #./node_modules/.bin/webpack.js --config webpack.config.production.js $SILENCE || error "webpack"
 
     cd '$BUILD_AT'
     # run your custom task
