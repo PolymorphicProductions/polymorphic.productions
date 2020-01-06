@@ -2,8 +2,8 @@
   "repository": {},
   "license": "MIT",
   "scripts": {
-    "deploy": "webpack --mode production --config webpack.config.production.js",
-    "watch": "webpack --mode development --watch-stdin"
+    "deploy": "./node_modules/webpack/bin/webpack.js --mode production --config webpack.config.production.js",
+    "watch": "./node_modules/webpack/bin/webpack.js --mode development --watch-stdin"
   },
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.4.2",

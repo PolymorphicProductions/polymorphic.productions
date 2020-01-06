@@ -18,5 +18,6 @@ defmodule PolymorphicProductions.Messages.Contact do
     |> cast(attrs, [:name, :email, :subject, :message])
     |> validate_required([:name, :email, :subject, :message])
     |> validate_format(:email, @mail_regex, message: "Not a valid email")
+    |> validate_length(:message, min: 100, message: "Message too short")
   end
 end

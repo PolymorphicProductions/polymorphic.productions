@@ -92,8 +92,8 @@ module.exports = (env, options) => ({
       filename: "../css/[name].css"
     }),
     new CopyWebpackPlugin([
-      { from: "static/", to: "../" },
-      { from: "js/sw.js", to: "../js/" }
+      { from: "static/", to: "../" }
+      // { from: "js/sw.js", to: "../js/" }
     ]),
 
     new WebpackMd5Hash()
